@@ -1,0 +1,21 @@
+.footer {
+  background-color: #42AB34; /* fundo verde */
+  padding: 2rem 1rem;
+  text-align: center;
+  color: white;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.footerContent {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.footerContent p {
+  margin: 0.25rem 0;
+}
+
+.logo {
+  margin-bottom: 1rem;
+}
