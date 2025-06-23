@@ -1,0 +1,18 @@
+footer{
+  background-color: var(--brand-color);
+  height: 14rem;
+  margin-top: 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-block: 2rem;
+  gap: .5rem;
+  & img{
+    height: 5rem;
+  }
+  & span{
+    color: var(--background);
+    font: 300 .7rem var(--lexend);
+  }
+}
