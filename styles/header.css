@@ -1,0 +1,14 @@
+#cabecalho{
+  background-color: var(--brand-color);
+  height: 5.625rem;
+  align-items: center;
+  display: flex;
+  & span{
+    display: flex;
+    gap: 2rem;
+    margin-left: auto;
+    margin-right: 3rem;
+  }
+}
+
+

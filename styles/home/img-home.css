@@ -1,0 +1,16 @@
+#imgs-home{
+  position: relative;
+  & #img-floresta{
+    width: 100vw;
+    height: 38rem;
+    filter: brightness(50%);
+  }
+  & #logo-home{
+    position: absolute;
+    top: 50%;
+    left: 50%;        
+    transform: translate(-50%, -50%);
+    width: 41rem;
+    height: 23.17rem;
+  }
+}

@@ -1,0 +1,22 @@
+#busca{
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  margin-inline: auto;
+  justify-content: center;
+  & input{
+    height: 2.9rem;
+    border-radius: 1rem;
+    border: solid 3px var(--brand-border);
+    display: flex;
+    
+  }
+  & h1{
+    font: var(--h1);
+    color: var(--brand-color);
+  }
+  & #busca1{
+    border-radius: 1rem;
+    width: 42.81rem;
+  }
+}
