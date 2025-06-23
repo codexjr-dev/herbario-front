@@ -11,7 +11,7 @@
 </head>
 <body>
   <header id="cabecalho">
-    <span class="abas aba">
+    <span class="abas">
       <a href="">Herbário</a>
       <a href="">Projetos</a>
       <a href="">Parceiros</a>
@@ -20,13 +20,37 @@
   </header>
   <section id="imgs-home">
   <img src="assets/floresta.jpg" alt="uma floresta" id="img-floresta">
-  <img src="assets/Frame 4.svg" alt="logo" id="logo-home">
+  <img src="assets/logo.svg" alt="logo" id="logo-home">
   </section>
   <section id="busca">
     <h1>Herbário Virtual</h1>
-    <form action="buscar plantas">
-      <input type="text" placeholder="Buscar por" id="busca1">
+    <form action="#" method="get">
+      <div class="busca-div">
+      <input type="text" placeholder="Buscar por" id="busca1" name="busca">
+      <fieldset>
+        <legend>Selecione</legend>
+        <select name="classe" required>
+          <option value="" hidden selected>Selecione a Classe</option>
+          <option value="plantas">Plantas</option>
+          <option value="animais">Animais</option>
+          <option value="fungos">Fungos</option>
+        </select>
+        <select name="familia" required>
+          <option value="" hidden selected>Selecione a Família</option>
+          <option value="rosaceae">Rosaceae</option>
+          <option value="asteraceae">Asteraceae</option>
+          <option value="fabaceae">Fabaceae</option>
+        </select>
+      </fieldset>
+      </div>
+      <div class="button-div">
+      <button type="submit" id="btn-buscar"></button>
+      <img src="assets/botão-de-pesquisa.svg" alt="botão de pesquisa">
+      </div>
     </form>
   </section>
+  <footer>
+    
+  </footer>
 </body>
 </html>

@@ -1,6 +1,6 @@
 #cabecalho{
   background-color: var(--brand-color);
-  height: 5.625rem;
+  height: 3.937rem;
   align-items: center;
   display: flex;
   & span{
@@ -9,6 +9,10 @@
     margin-left: auto;
     margin-right: 3rem;
   }
+  & a{
+  font: var(--aba);
+  color: var(--background);
+}
 }
 
 
