@@ -1,6 +1,6 @@
 footer{
   background-color: var(--brand-color);
-  height: 14rem;
+  height: 12rem;
   margin-top: 8rem;
   display: flex;
   flex-direction: column;
@@ -14,5 +14,6 @@ footer{
   & span{
     color: var(--background);
     font: 300 .7rem var(--lexend);
+    text-align: center;
   }
 }
