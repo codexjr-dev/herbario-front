@@ -1,0 +1,59 @@
+#busca{
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  margin-inline: auto;
+  justify-content: center;
+  & .busca-div{
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+
+    & fieldset{
+      display: flex;
+      justify-content: space-between;
+      width: 42.81rem;
+      border: none;
+
+      & select{
+        width: 18rem;
+      }
+
+      & legend{
+        display: inline-block;
+        margin-bottom: 1rem;
+        font: 300 1rem var(--lexend);
+        color: #000000;
+      }
+    }
+  }
+  & input, select{
+    height: 3.9rem;
+    border-radius: 1rem;
+    border: solid 3px var(--brand-border);
+    display: flex;
+    font: 1.3rem var(--lexend);
+  }
+  & h1{
+    font: var(--h1);
+    color: var(--brand-color);
+  }
+  & #busca1{
+    border-radius: 1rem;
+    width: 42.81rem;
+    padding-inline: 1rem;
+  }
+}
+
+
+#busca input::placeholder{
+  font: 1.3rem var(--lexend);
+}
+
+option[value=""][hidden] {
+  display: none; /* Oculta o placeholder na lista dropdown */
+}
+
+select:invalid {
+  color: gray; /* Define a cor do placeholder */
+}
