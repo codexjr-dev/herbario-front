@@ -1,0 +1,114 @@
+/* Introdução */
+#intro-parceiros {
+  max-width: 850px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#intro-parceiros h1 {
+  font: 105px var(--xilosa); 
+  color: var(--brand-color);
+}
+
+#intro-parceiros p {
+  font: 400 1.125rem var(--lexend);
+  color: var(--standart-grey);
+  line-height: 1.6;
+}
+
+/* Estilo global para imagens da seção Gurinhém */
+.gurinhem img {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 15px;
+  display: block;
+}
+
+/* ====== Bloco: Mapa ====== */
+.mapa-container {
+  padding: 2rem;
+}
+
+.mapa-container h2 {
+  font-family: 'Xilosa', sans-serif;
+  color: #3CAC2B;
+  font-size: 2rem;
+  margin-left: 2rem;
+}
+
+.mapa-bloco {
+  background-color: #3CAC2B;
+  border-radius: 20px;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 800px;
+}
+
+.mapa-bloco p {
+  text-align: left;
+  color: white;
+}
+
+.mapa-img {
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+}
+
+/* ====== Bloco: Escola João Ribeiro ====== */
+.imagem-joao-ribeiro {
+  max-width: 850px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  text-align: left;
+}
+
+.imagem-joao-ribeiro p {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1rem;
+  color: #3CAC2B;
+  margin-top: 0.5rem;
+}
+
+.legenda-extra {
+  font-size: 0.875rem;
+  color: #3CAC2B;
+}
+
+/* ====== Bloco: Imagens Oficinas ====== */
+.imagens-duplas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  max-width: 850px;
+}
+
+.imagens-duplas .imagem-legenda {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.imagens-duplas .imagem-legenda img {
+  width: 100%;
+  max-height: 350px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.imagens-duplas p {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1rem;
+  color: #3CAC2B;
+  margin-top: 0.5rem;
+  text-align: left;
+}
