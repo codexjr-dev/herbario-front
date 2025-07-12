@@ -11,9 +11,7 @@ export default function Home() {
         <img 
         src="/images/fundoMato.png"
         height={500}
-        
         />
-    
 
       <main className="main-home">
         <h2>Herbário Virtual</h2>
