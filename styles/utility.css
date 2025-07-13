@@ -1,3 +1,13 @@
 .flex{
-  display: flex;;
+  display: flex;
+}
+
+.xilosa{
+  font-family: var(--xilosa);
+  color: var(--brand-color);
+}
+
+.text{
+  font: var(--text);
+  color: var(--standart-grey);
 }

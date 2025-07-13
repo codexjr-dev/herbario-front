@@ -1,0 +1,14 @@
+#projeto{
+  width: 40rem;
+  margin-inline: auto;
+  margin-top: 2rem;
+  h1{
+    font: var(--h2);
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  p{
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+}

@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font: inherit;
+  font-family: var(--lexend);
   overflow-x: hidden;
 }
 
@@ -17,6 +17,9 @@
   --xilosa: "Xilosa", sans-serif;
   --lexend: "Lexend", sans-serif;
   --h1: 8rem var(--xilosa);
+  --h2: 4rem var(--xilosa);
+  --text: 400 1rem var(--lexend);
+  --legend: .75rem;
 
   --aba: 500 1rem var(--lexend);
 }

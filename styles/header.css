@@ -1,4 +1,4 @@
-#cabecalho{
+.cabecalho{
   background-color: var(--brand-color);
   height: 3.937rem;
   align-items: center;
@@ -13,6 +13,13 @@
   font: var(--aba);
   color: var(--background);
 }
+}
+
+.imagem{
+  img{
+    height: 3.5rem;
+    margin-left: 2rem;
+  }
 }
 
 
