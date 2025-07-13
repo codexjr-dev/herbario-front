@@ -1,0 +1,37 @@
+.parceiros-box{
+  margin-inline: auto;
+  width: 44rem;
+  & .retrato{
+    width: 40rem;
+    & img{
+      width: 38rem;
+    }
+  }
+  & .img-box{
+    margin-block: 2rem;
+    & legend{
+      color: var(--brand-color);
+    }
+    & .principal{
+      & img{
+        height: 18rem;
+        max-width: 42rem;
+      }
+    }
+  }
+}
+
+.second{
+  display: grid;
+  grid-auto-flow: column;
+  gap: .5rem;
+  img{
+    height: 18rem;
+  }
+  #img-1{
+    width: 24rem;
+  }
+  #img-2{
+    width: 17rem;
+  }
+}

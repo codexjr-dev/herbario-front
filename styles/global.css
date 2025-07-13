@@ -18,6 +18,7 @@
   --lexend: "Lexend", sans-serif;
   --h1: 8rem var(--xilosa);
   --h2: 4rem var(--xilosa);
+  --h3: 2.5rem var(--xilosa);
   --text: 400 1rem var(--lexend);
   --legend: .75rem;
 
