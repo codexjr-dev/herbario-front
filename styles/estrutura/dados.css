@@ -1,0 +1,16 @@
+.dados{
+  margin-bottom: 3rem;
+  & .dados-box{
+    border: .1rem solid var(--brand-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    & div{
+      & legend{
+        color: var(--brand-color);
+      }
+    }
+  }
+}

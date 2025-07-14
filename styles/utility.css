@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.verde{
+  color: var(--brand-color);
+}
+
 .xilosa{
   font-family: var(--xilosa);
   color: var(--brand-color);
@@ -18,5 +22,9 @@
 
 .querenta-rem{
   width: 40rem;
+}
+
+.h2{
+  font: var(--h2);
 }
 

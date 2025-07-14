@@ -1,0 +1,10 @@
+.galeria{
+  & div{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 2rem;
+    img{
+      max-width: 13.3rem;
+    }
+  }
+}
