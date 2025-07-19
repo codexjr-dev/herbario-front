@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Herbário Admin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+    }
+    h1 {
+      color: #2e7d32;
+    }
+    label, input, textarea {
+      display: block;
+      margin: 0.5rem 0;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      margin-top: 2rem;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Painel do Herbário</h1>
+
+  <h2>Adicionar Nova Planta</h2>
+  <form id="planta-form">
+    <label for="nomePopular">Nome Popular:</label>
+    <input type="text" id="nomePopular" name="nomePopular" required />
+
+    <label for="nomeCientifico">Nome Científico:</label>
+    <input type="text" id="nomeCientifico" name="nomeCientifico" required />
+
+    <label for="familia">Família:</label>
+    <input type="text" id="familia" name="familia" required />
+
+    <label for="descricao">Descrição:</label>
+    <textarea id="descricao" name="descricao" rows="3" required></textarea>
+
+    <button type="submit">Cadastrar Planta</button>
+  </form>
+
+  <h2>Plantas Cadastradas</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome Popular</th>
+        <th>Nome Científico</th>
+        <th>Família</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody id="plantas-table-body">
+    </tbody>
+  </table>
+
+  <script src="script.js"></script>
+</body>
+</html>
