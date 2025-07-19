@@ -12,33 +12,38 @@ function listarPlantas() {
       return res.json();
     })
     .then(data => {
-      const lista = document.getElementById('plantas-lista');
-      lista.innerHTML = ''; // Limpa a lista anterior
+      const tbody = document.getElementById('plantas-table-body');
+      tbody.innerHTML = ''; // Limpa linhas antigas
 
       if (data.length === 0) {
-        lista.innerHTML = '<li>Nenhuma planta cadastrada.</li>';
+        tbody.innerHTML = `<tr><td colspan="5">Nenhuma planta cadastrada.</td></tr>`;
         return;
       }
 
       data.forEach(planta => {
-        const item = document.createElement('li');
-        item.innerHTML = `
-          <strong>${planta.nomePopular}</strong> (${planta.nomeCientifico})<br/>
-          Família: ${planta.taxonomia?.familia || 'Desconhecida'}<br/>
-          ${planta.descricao || ''}
-          <br/>
-          <button onclick="buscarPlanta('${planta._id}')">🔍 Ver</button>
-          <button onclick="deletarPlanta('${planta._id}')">🗑️ Deletar</button>
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+          <td>${planta.nomePopular}</td>
+          <td>${planta.nomeCientifico}</td>
+          <td>${planta.taxonomia?.familia || 'Desconhecida'}</td>
+          <td>${planta.descricao || ''}</td>
+          <td>
+            <button onclick="buscarPlantaPorId('${planta._id}')">🔍 Ver</button>
+            <button onclick="deletarPlanta('${planta._id}')">🗑️ Deletar</button>
+          </td>
         `;
-        lista.appendChild(item);
+
+        tbody.appendChild(tr);
       });
     })
     .catch(err => {
       console.error(err);
-      const lista = document.getElementById('plantas-lista');
-      lista.innerHTML = '<li>Erro ao carregar plantas.</li>';
+      const tbody = document.getElementById('plantas-table-body');
+      tbody.innerHTML = `<tr><td colspan="5">Erro ao carregar plantas.</td></tr>`;
     });
 }
+
 
 
 // BUSCAR UMA PLANTA POR ID
@@ -53,16 +58,15 @@ function buscarPlantaPorId(id) {
 
 // CRIAR UMA NOVA PLANTA
 function criarPlanta(planta) {
-  fetch(API_URL, {
+  return fetch(API_URL, {
     method: 'POST',
     headers: AUTH_HEADER,
     body: JSON.stringify(planta)
   })
-    .then(res => res.json())
-    .then(data => {
-      console.log('Planta criada:', data);
-    })
-    .catch(err => console.error('Erro ao criar planta:', err));
+  .then(res => {
+    if (!res.ok) throw new Error('Falha ao criar planta');
+    return res.json();
+  });
 }
 
 // ATUALIZAR UMA PLANTA EXISTENTE
@@ -91,3 +95,34 @@ function deletarPlanta(id) {
     })
     .catch(err => console.error(`Erro ao deletar planta com ID ${id}:`, err));
 }
+
+// Chama para carregar a lista logo que a página abrir
+listarPlantas();
+
+document.getElementById('planta-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const nomePopular = document.getElementById('nomePopular').value.trim();
+  const nomeCientifico = document.getElementById('nomeCientifico').value.trim();
+  const familia = document.getElementById('familia').value.trim();
+  const descricao = document.getElementById('descricao').value.trim();
+
+  const novaPlanta = {
+    nomePopular,
+    nomeCientifico,
+    taxonomia: { familia },
+    descricao
+  };
+
+  criarPlanta(novaPlanta)
+    .then(() => {
+      this.reset();        // limpa formulário
+      listarPlantas();     // atualiza tabela
+    })
+    .catch(err => {
+      console.error('Erro ao criar planta:', err);
+      alert('Erro ao criar planta. Veja o console para detalhes.');
+    });
+});
+
+
