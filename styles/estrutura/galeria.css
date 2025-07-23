@@ -8,3 +8,16 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .galeria {
+    & div {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    img {
+      max-width: 10rem;
+      height: 5rem;
+    }
+  }
+}
