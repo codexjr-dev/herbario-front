@@ -17,3 +17,18 @@ footer{
     text-align: center;
   }
 }
+
+@media (max-width: 600px) {
+  footer {
+    height: auto;
+    margin-top: 7rem;
+    padding-block: 2rem;
+    gap: .45rem;
+  }
+  footer img {
+    height: 4.2rem;
+  }
+  footer span {
+    font-size: .72rem;
+  }
+}
