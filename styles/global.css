@@ -13,6 +13,8 @@
   --background: #F2F2F2;
   --standart-red: #E41F1C;
   --standart-grey: #27262B;
+  --apoio-par: #A1D59A80;
+  --apoio-impar: #E9E9E9;
   /*fontes*/
   --xilosa: "Xilosa", sans-serif;
   --lexend: "Lexend", sans-serif;
@@ -45,7 +47,7 @@ a{
 
 @font-face {
   font-family: "Xilosa";
-  src: url("/fonts/xilosa_.ttf") format("truetype");
+  src: url("/herbario-front/fonts/xilosa_.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   line-height: 100%;
