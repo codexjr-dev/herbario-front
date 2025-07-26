@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plantas Cadastradas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    h1, h2, legend {
+      color: #2e7d32;
+      font-size: 1.8rem;
+    }
+    table tbody tr td:first-child {
+        font-weight: bold;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+
+    fieldset {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    legend {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin: 0.3rem 0 1rem;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    td {
+      padding: 0.5rem 0;
+      vertical-align: middle;
+    }
+
+    .botoes {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+    }
+
+    .button-editar,
+    .button-excluir,
+    .button-voltar {
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .button-editar {
+      background-color: #2196f3;
+    }
+
+    .button-editar:hover {
+      background-color: #1976d2;
+    }
+
+    .button-excluir {
+      background-color: #f44336;
+    }
+
+    .button-excluir:hover {
+      background-color: #d32f2f;
+    }
+
+    .button-voltar {
+      padding: 0.7rem 1.2rem;
+      
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .button-voltar:hover {
+    background-color: #388e3c;
+    }
+    
+    .voltar-container {
+    text-align: center;
+    margin-top: 2rem;
+    }
+
+
+  </style>
+</head>
+<body>
+
+    <h1>Painel de Cadastros</h1>
+
+    <fieldset>
+        <legend>Plantas (Nome Popular)</legend>
+
+        <table>
+        <tbody id="tabela-lista">
+            <tr>
+            <td>Erva-doce</td>
+            <td class="botoes">
+                <button class="button-editar" onclick="editarPlanta('Erva-doce')">Editar</button>
+                <button class="button-excluir" onclick="excluirPlanta('Erva-doce')">Excluir</button>
+            </td>
+            </tr>
+            <tr>
+            <td>Babosa</td>
+            <td class="botoes">
+                <button class="button-editar" onclick="editarPlanta('Babosa')">Editar</button>
+                <button class="button-excluir" onclick="excluirPlanta('Babosa')">Excluir</button>
+            </td>
+            </tr>
+        </tbody>
+        </table>
+    </fieldset>
+
+  <!-- Botão Voltar centralizado -->
+    <div class="voltar-container">
+        <a href="index.html" class="button-voltar">Voltar</a>
+    </div>
+
+    <script>
+        function editarPlanta(nome) {
+        window.location.href = `index.html?editar=${encodeURIComponent(nome)}`;
+        }
+
+        function excluirPlanta(nome) {
+        const confirmar = confirm(`Tem certeza que deseja excluir a planta "${nome}"?`);
+        if (confirmar) {
+            alert(`Planta "${nome}" excluída!`);
+        }
+        }
+    </script>
+
+</body>
+</html>

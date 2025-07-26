@@ -7,73 +7,174 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 2rem;
+      max-width: 800px;
+      margin: 2rem auto;
     }
-    h1 {
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    h1, h2, legend {
       color: #2e7d32;
+      font-size: 1.8rem;
     }
-    label, input, textarea {
-      display: block;
-      margin: 0.5rem 0;
-    }
-    button {
+
+    label {
+      font-weight: bold;
       margin-top: 1rem;
-      padding: 0.5rem 1rem;
+      display: block;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin: 0.3rem 0 1rem;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .botao-salvar,
+    .botao-lista {
+      padding: 0.7rem 1.2rem;
       background-color: #4caf50;
       color: white;
       border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      text-decoration: none;
+      text-align: center;
       cursor: pointer;
     }
-    table {
-      width: 100%;
+
+    .botao-salvar:hover,
+    .botao-lista:hover {
+      background-color: #388e3c;
+    }
+
+    /* Corrige o link para se parecer com botão */
+    .botao-lista {
+      display: inline-block;
+    }
+    
+    fieldset {
       margin-top: 2rem;
-      border-collapse: collapse;
-    }
-    th, td {
+      padding: 1rem;
       border: 1px solid #ccc;
-      padding: 0.5rem;
-      text-align: left;
+      border-radius: 6px;
     }
-    th {
-      background-color: #f0f0f0;
+
+    legend {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 600px) {
+      html {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Painel do Herbário</h1>
+  <h1>Painel de Cadastro / Edição </h1>
 
-  <h2>Adicionar Nova Planta</h2>
   <form id="planta-form">
-    <label for="nomePopular">Nome Popular:</label>
-    <input type="text" id="nomePopular" name="nomePopular" required />
+    <!-- Seção Principal -->
+    <fieldset>
+      <legend>Planta</legend>
 
-    <label for="nomeCientifico">Nome Científico:</label>
-    <input type="text" id="nomeCientifico" name="nomeCientifico" required />
+      <label for="nomePopular">Nome Popular:</label>
+      <input type="text" id="nomePopular" name="nomePopular" required />
 
-    <label for="familia">Família:</label>
-    <input type="text" id="familia" name="familia" required />
+      <label for="nomeCientifico">Nome Científico:</label>
+      <input type="text" id="nomeCientifico" name="nomeCientifico" required />
 
-    <label for="descricao">Descrição:</label>
-    <textarea id="descricao" name="descricao" rows="3" required></textarea>
+      <label for="familia">Família:</label>
+      <input type="text" id="familia" name="familia" required />
 
-    <button type="submit">Cadastrar Planta</button>
+      <label for="descricao">Descrição:</label>
+      <textarea id="descricao" name="descricao" rows="3" required></textarea>
+
+      <label for="imagemCapa">Imagem de Capa (URL):</label>
+      <input type="url" id="imagemCapa" name="imagemCapa" />
+    </fieldset>
+
+    <!-- Seção Dados Técnicos -->
+    <fieldset>
+      <legend>Dados Técnicos</legend>
+
+      <label for="especieTipo">Espécie Tipo:</label>
+      <input type="text" id="especieTipo" name="especieTipo" />
+
+      <label for="ordem">Ordem:</label>
+      <input type="text" id="ordem" name="ordem" />
+
+      <label for="duplicatas">Duplicatas Indicadas:</label>
+      <input type="text" id="duplicatas" name="duplicatas" />
+
+      <label for="numeroColeta">Número da Coleta:</label>
+      <input type="text" id="numeroColeta" name="numeroColeta" />
+
+      <label for="dataColeta">Data da Coleta:</label>
+      <input type="date" id="dataColeta" name="dataColeta" />
+
+      <label for="localidade">Localidade:</label>
+      <input type="text" id="localidade" name="localidade" />
+
+      <label for="coletor">Coletor(es):</label>
+      <input type="text" id="coletor" name="coletor" />
+
+      <label for="observacoes">Observações:</label>
+      <textarea id="observacoes" name="observacoes" rows="2"></textarea>
+    </fieldset>
+
+    <!-- Seção Glossário -->
+    <fieldset>
+      <legend>Glossário</legend>
+
+      <label for="termoGlossario">Termo:</label>
+      <input type="text" id="termoGlossario" name="termoGlossario" />
+
+      <label for="definicaoGlossario">Definição:</label>
+      <textarea id="definicaoGlossario" name="definicaoGlossario" rows="3"></textarea>
+    </fieldset>
+
+    <!-- Seção Galeria -->
+    <fieldset>
+      <legend>Galeria de Imagens (URLs)</legend>
+
+      <label for="galeria1">Imagem 1:</label>
+      <input type="url" id="galeria1" name="galeria1" />
+
+      <label for="galeria2">Imagem 2:</label>
+      <input type="url" id="galeria2" name="galeria2" />
+
+      <label for="galeria3">Imagem 3:</label>
+      <input type="url" id="galeria3" name="galeria3" />
+
+      <label for="galeria4">Imagem 4:</label>
+      <input type="url" id="galeria4" name="galeria4" />
+
+      <label for="galeria5">Imagem 5:</label>
+      <input type="url" id="galeria5" name="galeria5" />
+
+      <label for="galeria6">Imagem 6:</label>
+      <input type="url" id="galeria6" name="galeria6" />
+    </fieldset>
+
+  <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+    <button type="submit" class="botao-salvar">Salvar</button>
+    <a href="lista.html" class="botao-lista">Ver Lista</a>
+  </div>
+
+
   </form>
-
-  <h2>Plantas Cadastradas</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Nome Popular</th>
-        <th>Nome Científico</th>
-        <th>Família</th>
-        <th>Descrição</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody id="plantas-table-body">
-    </tbody>
-  </table>
-
-  <script src="/assets/scripts.js"></script>
 </body>
 </html>
