@@ -19,9 +19,7 @@
       color: #2e7d32;
       font-size: 1.8rem;
     }
-    table tbody tr td:first-child {
-        font-weight: bold;
-    }
+  
 
     label {
       font-weight: bold;
@@ -56,9 +54,10 @@
       border-collapse: collapse;
     }
 
-    td {
+    td, th {
       padding: 0.5rem 0;
       vertical-align: middle;
+      text-align: left;
     }
 
     .botoes {
@@ -123,9 +122,14 @@
   <h1>Painel de Cadastros</h1>
 
   <fieldset>
-    <legend>Plantas (Nome Popular)</legend>
+    <legend>Plantas</legend>
 
     <table>
+      <thead>
+        <tr>
+          <th style="width: 70%;">Nome Popular</th>
+        </tr>
+      </thead>
       <tbody id="plantas-table-body">
         <!-- preenchido dinamicamente pelo scripts.js -->
       </tbody>

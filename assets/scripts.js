@@ -24,7 +24,7 @@ function listarPlantas() {
       tbody.innerHTML = '';
 
       if (data.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5">Nenhuma planta cadastrada.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="2">Nenhuma planta cadastrada.</td></tr>`;
         return;
       }
 
@@ -33,9 +33,6 @@ function listarPlantas() {
 
         tr.innerHTML = `
           <td>${planta.nomePopular}</td>
-          <td>${planta.nomeCientifico}</td>
-          <td>${planta.taxonomia?.familia || 'Desconhecida'}</td>
-          <td>${planta.descricao || ''}</td>
           <td class="botoes">
             <button class="button-editar" onclick="editarPlanta('${planta._id}')">Editar</button>
             <button class="button-excluir" onclick="deletarPlanta('${planta._id}')">Excluir</button>
@@ -47,7 +44,7 @@ function listarPlantas() {
     .catch(err => {
       console.error(err);
       const tbody = document.getElementById('plantas-table-body');
-      if (tbody) tbody.innerHTML = `<tr><td colspan="5">Erro ao carregar plantas.</td></tr>`;
+      if (tbody) tbody.innerHTML = `<tr><td colspan="2">Erro ao carregar plantas.</td></tr>`;
     });
 }
 
@@ -172,6 +169,12 @@ if (form) {
       document.getElementById('galeria5').value.trim(),
       document.getElementById('galeria6').value.trim(),
     ].filter(url => url !== '');
+
+    // VALIDAÇÃO: campos obrigatórios
+    if (!nomePopular || !nomeCientifico || !familia) {
+      alert('Por favor, preencha os campos obrigatórios: Nome Popular, Nome Científico e Família.');
+      return;
+    }
 
     const plantaData = {
       nomePopular,
