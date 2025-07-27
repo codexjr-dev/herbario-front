@@ -22,3 +22,7 @@ main{
     background-color: var(--apoio-par);
   }
 }
+
+& li:hover{
+  border: solid 1px var(--brand-border);
+}
