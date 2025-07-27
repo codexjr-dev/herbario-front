@@ -67,8 +67,7 @@
     }
 
     .button-editar,
-    .button-excluir,
-    .button-voltar {
+    .button-excluir {
       padding: 0.7rem 1.2rem;
       font-size: 1rem;
       border: none;
@@ -95,7 +94,8 @@
       background-color: #d32f2f;
     }
 
-    .button-voltar {
+    .button-voltar,
+    .button-sair {
       padding: 0.7rem 1.2rem;
       background-color: #4caf50;
       color: white;
@@ -119,7 +119,7 @@
 </head>
 <body>
 
-  <h1>Painel de Cadastros</h1>
+  <h1>Lista de Plantas</h1>
 
   <fieldset>
     <legend>Plantas</legend>
@@ -137,8 +137,9 @@
   </fieldset>
 
   <!-- Botão Voltar centralizado -->
-  <div class="voltar-container">
-    <a href="admin.html" class="button-voltar">Voltar</a>
+  <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem;">
+    <a href="painel-admin.html" class="button-voltar">Voltar</a>
+    <a href="login-admin.html" class="button-voltar">Sair</a>
   </div>
 
   <script src="assets/scripts.js"></script>

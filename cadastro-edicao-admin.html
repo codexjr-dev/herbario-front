@@ -41,7 +41,8 @@
     }
 
     .botao-salvar,
-    .botao-lista {
+    .botao-lista,
+    .botao-sair {
       padding: 0.7rem 1.2rem;
       background-color: #4caf50;
       color: white;
@@ -54,15 +55,11 @@
     }
 
     .botao-salvar:hover,
-    .botao-lista:hover {
+    .botao-lista:hover,
+    .botao-sair:hover{
       background-color: #388e3c;
     }
 
-    /* Corrige o link para se parecer com botão */
-    .botao-lista {
-      display: inline-block;
-    }
-    
     fieldset {
       margin-top: 2rem;
       padding: 1rem;
@@ -171,10 +168,15 @@
 
   <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
     <button type="submit" class="botao-salvar">Salvar</button>
-    <a href="lista.html" class="botao-lista">Ver Lista</a>
+    <a href="lista-plantas-admin.html" class="botao-lista">Ver Lista</a>
+    <a href="painel-admin.html" class="botao-lista">Voltar</a>
+    <a href="login-admin.html" class="botao-lista">Sair</a> <!-- Agora com estilo idêntico -->
   </div>
+
+
   </form>
 
+    
    <script src="assets/scripts.js"></script>
 
 </body>

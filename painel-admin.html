@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel do Herbário</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    h1 {
+      color: #2e7d32;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .menu-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .botao-menu {
+      aspect-ratio: 1 / 1;
+      width: 160px;
+      background-color: white;
+      color: #2e7d32;
+      border: 1px solid #2e7d32;
+      border-radius: 6px;
+      font-size: 1rem;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .botao-menu:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .botao-sair {
+      padding: 0.7rem 1.2rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      margin-top: 1.2rem;
+      display: inline-block;
+      
+    }
+
+    .botao-sair:hover {
+      background-color: #388e3c;
+    }
+
+    @media (max-width: 600px) {
+      .botao-menu {
+        width: 120px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Painel do Herbário</h1>
+
+  <div class="menu-container">
+    <a href="cadastro-edicao-admin.html" class="botao-menu">Cadastrar Plantas</a>
+    <a href="lista-plantas-admin.html" class="botao-menu">Lista de Plantas</a>
+    <a href="parceiros-admin.html" class="botao-menu">Cadastrar Parceiros</a>
+    <a href="lista-parceiros-admin.html" class="botao-menu">Lista de Parceiros</a>
+    <a href="sobre-admin.html" class="botao-menu">Editar Sobre</a>
+  </div>
+
+  <a href="login-admin.html" class="botao-sair">Sair</a> 
+</body>
+</html>
