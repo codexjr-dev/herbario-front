@@ -1,0 +1,27 @@
+ul{
+  & li{
+    list-style: none;
+    margin-bottom: 0.5rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: var(--apoio-impar);
+    display: flex;
+    gap: 1.5rem;
+    & .nome-planta{
+      color: var(--brand-color);
+      font-weight: 500;
+      font-size: 2rem;
+      display: block;
+      margin-bottom: .5rem;
+    }
+    & img{
+      width: 11rem;
+      height: 10rem;
+    }
+  }
+
+  & li:hover{
+    border: solid 1px var(--brand-border);
+    background-color: var(--apoio-par);
+  }
+}

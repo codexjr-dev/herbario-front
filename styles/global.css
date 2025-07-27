@@ -47,7 +47,7 @@ a{
 
 @font-face {
   font-family: "Xilosa";
-  src: url("/herbario-front/fonts/xilosa_.ttf") format("truetype");
+  src: url("/fonts/xilosa_.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   line-height: 100%;
