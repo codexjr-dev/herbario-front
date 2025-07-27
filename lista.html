@@ -98,7 +98,6 @@
 
     .button-voltar {
       padding: 0.7rem 1.2rem;
-      
       background-color: #4caf50;
       color: white;
       border: none;
@@ -110,62 +109,34 @@
     }
 
     .button-voltar:hover {
-    background-color: #388e3c;
+      background-color: #388e3c;
     }
-    
+
     .voltar-container {
-    text-align: center;
-    margin-top: 2rem;
+      text-align: center;
+      margin-top: 2rem;
     }
-
-
   </style>
 </head>
 <body>
 
-    <h1>Painel de Cadastros</h1>
+  <h1>Painel de Cadastros</h1>
 
-    <fieldset>
-        <legend>Plantas (Nome Popular)</legend>
+  <fieldset>
+    <legend>Plantas (Nome Popular)</legend>
 
-        <table>
-        <tbody id="tabela-lista">
-            <tr>
-            <td>Erva-doce</td>
-            <td class="botoes">
-                <button class="button-editar" onclick="editarPlanta('Erva-doce')">Editar</button>
-                <button class="button-excluir" onclick="excluirPlanta('Erva-doce')">Excluir</button>
-            </td>
-            </tr>
-            <tr>
-            <td>Babosa</td>
-            <td class="botoes">
-                <button class="button-editar" onclick="editarPlanta('Babosa')">Editar</button>
-                <button class="button-excluir" onclick="excluirPlanta('Babosa')">Excluir</button>
-            </td>
-            </tr>
-        </tbody>
-        </table>
-    </fieldset>
+    <table>
+      <tbody id="plantas-table-body">
+        <!-- preenchido dinamicamente pelo scripts.js -->
+      </tbody>
+    </table>
+  </fieldset>
 
   <!-- Botão Voltar centralizado -->
-    <div class="voltar-container">
-        <a href="index.html" class="button-voltar">Voltar</a>
-    </div>
+  <div class="voltar-container">
+    <a href="admin.html" class="button-voltar">Voltar</a>
+  </div>
 
-    <script>
-        function editarPlanta(nome) {
-        window.location.href = `index.html?editar=${encodeURIComponent(nome)}`;
-        }
-
-        function excluirPlanta(nome) {
-        const confirmar = confirm(`Tem certeza que deseja excluir a planta "${nome}"?`);
-        if (confirmar) {
-            alert(`Planta "${nome}" excluída!`);
-        }
-        }
-    </script>
-    <script src="assets/scripts.js"></script>
-
+  <script src="assets/scripts.js"></script>
 </body>
 </html>
