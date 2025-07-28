@@ -1,0 +1,27 @@
+.retrato{
+  background-color: var(--brand-color);
+  box-sizing: content-box;
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 35rem;
+  img{
+    height: 18rem;
+  }
+  legend{
+    color: var(--background);
+    font-size: var(--legend);
+  }
+}
+
+@media (max-width: 600px) {
+  .retrato {
+    width: 100%;
+    padding: 0.5rem;
+  }
+  .retrato img {
+    height: 10rem;
+  }
+  .retrato legend {
+    font-size: 1rem;
+  }
+}

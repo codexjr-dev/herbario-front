@@ -1,3 +1,30 @@
 .flex{
-  display: flex;;
+  display: flex;
 }
+
+.verde{
+  color: var(--brand-color);
+}
+
+.xilosa{
+  font-family: var(--xilosa);
+  color: var(--brand-color);
+}
+
+.text{
+  font: var(--text);
+  color: var(--standart-grey);
+}
+
+.h3{
+  font: var(--h3);
+}
+
+.querenta-rem{
+  width: 40rem;
+}
+
+.h2{
+  font: var(--h2);
+}
+

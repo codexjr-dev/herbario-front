@@ -1,0 +1,30 @@
+#projeto{
+  width: 40rem;
+  margin-inline: auto;
+  margin-top: 2rem;
+  h1{
+    font: var(--h2);
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  p{
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #projeto {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+  #projeto h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  #projeto p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+}

@@ -1,0 +1,23 @@
+.galeria{
+  & div{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 2rem;
+    img{
+      max-width: 13.3rem;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .galeria {
+    & div {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    img {
+      max-width: 10rem;
+      height: 5rem;
+    }
+  }
+}

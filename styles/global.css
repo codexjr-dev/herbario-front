@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font: inherit;
+  font-family: var(--lexend);
   overflow-x: hidden;
 }
 
@@ -17,8 +17,23 @@
   --xilosa: "Xilosa", sans-serif;
   --lexend: "Lexend", sans-serif;
   --h1: 8rem var(--xilosa);
+  --h2: 4rem var(--xilosa);
+  --h3: 2.5rem var(--xilosa);
+  --text: 400 1rem var(--lexend);
+  --legend: .75rem;
 
   --aba: 500 1rem var(--lexend);
+}
+
+@media (max-width: 600px) {
+  :root {
+    --h1: 3rem var(--xilosa);
+    --h2: 2.5rem var(--xilosa);
+    --h3: 1.5rem var(--xilosa);
+    --text: 400 0.95rem var(--lexend);
+    --legend: 0.5rem;
+    --aba: 500 0.8rem var(--lexend);
+  }
 }
 
 a{

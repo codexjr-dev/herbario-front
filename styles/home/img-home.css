@@ -1,16 +1,28 @@
-#imgs-home{
+#imgs-home {
   position: relative;
-  & #img-floresta{
-    width: 100vw;
-    height: 26.6rem;
-    filter: brightness(50%);
+}
+
+#imgs-home #img-floresta {
+  width: 100vw;
+  height: 26.6rem;
+  filter: brightness(50%);
+}
+
+#imgs-home #logo-home {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 41rem;
+  height: 16.21rem;
+}
+
+@media screen and (max-width: 600px) {
+  #imgs-home #img-floresta {
+    height: 13rem;
   }
-  & #logo-home{
-    position: absolute;
-    top: 50%;
-    left: 50%;        
-    transform: translate(-50%, -50%);
-    width: 41rem;
-    height: 16.21rem;
+  #imgs-home #logo-home {
+    width: 10rem;
+    height: 7rem;
   }
 }

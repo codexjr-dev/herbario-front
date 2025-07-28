@@ -1,0 +1,8 @@
+.glossario{
+  margin-bottom: 3rem;
+  & div{
+  border: .1rem solid var(--brand-color);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+}
