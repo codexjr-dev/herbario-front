@@ -28,3 +28,7 @@
   font: var(--h2);
 }
 
+.bold{
+  font-weight: 500;
+}
+
