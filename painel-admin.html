@@ -85,6 +85,27 @@
     <a href="projeto-admin.html" class="botao-menu">Projeto</a>
   </div>
 
-  <a href="login-admin.html" class="botao-sair">Sair</a> 
+  <button class="botao-sair" onclick="logout()">Sair</button>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("token");
+      window.location.href = "login-admin.html";
+    }
+  </script>
+
+ <!--
+<script>
+  // Verifica se está logado (exemplo usando token no localStorage)
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Você precisa estar logado para acessar o painel.");
+    window.location.href = "login-admin.html";
+  }
+</script> 
+
+--> 
+   
+
 </body>
 </html>
