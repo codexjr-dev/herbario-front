@@ -1,5 +1,5 @@
-const API_URL = process.env.PORT;
-require("dotenv").config();
+const API_URL = 1025;
+
 
 document.querySelector("form").addEventListener("submit", async (e) => {
   e.preventDefault(); // Impede o envio tradicional
@@ -8,7 +8,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
   const senha = document.querySelector("#senha").value;
 
   try {
-    const resposta = await fetch("http://localhost:3000/login-admin", {
+    const resposta = await fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -17,7 +17,8 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     });
 
     if (resposta.ok) {
-      const dados = await resposta.json();
+      const conteudo = resposta.body;
+      // const dados = await resposta.json();
       // Aqui você pode salvar o token/localStorage se usar autenticação
       window.location.href = "painel-admin.html";
     } else {

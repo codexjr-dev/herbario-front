@@ -1,6 +1,6 @@
 
-const API_URL = process.env.PORT;
-require("dotenv").config();
+const API_URL = 1025;
+
 
 const AUTH_HEADERS = {
   "Authorization": "Basic YWRtaW46YWRtaW4xMjM=",

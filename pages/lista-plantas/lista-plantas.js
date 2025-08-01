@@ -1,5 +1,5 @@
-const API_URL = process.env.PORT;
-require("dotenv").config();
+const API_URL = 1025;
+
 const AUTH_HEADER = {
   'Authorization': 'Basic YWRtaW46YWRtaW4xMjM=',
   'Content-Type': 'application/json'
@@ -7,7 +7,7 @@ const AUTH_HEADER = {
 
 async function carregarPlantas() {
   try {
-    const resposta = await fetch('http://localhost:3000/api/plantas', {
+    const resposta = await fetch(`${API_URL}/api/plantas`, {
       headers: AUTH_HEADER
     });
 
@@ -62,7 +62,7 @@ async function excluirPlanta(id) {
   if (!confirmar) return;
 
   try {
-    const resposta = await fetch(`http://localhost:3000/api/plantas/${id}`, {
+    const resposta = await fetch(`${API_URL}/api/plantas/${id}`, {
       method: 'DELETE',
       headers: AUTH_HEADER
     });

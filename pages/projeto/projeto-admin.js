@@ -1,5 +1,5 @@
-const API_URL = process.env.PORT;
-require("dotenv").config();
+const API_URL = 1025;
+
 
 const AUTH_HEADER = {
   'Authorization': 'Basic YWRtaW46YWRtaW4xMjM=',
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/projetos', {
+      const response = await fetch(API_URL, {
         method: 'POST',
         headers: AUTH_HEADER,
         body: JSON.stringify(projeto)

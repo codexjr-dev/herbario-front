@@ -1,5 +1,5 @@
-const API_URL = process.env.PORT;
-require("dotenv").config();
+const API_URL = 1025;
+
 const AUTH_HEADER = {
     'Authorization': 'Basic YWRtaW46YWRtaW4xMjM=',
     'Content-Type': 'application/json'
@@ -7,7 +7,7 @@ const AUTH_HEADER = {
 
   async function carregarParceiros() {
     try {
-      const resposta = await fetch('http://localhost:3000/api/parceiros', {
+      const resposta = await fetch(`${API_URL}/api/parceiros`, {
         headers: AUTH_HEADER
       });
 
@@ -65,7 +65,7 @@ const AUTH_HEADER = {
     if (!confirmacao) return;
 
     try {
-      const resposta = await fetch(`http://localhost:3000/api/parceiros/${id}`, {
+      const resposta = await fetch(`${API_URL}/api/parceiros/${id}`, {
         method: 'DELETE',
         headers: AUTH_HEADER
       });

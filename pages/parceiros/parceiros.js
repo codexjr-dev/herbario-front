@@ -1,11 +1,10 @@
-const API_URL = process.env.PORT;
-require("dotenv").config();
+const API_URL = 1025;
+
 
 document.addEventListener("DOMContentLoaded", () => {
 const form = document.getElementById("parceiro-form");
 if (!form) return;
 
-const API_URL = "http://localhost:3000/api/parceiros";
 const AUTH_HEADERS = {
   "Authorization": "Basic YWRtaW46YWRtaW4xMjM=",
   "Content-Type": "application/json"
