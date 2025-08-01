@@ -1,5 +1,7 @@
 
-const API_URL = "http://localhost:3000";
+const API_URL = process.env.PORT;
+require("dotenv").config();
+
 const AUTH_HEADERS = {
   "Authorization": "Basic YWRtaW46YWRtaW4xMjM=",
   "Content-Type": "application/json"
