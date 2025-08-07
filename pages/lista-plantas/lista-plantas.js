@@ -18,7 +18,7 @@ async function carregarPlantas() {
     const plantas = await resposta.json();
     const corpoTabela = document.getElementById('plantas-table-body');
     corpoTabela.innerHTML = '';
-
+    
     plantas.forEach(planta => {
       const linha = document.createElement('tr');
 
