@@ -25,3 +25,20 @@ ul{
     background-color: var(--apoio-par);
   }
 }
+
+@media screen and (max-width: 400px) {
+  ul{
+    & li{
+      flex-direction: column;
+      padding: 1rem;
+      & .nome-planta{
+        font-size: 1.2rem;
+        margin-bottom: .3rem;
+      }
+      & img{
+        width: 8rem;
+        height: 7rem;
+      }
+    }
+  }
+}

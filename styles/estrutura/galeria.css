@@ -9,15 +9,22 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media (max-width: 400px) {
   .galeria {
-    & div {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
+    margin-bottom: 0.3rem;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    margin-inline: 0.3rem;
+    max-width: 94vw;
+  }
+  .galeria div {
+    max-width: 94vw;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.3rem;
     img {
       max-width: 10rem;
-      height: 5rem;
+      height: auto;
+      border-radius: 0.5rem;
     }
   }
 }
