@@ -1,10 +1,10 @@
 const API_URL = "https://herbario-back.onrender.com";
 
 async function carregarPlantas() {
-  const token = localStorage.getItem("authToken");
-  if (!token) {
+  const credentials = localStorage.getItem("authToken");
+  if (!credentials) {
     alert("Usuário não autenticado. Faça login.");
-    window.location.href = "login.html"; // Redireciona para login
+    window.location.href = "login.html";
     return;
   }
 
@@ -12,7 +12,7 @@ async function carregarPlantas() {
     const resposta = await fetch(`${API_URL}/api/plants`, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Basic ${credentials}`
       }
     });
 
@@ -61,8 +61,8 @@ async function excluirPlanta(id) {
   const confirmar = confirm("Tem certeza que deseja excluir esta planta?");
   if (!confirmar) return;
 
-  const token = localStorage.getItem("authToken");
-  if (!token) {
+  const credentials = localStorage.getItem("authToken");
+  if (!credentials) {
     alert("Usuário não autenticado. Faça login.");
     window.location.href = "login.html";
     return;
@@ -73,7 +73,7 @@ async function excluirPlanta(id) {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        "Authorization": `Basic ${credentials}`
       }
     });
 
