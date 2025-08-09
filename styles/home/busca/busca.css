@@ -33,6 +33,7 @@
     border: solid 3px var(--brand-border);
     display: flex;
     font: 1.3rem var(--lexend);
+    background: white;
   }
   & h1{
     font: var(--h1);

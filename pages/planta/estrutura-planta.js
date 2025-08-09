@@ -6,26 +6,18 @@ fetch(`${API_URL}/${editarId}`, {
   })
     .then(res => res.json())
     .then((resultado) => {
-    document.querySelector("nomePlanta#nomePopular").value = resultado.nomePopular;
-    document.querySelector("").value = resultado.nomeCientifico;
-    document.querySelector("span#descricao").value = resultado.descricao;
-    document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
-    document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
-    document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
-    document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
-    document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
-    document.querySelector("h1 xilosa h2").value = resultado;
-    document.querySelector("h1 xilosa h2").value = resultado;
+      document.querySelector("nomePlanta#nomePopular").value = resultado.nomePopular;
+      document.querySelector("").value = resultado.nomeCientifico;
+      document.querySelector("span#descricao").value = resultado.descricao;
+      document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
+      document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
+      document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
+      document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
+      document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
+      document.querySelector("h1 xilosa h2").value = resultado;
+      document.querySelector("h1 xilosa h2").value = resultado;
 
     // document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
-
-
-
-
-
-
-
-
     //   form.nome.value = parceiro.nome || "";
     //   form["mapa-url"].value = parceiro.mapaUrl || "";
     //   form["mapa-descricao"].value = parceiro.mapaDescricao || "";
