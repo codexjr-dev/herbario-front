@@ -1,33 +1,58 @@
+const API_URL = "https://herbario-back.onrender";
 
+const token = localStorage.getItem("authToken");
+if (!token) {
+  alert("Faça login para editar plantas.");
+  window.location.href = "login.html";
+}
 
-fetch(`${API_URL}/${editarId}`, {
+// Função para pegar o parâmetro `id` da URL
+function getEditarId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("id");
+}
+
+const editarId = getEditarId();
+
+if (editarId) {
+  fetch(`${API_URL}/${editarId}`, {
     method: "GET",
-    headers: AUTH_HEADERS
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
   })
-    .then(res => res.json())
-    .then((resultado) => {
-      document.querySelector("nomePlanta#nomePopular").value = resultado.nomePopular;
-      document.querySelector("").value = resultado.nomeCientifico;
-      document.querySelector("span#descricao").value = resultado.descricao;
-      document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
-      document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
-      document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
-      document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
-      document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
-      document.querySelector("h1 xilosa h2").value = resultado;
-      document.querySelector("h1 xilosa h2").value = resultado;
+    .then(res => {
+      if (!res.ok) throw new Error("Erro ao carregar planta");
+      return res.json();
+    })
+    .then(planta => {
+      // Preencher campos do formulário
+      document.querySelector("#nomePopular").value = planta.nomePopular || "";
+      document.querySelector("#nomeCientifico").value = planta.nomeCientifico || "";
+      document.querySelector("#descricao").value = planta.descricao || "";
+      
+      // Exemplo para taxonomia
+      document.querySelector("#reino").value = planta.taxonomia?.reino || "";
+      document.querySelector("#filo").value = planta.taxonomia?.filo || "";
+      document.querySelector("#classe").value = planta.taxonomia?.classe || "";
+      document.querySelector("#ordem").value = planta.taxonomia?.ordem || "";
+      document.querySelector("#familia").value = planta.taxonomia?.familia || "";
+      document.querySelector("#genero").value = planta.taxonomia?.genero || "";
+      document.querySelector("#especie").value = planta.taxonomia?.especie || "";
 
-    // document.querySelector("h1 xilosa h2").value = resultado.nomePopular;
-    //   form.nome.value = parceiro.nome || "";
-    //   form["mapa-url"].value = parceiro.mapaUrl || "";
-    //   form["mapa-descricao"].value = parceiro.mapaDescricao || "";
-    //   form["imagem1-url"].value = parceiro.imagem1Url || "";
-    //   form["imagem1-descricao"].value = parceiro.imagem1Descricao || "";
-    //   form["imagem2-url"].value = parceiro.imagem2Url || "";
-    //   form["imagem3-url"].value = parceiro.imagem3Url || "";
-    //   form["imagem2e3-descricao"].value = parceiro.imagem2e3Descricao || "";
+      // E assim por diante para fotos, usos, glossary etc.
+
+      // Preencher a galeria e outros campos conforme estrutura do formulário
     })
     .catch(err => {
-      console.error("Erro ao carregar parceiro para edição:", err);
-      alert("Erro ao carregar parceiro.");
+      console.error("Erro ao carregar planta para edição:", err);
+      alert("Erro ao carregar planta.");
     });
+} else {
+  alert("ID da planta não fornecido para edição.");
+}
+
+
+
+

@@ -1,8 +1,7 @@
-const API_URL = 1025;
-
+const API_URL = "https://herbario-back.onrender.com"; 
 
 document.querySelector("form").addEventListener("submit", async (e) => {
-  e.preventDefault(); // Impede o envio tradicional
+  e.preventDefault();
 
   const usuario = document.querySelector("#usuario").value;
   const senha = document.querySelector("#senha").value;
@@ -10,17 +9,19 @@ document.querySelector("form").addEventListener("submit", async (e) => {
   try {
     const resposta = await fetch(API_URL, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ usuario, senha })
     });
 
     if (resposta.ok) {
-      const conteudo = resposta.body;
-      // const dados = await resposta.json();
-      // Aqui você pode salvar o token/localStorage se usar autenticação
-      window.location.href = "painel-admin.html";
+      const dados = await resposta.json();
+      const token = dados.token; // ajusta conforme o formato que sua API retorna o token
+      if (!token) {
+        alert("Token não recebido. Verifique a API.");
+        return;
+      }
+      localStorage.setItem("authToken", token);
+      window.location.href = "painel-admin.html"; // redireciona para o painel
     } else {
       alert("Usuário ou senha inválidos.");
     }
@@ -29,4 +30,5 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     alert("Erro ao conectar com o servidor.");
   }
 });
+
 

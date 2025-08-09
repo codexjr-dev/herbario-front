@@ -1,11 +1,4 @@
-
-const API_URL = 1025;
-
-
-const AUTH_HEADERS = {
-  "Authorization": "Basic YWRtaW46YWRtaW4xMjM=",
-  "Content-Type": "application/json"
-};
+const API_URL = "https://herbario-back.onrender.com";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("planta-form");
@@ -77,10 +70,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }],
     };
 
-    try {
-      const response = await fetch(`${API_URL}/plantas`, {
+     try {
+      const response = await fetch(`${API_URL}/api/plants`, {
         method: "POST",
-        headers: AUTH_HEADERS,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
         body: JSON.stringify(data)
       });
 

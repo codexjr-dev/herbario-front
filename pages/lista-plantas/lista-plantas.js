@@ -1,45 +1,46 @@
-const API_URL = 1025;
-
-const AUTH_HEADER = {
-  'Authorization': 'Basic YWRtaW46YWRtaW4xMjM=',
-  'Content-Type': 'application/json'
-};
+const API_URL = "https://herbario-back.onrender.com";
 
 async function carregarPlantas() {
+  const token = localStorage.getItem("authToken");
+  if (!token) {
+    alert("Usuário não autenticado. Faça login.");
+    window.location.href = "login.html"; // Redireciona para login
+    return;
+  }
+
   try {
-    const resposta = await fetch(`${API_URL}/api/plantas`, {
-      headers: AUTH_HEADER
+    const resposta = await fetch(`${API_URL}/api/plants`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
     });
 
     if (!resposta.ok) {
-      throw new Error('Erro ao buscar plantas');
+      throw new Error("Erro ao buscar plantas");
     }
 
     const plantas = await resposta.json();
-    const corpoTabela = document.getElementById('plantas-table-body');
-    corpoTabela.innerHTML = '';
-    
-    plantas.forEach(planta => {
-      const linha = document.createElement('tr');
+    const corpoTabela = document.getElementById("plantas-table-body");
+    corpoTabela.innerHTML = "";
 
-      // Coluna: nome popular da planta
-      const tdNome = document.createElement('td');
+    plantas.forEach(planta => {
+      const linha = document.createElement("tr");
+
+      const tdNome = document.createElement("td");
       tdNome.textContent = planta.nomePopular;
 
-      // Coluna: botões de ação
-      const tdAcoes = document.createElement('td');
-      tdAcoes.classList.add('botoes');
+      const tdAcoes = document.createElement("td");
+      tdAcoes.classList.add("botoes");
 
-      // Botão Editar
-      const botaoEditar = document.createElement('a');
+      const botaoEditar = document.createElement("a");
       botaoEditar.href = `plantas-admin.html?id=${planta._id}`;
-      botaoEditar.textContent = 'Editar';
-      botaoEditar.className = 'button-editar';
+      botaoEditar.textContent = "Editar";
+      botaoEditar.className = "button-editar";
 
-      // Botão Excluir
-      const botaoExcluir = document.createElement('button');
-      botaoExcluir.textContent = 'Excluir';
-      botaoExcluir.className = 'button-excluir';
+      const botaoExcluir = document.createElement("button");
+      botaoExcluir.textContent = "Excluir";
+      botaoExcluir.className = "button-excluir";
       botaoExcluir.onclick = () => excluirPlanta(planta._id);
 
       tdAcoes.appendChild(botaoEditar);
@@ -50,33 +51,42 @@ async function carregarPlantas() {
 
       corpoTabela.appendChild(linha);
     });
-
   } catch (erro) {
     console.error(erro);
-    alert('Erro ao carregar plantas.');
+    alert("Erro ao carregar plantas.");
   }
 }
 
 async function excluirPlanta(id) {
-  const confirmar = confirm('Tem certeza que deseja excluir esta planta?');
+  const confirmar = confirm("Tem certeza que deseja excluir esta planta?");
   if (!confirmar) return;
 
+  const token = localStorage.getItem("authToken");
+  if (!token) {
+    alert("Usuário não autenticado. Faça login.");
+    window.location.href = "login.html";
+    return;
+  }
+
   try {
-    const resposta = await fetch(`${API_URL}/api/plantas/${id}`, {
-      method: 'DELETE',
-      headers: AUTH_HEADER
+    const resposta = await fetch(`${API_URL}/api/plants/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
     });
 
     if (!resposta.ok) {
-      throw new Error('Erro ao excluir planta');
+      throw new Error("Erro ao excluir planta");
     }
 
-    alert('Planta excluída com sucesso!');
-    carregarPlantas(); // Recarrega lista após exclusão
+    alert("Planta excluída com sucesso!");
+    carregarPlantas();
   } catch (erro) {
     console.error(erro);
-    alert('Erro ao excluir planta.');
+    alert("Erro ao excluir planta.");
   }
 }
 
-window.addEventListener('DOMContentLoaded', carregarPlantas);
+window.addEventListener("DOMContentLoaded", carregarPlantas);
