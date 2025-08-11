@@ -1,4 +1,10 @@
-const API_URL = 1025;
+const API_URL = "https://herbario-back.onrender.com/api/projetos";
+
+ //Serve pra garantir que só possa entrar se tiver logado
+ const token = localStorage.getItem('token');
+if (!token) {
+  window.location.href = '/pages/login/login-admin.html';
+}
 
 const AUTH_HEADER = {
   'Authorization': 'Basic YWRtaW46YWRtaW4xMjM=',
@@ -18,7 +24,3 @@ async () => {
       alert(erro.stack);
     }
 };
-
-// <h1 class="xilosa">
-//      Projeto
-//    </h1>

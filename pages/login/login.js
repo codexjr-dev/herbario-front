@@ -3,15 +3,14 @@ const API_URL = "https://herbario-back.onrender.com/api/login"; // rota real
 document.querySelector("form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const usuario = document.querySelector("#usuario").value;
-  const senha = document.querySelector("#senha").value;
+  const usuario = document.querySelector("#usuario").value.trim();
+  const senha = document.querySelector("#senha").value.trim();
 
-  // Monta as credenciais no formato Basic Auth
   const credentials = btoa(`${usuario}:${senha}`);
 
   try {
     const resposta = await fetch(API_URL, {
-      method: "GET", // ou "POST" se o backend tiver definido assim
+      method: "POST", // precisa ser POST
       headers: {
         "Authorization": `Basic ${credentials}`
       }
@@ -20,9 +19,15 @@ document.querySelector("form").addEventListener("submit", async (e) => {
     if (resposta.ok) {
       const dados = await resposta.json().catch(() => null);
       console.log("Resposta do servidor:", dados || "Login bem-sucedido");
-      localStorage.setItem("authToken", credentials);
-      window.location.href = "painel-admin.html";
+
+      // Salva token para usar em requisições futuras
+      localStorage.setItem('token', credentials);
+
+      // Redireciona para painel
+      window.location.href = "/pages/painel-admin/painel-admin.html";
     } else {
+      const erroMsg = await resposta.text();
+      console.error("Erro:", erroMsg);
       alert("Usuário ou senha inválidos.");
     }
   } catch (erro) {

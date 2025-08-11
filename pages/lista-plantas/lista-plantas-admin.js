@@ -1,18 +1,18 @@
-const API_URL = "https://herbario-back.onrender.com";
+const API_URL = "https://herbario-back.onrender.com/api/plants";
+
+// Serve para garantir que só possa entrar se tiver logado
+const token = localStorage.getItem('token');
+if (!token) {
+  alert("Usuário não autenticado. Faça login.");
+  window.location.href = '/pages/login/login-admin.html';
+}
 
 async function carregarPlantas() {
-  const credentials = localStorage.getItem("authToken");
-  if (!credentials) {
-    alert("Usuário não autenticado. Faça login.");
-    window.location.href = "login.html";
-    return;
-  }
-
   try {
-    const resposta = await fetch(`${API_URL}/api/plants`, {
+    const resposta = await fetch(API_URL, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Basic ${credentials}`
+        "Authorization": `Basic ${token}`
       }
     });
 
@@ -34,7 +34,7 @@ async function carregarPlantas() {
       tdAcoes.classList.add("botoes");
 
       const botaoEditar = document.createElement("a");
-      botaoEditar.href = `plantas-admin.html?id=${planta._id}`;
+      botaoEditar.href = `/pages/plantas/plantas-admin.html?id=${planta._id}`;
       botaoEditar.textContent = "Editar";
       botaoEditar.className = "button-editar";
 
@@ -61,19 +61,12 @@ async function excluirPlanta(id) {
   const confirmar = confirm("Tem certeza que deseja excluir esta planta?");
   if (!confirmar) return;
 
-  const credentials = localStorage.getItem("authToken");
-  if (!credentials) {
-    alert("Usuário não autenticado. Faça login.");
-    window.location.href = "login.html";
-    return;
-  }
-
   try {
-    const resposta = await fetch(`${API_URL}/api/plants/${id}`, {
+    const resposta = await fetch(`${API_URL}/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Basic ${credentials}`
+        "Authorization": `Basic ${token}`
       }
     });
 

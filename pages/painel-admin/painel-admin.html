@@ -91,22 +91,17 @@
   <script>
     function logout() {
       localStorage.removeItem("token");
-      window.location.href = "login-admin.html";
+      window.location.href = "/pages/login/login-admin.html";
     }
   </script>
-
- <!--
-<script>
-  // Verifica se está logado (exemplo usando token no localStorage)
-  const token = localStorage.getItem("token");
-  if (!token) {
-    alert("Você precisa estar logado para acessar o painel.");
-    window.location.href = "login-admin.html";
-  }
-</script> 
-
---> 
-   
+  
+   <script>
+     //Serve pra garantir que só possa entrar se tiver logado
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = '/pages/login/login-admin.html';
+    }
+   </script>
 
 </body>
 </html>

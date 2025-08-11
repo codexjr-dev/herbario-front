@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Herbário Admin</title>
   <style>
     body {
@@ -68,6 +68,32 @@
       font-size: 1.1rem;
     }
 
+    #glossario-container > .glossario-item {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      position: relative;
+    }
+
+    #glossario-container > .glossario-item button.remover-glossario {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: #e53935;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    #btn-adicionar-glossario {
+      margin-top: 0.5rem;
+      background-color: #1976d2;
+    }
+
     @media (max-width: 600px) {
       html {
         font-size: 14px;
@@ -79,6 +105,7 @@
   <h1>Cadastro / Edição de Planta</h1>
 
   <form id="planta-form">
+
     <!-- Seção Principal -->
     <fieldset>
       <legend>Planta</legend>
@@ -129,15 +156,14 @@
     </fieldset>
 
     <!-- Seção Glossário -->
-     <!-- TODO: QUANTOS CAMPOS DE GLOSSARIO O CLIENTE QUISER -->
     <fieldset>
       <legend>Glossário</legend>
 
-      <label for="termoGlossario">Termo:</label>
-      <input type="text" id="termoGlossario" name="termoGlossario" />
+      <div id="glossario-container">
+        <!-- Glossário dinâmico: aqui serão adicionados os termos -->
+      </div>
 
-      <label for="definicaoGlossario">Definição:</label>
-      <textarea id="definicaoGlossario" name="definicaoGlossario" rows="3"></textarea>
+      <button type="button" id="btn-adicionar-glossario" class="botao-lista">Novo Glossário</button>
     </fieldset>
 
     <!-- Seção Galeria -->
@@ -163,17 +189,55 @@
       <input type="url" id="galeria6" name="galeria6" />
     </fieldset>
 
-  <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
-    <button type="submit" class="botao-lista">Salvar</button>
-    <a href="../lista-plantas/lista-plantas-admin.html" class="botao-lista">Ver Lista</a>
-    <a href="../painel-admin/painel-admin.html" class="botao-lista">Voltar</a>
-    <a href="../login/login-admin.html" class="botao-lista">Sair</a> <!-- Agora com estilo idêntico -->
-  </div>
-
-
+    <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+      <button type="submit" class="botao-lista">Salvar</button>
+      <a href="../lista-plantas/lista-plantas-admin.html" class="botao-lista">Ver Lista</a>
+      <a href="../painel-admin/painel-admin.html" class="botao-lista">Voltar</a>
+      <a href="../login/login-admin.html" class="botao-lista">Sair</a>
+    </div>
   </form>
 
-    <script src="plantas.js"></script>
-   
+  <script>
+    // Função para criar novo bloco de glossário
+    function criarGlossarioItem(term = '', description = '') {
+      const container = document.createElement('div');
+      container.className = 'glossario-item';
+
+      container.innerHTML = `
+        <label>Termo:
+          <input type="text" name="termoGlossario" value="${term}" required />
+        </label>
+        <label>Definição:
+          <textarea name="definicaoGlossario" rows="3" required>${description}</textarea>
+        </label>
+        <button type="button" class="remover-glossario" title="Remover termo">X</button>
+      `;
+
+      // Botão remover
+      container.querySelector('button.remover-glossario').addEventListener('click', () => {
+        container.remove();
+      });
+
+      return container;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const glossarioContainer = document.getElementById('glossario-container');
+      const btnAddGlossario = document.getElementById('btn-adicionar-glossario');
+
+      // Inicializa com um campo vazio
+      glossarioContainer.appendChild(criarGlossarioItem());
+
+      btnAddGlossario.addEventListener('click', () => {
+        glossarioContainer.appendChild(criarGlossarioItem());
+      });
+
+      // Seu script plantas-admin.js deve ser importado aqui ou incorporado para o funcionamento geral
+      // Como não foi enviado, você deve manter seu arquivo externo para salvar / editar plantas
+
+    });
+  </script>
+
+  <script src="plantas-admin.js"></script>
 </body>
 </html>

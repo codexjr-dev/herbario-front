@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plantas Cadastradas</title>
+  <title>Parceiros Cadastrados</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -19,7 +19,6 @@
       color: #2e7d32;
       font-size: 1.8rem;
     }
-  
 
     label {
       font-weight: bold;
@@ -122,16 +121,17 @@
   <h1>Lista de Parceiros</h1>
 
   <fieldset>
-    <legend>Plantas</legend>
+    <legend>Parceiros</legend>
 
     <table>
       <thead>
         <tr>
           <th style="width: 70%;">Nome do Parceiro</th>
+          <th style="width: 30%;">Ações</th>
         </tr>
       </thead>
-      <tbody id="plantas-table-body">
-        <!-- preenchido dinamicamente pelo scripts.js -->
+      <tbody id="parceiros-table-body">
+        <!-- preenchido dinamicamente pelo lista-parceiros-admin.js -->
       </tbody>
     </table>
   </fieldset>
@@ -142,7 +142,7 @@
     <a href="../login/login-admin.html" class="button-voltar">Sair</a>
   </div>
 
-  <script src="lista-parceiros.js"></script>
+  <script src="lista-parceiros-admin.js"></script>
 
 </body>
 </html>

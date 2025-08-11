@@ -1,10 +1,12 @@
-const API_URL = "https://herbario-back.onrender";
+const API_URL = "https://herbario-back.onrender.com/api/plants";
 
-const token = localStorage.getItem("authToken");
+//Serve pra garantir que só possa entrar se tiver logado
+const token = localStorage.getItem('token');
 if (!token) {
-  alert("Faça login para editar plantas.");
-  window.location.href = "login.html";
+  alert('Faça login para editar plantas.');
+  window.location.href = '/pages/login/login-admin.html';
 }
+
 
 // Função para pegar o parâmetro `id` da URL
 function getEditarId() {
