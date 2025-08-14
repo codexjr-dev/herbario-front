@@ -21,83 +21,79 @@
   </header>
   <main>
     <div class="intro">
-    <h1 class="nomePlanta xilosa h2">Hortelã</h1>
+  <h1 id="nomePopular" class="nomePlanta xilosa h2">Nome da Planta</h1>
+  <div>
+    <img id="capaPlanta" src="../../assets/image (1).png" alt="Imagem da planta">
+    <!-- Estabeleça uma quantidade máxima de dígitos e aumente o tamanho da fonte da descrição-->
+    <span id="descricao">Descrição da planta</span>
+  </div>
+</div>
+
+  <section class="dados">
+  <h2 class="xilosa h3">Dados</h2>
+  <div class="dados-box">
     <div>
-      <img src="../../assets/image (1).png" alt="">
-      <!-- Estabeleça uma quantidade max de digitos aqui -->
-      <span id="description">A hortelã-verde ou menta (Mentha spicata), também conhecida como hortelã-de-leite, hortelã-das-cozinhas, hortelã-dos-temperos, hortelã-vulgar, hortelã-das-hortas, hortelã-comum, levante, alevante, elevante ou simplesmente hortelã, é uma planta herbácea perene, da família Lamiaceae (Labiadas). Existem inúmeras variedades cultivadas.
-        <br><br>
-É uma planta originária da Ásia, mas é muito cultivada em todo o mundo, devido às essências aromáticas presentes em toda a planta, principalmente nas folhas. Tolera bem diferentes condições climáticas, desde que não falte água. Em climas frios pode perder as partes aéreas no Inverno, sobrevivendo através dos seus rizomas, que só morrem se o solo congelar completamente.
-<br><br>
-É utilizada como tempero em culinária, como aromatizante em certos produtos alimentares, ou para a extração do seu óleo essencial.</span>
+      <legend>Nome científico</legend>
+      <span id="nomeCientifico">Mentha spicata</span>
+    </div>
+    <div>
+      <legend>Número da coleta</legend>
+      <span id="numeroColeta">18</span>
+    </div>
+    <div>
+      <legend>Classe</legend>
+      <span id="classe">Herbácea perene</span>
+    </div>
+    <div>
+      <legend>Data da coleta</legend>
+      <span id="dataColeta">08/08/2018</span>
+    </div>
+    <div>
+      <legend>Ordem</legend>
+      <span id="ordem">Lamiales</span>
+    </div>
+    <div>
+      <legend>Localidade</legend>
+      <span id="localidade">Universidade Federal do Rio de Janeiro</span>
+    </div>
+    <div>
+      <legend>Família</legend>
+      <span id="familia">Lamiaceae</span>
+    </div>
+    <div>
+      <legend>Coletor(es)</legend>
+      <span id="coletor">Siman Eugster</span>
+    </div>
+    <div>
+      <legend>Espécime tipo</legend>
+      <span id="especimeTipo">Não informado.</span>
+    </div>
+    <div>
+      <legend>Duplicatas indicadas</legend>
+      <span id="duplicatas">Não informado.</span>
     </div>
   </div>
-  <section class="dados">
-    <h2 class="xilosa h3">
-      Dados
-    </h2>
-    <div class="dados-box">
-      <div>
-        <legend>Nome científico</legend>
-        <span>Mentha spicata</span>
-      </div>
-      <div>
-        <legend>Número da coleta</legend>
-        <span>18</span>
-      </div>
-      <div>
-        <legend>Espécime tipo</legend>
-        <span>Herbácea perene</span>
-      </div>
-      <div>
-        <legend>Data da coleta</legend>
-        <span>08/08/2018</span>
-      </div>
-      <div>
-        <legend>Ordem</legend>
-        <span>Lamiales</span>
-      </div>
-      <div>
-        <legend>Localidade</legend>
-        <span>Universidade Federal do Rio de Janeiro</span>
-      </div>
-      <div>
-        <legend>Família</legend>
-        <span>Lamiaceae</span>
-      </div>
-      <div>
-        <legend>Coletor(es)</legend>
-        <span>Siman Eugster</span>
-      </div>
-      <div>
-        <legend>Duplicatas indicadas</legend>
-        <span>Não informado.</span>
-      </div>
-      <div>
-        <legend>Observações</legend>
-        <span>Cultivada também para fins ornamentais. É uma das plantas mais usadas do mundo.</span>
-      </div>
-    </div>
-  </section>
-  <section class="glossario">
-    <h2 class="xilosa h3">Glossário</h2>
-    <div>
-      <span class="verde">Herbacea perene:</span>
-      <span> Plantas de caule flexível e de coloração verde bem forte. Possuem um ciclo de vida longo, chegando a viver entre dois e três anos. Normalmente são encontradas em tamanhos compactos. Além disso, essas plantas contam com floração contínua, ou seja, não há intervalo entre um período de floração e outro.</span>
-      </div>
-    </div>
-  </section>
-  <section class="galeria">
-    <h2 class="xilosa h3">Galeria</h2>
-    <div>
-      <img src="../../assets/fotos-galeria/image.png" alt="">
-      <img src="../../assets/fotos-galeria/image-1.png" alt="">
-      <img src="../../assets/fotos-galeria/image-2.png" alt="">
-      <img src="../../assets/fotos-galeria/image-3.png" alt="">
-      <img src="../../assets/fotos-galeria/image-4.png" alt="">
-      <img src="../../assets/fotos-galeria/image-5.png" alt="">
-    </div>
-  </section>
+</section>
+
+<section class="glossario">
+  <h2 class="xilosa h3">Glossário</h2>
+  <div id="glossario-container">
+    <!-- Glossário será populado dinamicamente -->
+  </div>
+</section>
+
+<section class="galeria">
+  <h2 class="xilosa h3">Galeria</h2>
+  <div>
+    <img id="foto1" src="../../assets/fotos-galeria/image.png" alt="">
+    <img id="foto2" src="../../assets/fotos-galeria/image-1.png" alt="">
+    <img id="foto3" src="../../assets/fotos-galeria/image-2.png" alt="">
+    <img id="foto4" src="../../assets/fotos-galeria/image-3.png" alt="">
+    <img id="foto5" src="../../assets/fotos-galeria/image-4.png" alt="">
+    <img id="foto6" src="../../assets/fotos-galeria/image-5.png" alt="">
+  </div>
+</section>
+
   </main>
   <footer>
     <img src="../../assets/logo2.svg" alt="logo secundária do herbário">
