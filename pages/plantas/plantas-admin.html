@@ -11,11 +11,8 @@
       margin: 2rem auto;
     }
 
-    h1, h2 {
+    h1 {
       text-align: center;
-    }
-
-    h1, h2, legend {
       color: #2e7d32;
       font-size: 1.8rem;
     }
@@ -66,9 +63,10 @@
     legend {
       font-weight: bold;
       font-size: 1.1rem;
+      color: #2e7d32;
     }
 
-    #glossario-container > .glossario-item {
+    .item-dinamico {
       border: 1px solid #ccc;
       padding: 1rem;
       margin-bottom: 1rem;
@@ -76,7 +74,7 @@
       position: relative;
     }
 
-    .glossario-botoes {
+    .botoes-item {
       position: absolute;
       top: 0.5rem;
       right: 0.5rem;
@@ -84,7 +82,7 @@
       gap: 0.3rem;
     }
 
-    button.adicionar-glossario {
+    button.adicionar {
       background: #4caf50;
       color: white;
       border: none;
@@ -94,7 +92,7 @@
       font-size: 0.9rem;
     }
 
-    button.remover-glossario {
+    button.remover {
       background: #e53935;
       color: white;
       border: none;
@@ -118,35 +116,30 @@
     <!-- Seção Principal -->
     <fieldset>
       <legend>Planta</legend>
-
       <label for="nomePopular">Nome Popular:</label>
       <input type="text" id="nomePopular" name="nomePopular" required />
 
-      <label for="nomeCientifico">Nome Científico:</label>
-      <input type="text" id="nomeCientifico" name="nomeCientifico" required />
-
-      <label for="familia">Família:</label>
-      <input type="text" id="familia" name="familia" required />
+      <label for="imagemCapa">Imagem de Capa (URL):</label>
+      <input type="url" id="capaUrl" name="capaUrl" />
 
       <label for="descricao">Descrição:</label>
       <textarea id="descricao" name="descricao" rows="3" required></textarea>
-
-      <label for="imagemCapa">Imagem de Capa (URL):</label>
-      <input type="url" id="imagemCapa" name="imagemCapa" />
     </fieldset>
 
     <!-- Seção Dados Técnicos -->
     <fieldset>
       <legend>Dados Técnicos</legend>
-
-      <label for="especieTipo">Espécie Tipo:</label>
-      <input type="text" id="especieTipo" name="especieTipo" />
+      <label for="nomeCientifico">Nome Científico:</label>
+      <input type="text" id="nomeCientifico" name="nomeCientifico" required />
 
       <label for="ordem">Ordem:</label>
       <input type="text" id="ordem" name="ordem" />
 
-      <label for="duplicatas">Duplicatas Indicadas:</label>
-      <input type="text" id="duplicatas" name="duplicatas" />
+      <label for="familia">Família:</label>
+      <input type="text" id="familia" name="familia" required /> 
+      
+      <label for="especimeTipo">Espécime Tipo:</label>
+      <input type="text" id="especimeTipo" name="especimeTipo" />
 
       <label for="numeroColeta">Número da Coleta:</label>
       <input type="text" id="numeroColeta" name="numeroColeta" />
@@ -157,11 +150,14 @@
       <label for="localidade">Localidade:</label>
       <input type="text" id="localidade" name="localidade" />
 
-      <label for="coletor">Coletor(es):</label>
-      <input type="text" id="coletor" name="coletor" />
+      <label for="duplicatas">Duplicatas Indicadas:</label>
+      <input type="text" id="duplicatas" name="duplicatas" />
+    </fieldset>
 
-      <label for="observacoes">Observações:</label>
-      <textarea id="observacoes" name="observacoes" rows="2"></textarea>
+    <!-- Seção Coletores -->
+    <fieldset>
+      <legend>Coletor(es)</legend>
+      <div id="coletores-container"></div>
     </fieldset>
 
     <!-- Seção Glossário -->
@@ -173,7 +169,6 @@
     <!-- Seção Galeria -->
     <fieldset>
       <legend>Galeria de Imagens (URLs)</legend>
-
       <label for="galeria1">Imagem 1:</label>
       <input type="url" id="galeria1" name="galeria1" />
 
@@ -193,6 +188,7 @@
       <input type="url" id="galeria6" name="galeria6" />
     </fieldset>
 
+    <!-- Botões -->
     <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
       <button type="submit" class="botao">Salvar</button>
       <a href="../lista-plantas/lista-plantas-admin.html" class="botao">Ver Lista</a>
@@ -202,46 +198,75 @@
   </form>
 
   <script>
-    function criarGlossarioItem(term = '', description = '') {
+    function criarItemDinamico(config) {
       const container = document.createElement('div');
-      container.className = 'glossario-item';
+      container.className = 'item-dinamico';
 
-      container.innerHTML = `
-        <label>Termo:
-          <input type="text" name="termoGlossario" value="${term}" required />
-        </label>
-        <label>Definição:
-          <textarea name="definicaoGlossario" rows="3" required>${description}</textarea>
-        </label>
-        <div class="glossario-botoes">
-          <button type="button" class="adicionar-glossario" title="Adicionar termo">+</button>
-          <button type="button" class="remover-glossario" title="Remover termo">x</button>
+      const { label1, nome1, valor1 = '', label2, nome2, valor2 = '' } = config;
+
+      let html = `<label class="rotulo-item">${label1}:</label>
+                  <input type="text" name="${nome1}" value="${valor1}" required />`;
+
+      if (nome2) {
+        html += `<label>${label2}:
+                  <textarea name="${nome2}" rows="3" required>${valor2}</textarea>
+                </label>`;
+      }
+
+      container.innerHTML = html + `
+        <div class="botoes-item">
+          <button type="button" class="adicionar" title="Adicionar">+</button>
+          <button type="button" class="remover" title="Remover">x</button>
         </div>
       `;
 
-      // Remover item (só se houver mais de 1)
-      container.querySelector('.remover-glossario').addEventListener('click', () => {
-        const glossarioContainer = document.getElementById('glossario-container');
-        if (glossarioContainer.children.length > 1) {
-          container.remove();
-        } else {
-          alert('É necessário ter pelo menos um glossário.');
-        }
+      container.querySelector('.adicionar').addEventListener('click', () => {
+        const novoItem = criarItemDinamico(config);
+        container.insertAdjacentElement('afterend', novoItem);
+        if (config.tipo === 'coletor') atualizarNumeracaoColetores();
       });
 
-      // Adicionar logo abaixo
-      container.querySelector('.adicionar-glossario').addEventListener('click', () => {
-        container.insertAdjacentElement('afterend', criarGlossarioItem());
+      container.querySelector('.remover').addEventListener('click', () => {
+        const parentContainer = document.getElementById(config.containerId);
+        if (parentContainer.children.length > 1) {
+          container.remove();
+          if (config.tipo === 'coletor') atualizarNumeracaoColetores();
+        } else {
+          alert('É necessário ter pelo menos um item.');
+        }
       });
 
       return container;
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const glossarioContainer = document.getElementById('glossario-container');
-      glossarioContainer.appendChild(criarGlossarioItem());
-    });
+    function atualizarNumeracaoColetores() {
+      const itens = document.querySelectorAll('#coletores-container .item-dinamico');
+      itens.forEach((item, index) => {
+        item.querySelector('.rotulo-item').textContent = `Coletor ${index + 1}:`;
+      });
+    }
 
+    document.addEventListener('DOMContentLoaded', () => {
+      // Inicializa coletores
+      const coletoresContainer = document.getElementById('coletores-container');
+      coletoresContainer.appendChild(criarItemDinamico({
+        label1: 'Coletor 1',
+        nome1: 'nomeColetor',
+        containerId: 'coletores-container',
+        tipo: 'coletor'
+      }));
+
+      // Inicializa glossário
+      const glossarioContainer = document.getElementById('glossario-container');
+      glossarioContainer.appendChild(criarItemDinamico({
+        label1: 'Termo',
+        nome1: 'termoGlossario',
+        label2: 'Definição',
+        nome2: 'definicaoGlossario',
+        containerId: 'glossario-container',
+        tipo: 'glossario'
+      }));
+    });
   </script>
 
   <script src="plantas-admin.js"></script>
