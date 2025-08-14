@@ -10,19 +10,16 @@
       max-width: 800px;
       margin: 2rem auto;
     }
-
     h1 {
       text-align: center;
       color: #2e7d32;
       font-size: 1.8rem;
     }
-
     label {
       font-weight: bold;
       margin-top: 1rem;
       display: block;
     }
-
     input, textarea {
       width: 100%;
       margin: 0.3rem 0 1rem;
@@ -32,11 +29,9 @@
       border-radius: 4px;
       box-sizing: border-box;
     }
-
     textarea {
       resize: vertical;
     }
-
     .botao {
       padding: 0.7rem 1.2rem;
       background-color: #4caf50;
@@ -44,28 +39,23 @@
       border: none;
       border-radius: 4px;
       font-size: 1rem;
-      text-decoration: none;
       text-align: center;
       cursor: pointer;
     }
-
     .botao:hover {
       background-color: #388e3c;
     }
-
     fieldset {
       margin-top: 2rem;
       padding: 1rem;
       border: 1px solid #ccc;
       border-radius: 6px;
     }
-
     legend {
       font-weight: bold;
       font-size: 1.1rem;
       color: #2e7d32;
     }
-
     .item-dinamico {
       border: 1px solid #ccc;
       padding: 1rem;
@@ -73,7 +63,6 @@
       border-radius: 6px;
       position: relative;
     }
-
     .botoes-item {
       position: absolute;
       top: 0.5rem;
@@ -81,7 +70,6 @@
       display: flex;
       gap: 0.3rem;
     }
-
     button.adicionar {
       background: #4caf50;
       color: white;
@@ -91,7 +79,6 @@
       cursor: pointer;
       font-size: 0.9rem;
     }
-
     button.remover {
       background: #e53935;
       color: white;
@@ -100,12 +87,6 @@
       padding: 0.2rem 0.6rem;
       cursor: pointer;
       font-size: 0.9rem;
-    }
-
-    @media (max-width: 600px) {
-      html {
-        font-size: 14px;
-      }
     }
   </style>
 </head>
@@ -119,8 +100,8 @@
       <label for="nomePopular">Nome Popular:</label>
       <input type="text" id="nomePopular" name="nomePopular" required />
 
-      <label for="imagemCapa">Imagem de Capa (URL):</label>
-      <input type="url" id="capaUrl" name="capaUrl" />
+      <label for="capaPlanta">Imagem de Capa (URL):</label>
+      <input type="url" id="capaPlanta" name="capaPlanta" />
 
       <label for="descricao">Descrição:</label>
       <textarea id="descricao" name="descricao" rows="3" required></textarea>
@@ -131,6 +112,9 @@
       <legend>Dados Técnicos</legend>
       <label for="nomeCientifico">Nome Científico:</label>
       <input type="text" id="nomeCientifico" name="nomeCientifico" required />
+      
+      <label for="classe">Classe:</label>
+      <input type="text" id="classe" name="classe" />
 
       <label for="ordem">Ordem:</label>
       <input type="text" id="ordem" name="ordem" />
@@ -138,20 +122,20 @@
       <label for="familia">Família:</label>
       <input type="text" id="familia" name="familia" required /> 
       
-      <label for="especimeTipo">Espécime Tipo:</label>
-      <input type="text" id="especimeTipo" name="especimeTipo" />
+      <label for="especieTipo">Especime Tipo:</label>
+      <input type="text" id="especieTipo" name="especieTipo" />
 
-      <label for="numeroColeta">Número da Coleta:</label>
-      <input type="text" id="numeroColeta" name="numeroColeta" />
+      <label for="collectNumber">Número da Coleta:</label>
+      <input type="text" id="collectNumber" name="collectNumber" />
 
-      <label for="dataColeta">Data da Coleta:</label>
-      <input type="date" id="dataColeta" name="dataColeta" />
+      <label for="colectDate">Data da Coleta:</label>
+      <input type="date" id="colectDate" name="colectDate" />
 
-      <label for="localidade">Localidade:</label>
-      <input type="text" id="localidade" name="localidade" />
+      <label for="local">Localidade:</label>
+      <input type="text" id="local" name="local" />
 
-      <label for="duplicatas">Duplicatas Indicadas:</label>
-      <input type="text" id="duplicatas" name="duplicatas" />
+      <label for="duplicates">Duplicatas Indicadas:</label>
+      <input type="text" id="duplicates" name="duplicates" />
     </fieldset>
 
     <!-- Seção Coletores -->
@@ -169,32 +153,34 @@
     <!-- Seção Galeria -->
     <fieldset>
       <legend>Galeria de Imagens (URLs)</legend>
-      <label for="galeria1">Imagem 1:</label>
-      <input type="url" id="galeria1" name="galeria1" />
+      <label for="foto1">Imagem 1:</label>
+      <input type="url" id="foto1" name="foto1" />
 
-      <label for="galeria2">Imagem 2:</label>
-      <input type="url" id="galeria2" name="galeria2" />
+      <label for="foto2">Imagem 2:</label>
+      <input type="url" id="foto2" name="foto2" />
 
-      <label for="galeria3">Imagem 3:</label>
-      <input type="url" id="galeria3" name="galeria3" />
+      <label for="foto3">Imagem 3:</label>
+      <input type="url" id="foto3" name="foto3" />
 
-      <label for="galeria4">Imagem 4:</label>
-      <input type="url" id="galeria4" name="galeria4" />
+      <label for="foto4">Imagem 4:</label>
+      <input type="url" id="foto4" name="foto4" />
 
-      <label for="galeria5">Imagem 5:</label>
-      <input type="url" id="galeria5" name="galeria5" />
+      <label for="foto5">Imagem 5:</label>
+      <input type="url" id="foto5" name="foto5" />
 
-      <label for="galeria6">Imagem 6:</label>
-      <input type="url" id="galeria6" name="galeria6" />
+      <label for="foto6">Imagem 6:</label>
+      <input type="url" id="foto6" name="foto6" />
     </fieldset>
 
     <!-- Botões -->
-    <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+    <!-- Botões -->
+    <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
       <button type="submit" class="botao">Salvar</button>
-      <a href="../lista-plantas/lista-plantas-admin.html" class="botao">Ver Lista</a>
-      <a href="../painel-admin/painel-admin.html" class="botao">Voltar</a>
-      <a href="../login/login-admin.html" class="botao">Sair</a>
+      <a href="../lista-plantas/lista-plantas-admin.html" class="botao" style="text-decoration: none;">Ver Lista</a>
+      <a href="../painel-admin/painel-admin.html" class="botao" style="text-decoration: none;">Voltar</a>
+      <a href="../login/login-admin.html" class="botao" style="text-decoration: none;">Sair</a>
     </div>
+
   </form>
 
   <script>
@@ -251,7 +237,7 @@
       const coletoresContainer = document.getElementById('coletores-container');
       coletoresContainer.appendChild(criarItemDinamico({
         label1: 'Coletor 1',
-        nome1: 'nomeColetor',
+        nome1: 'collectors[]',
         containerId: 'coletores-container',
         tipo: 'coletor'
       }));
@@ -260,9 +246,9 @@
       const glossarioContainer = document.getElementById('glossario-container');
       glossarioContainer.appendChild(criarItemDinamico({
         label1: 'Termo',
-        nome1: 'termoGlossario',
+        nome1: 'glossary[].term',
         label2: 'Definição',
-        nome2: 'definicaoGlossario',
+        nome2: 'glossary[].description',
         containerId: 'glossario-container',
         tipo: 'glossario'
       }));

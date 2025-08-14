@@ -2,12 +2,12 @@
 <html lang="pt-BR">
 <head>
    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../styles/style4.css">
-  <title>Planta</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="../../styles/style4.css">
+   <title>Planta</title>
+   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="cabecalho imagem">
@@ -19,82 +19,50 @@
       <a href="../apoio/sites-de-apoio.html">Site de apoio</a>
     </span>
   </header>
+
   <main>
     <div class="intro">
-  <h1 id="nomePopular" class="nomePlanta xilosa h2">Nome da Planta</h1>
-  <div>
-    <img id="capaPlanta" src="../../assets/image (1).png" alt="Imagem da planta">
-    <!-- Estabeleça uma quantidade máxima de dígitos e aumente o tamanho da fonte da descrição-->
-    <span id="descricao">Descrição da planta</span>
-  </div>
-</div>
+      <h1 id="nomePopular" class="nomePlanta xilosa h2">Nome da Planta</h1>
+      <div>
+        <img id="capaPlanta" alt="Imagem da planta">
+        <span id="descricao"></span>
+      </div>
+    </div>
 
-  <section class="dados">
-  <h2 class="xilosa h3">Dados</h2>
-  <div class="dados-box">
-    <div>
-      <legend>Nome científico</legend>
-      <span id="nomeCientifico">Mentha spicata</span>
-    </div>
-    <div>
-      <legend>Número da coleta</legend>
-      <span id="numeroColeta">18</span>
-    </div>
-    <div>
-      <legend>Classe</legend>
-      <span id="classe">Herbácea perene</span>
-    </div>
-    <div>
-      <legend>Data da coleta</legend>
-      <span id="dataColeta">08/08/2018</span>
-    </div>
-    <div>
-      <legend>Ordem</legend>
-      <span id="ordem">Lamiales</span>
-    </div>
-    <div>
-      <legend>Localidade</legend>
-      <span id="localidade">Universidade Federal do Rio de Janeiro</span>
-    </div>
-    <div>
-      <legend>Família</legend>
-      <span id="familia">Lamiaceae</span>
-    </div>
-    <div>
-      <legend>Coletor(es)</legend>
-      <span id="coletor">Siman Eugster</span>
-    </div>
-    <div>
-      <legend>Espécime tipo</legend>
-      <span id="especimeTipo">Não informado.</span>
-    </div>
-    <div>
-      <legend>Duplicatas indicadas</legend>
-      <span id="duplicatas">Não informado.</span>
-    </div>
-  </div>
-</section>
+    <section class="dados">
+      <h2 class="xilosa h3">Dados</h2>
+      <div class="dados-box">
+        <div><legend>Nome científico</legend><span id="nomeCientifico">—</span></div>
+        <div><legend>Número da coleta</legend><span id="collectNumber">—</span></div>
+        <div><legend>Classe</legend><span id="classe">—</span></div>
+        <div><legend>Data da coleta</legend><span id="colectDate">—</span></div>
+        <div><legend>Ordem</legend><span id="ordem">—</span></div>
+        <div><legend>Localidade</legend><span id="localidade">—</span></div>
+        <div><legend>Família</legend><span id="familia">—</span></div>
+        <div><legend>Coletor(es)</legend><span id="coletor">—</span></div>
+        <div><legend>Espécime tipo</legend><span id="especieTipo">—</span></div>
+        <div><legend>Duplicatas indicadas</legend><span id="duplicates">—</span></div>
+      </div>
+    </section>
 
-<section class="glossario">
-  <h2 class="xilosa h3">Glossário</h2>
-  <div id="glossario-container">
-    <!-- Glossário será populado dinamicamente -->
-  </div>
-</section>
+    <section class="glossario">
+      <h2 class="xilosa h3">Glossário</h2>
+      <div id="glossario-container"></div>
+    </section>
 
-<section class="galeria">
-  <h2 class="xilosa h3">Galeria</h2>
-  <div>
-    <img id="foto1" src="../../assets/fotos-galeria/image.png" alt="">
-    <img id="foto2" src="../../assets/fotos-galeria/image-1.png" alt="">
-    <img id="foto3" src="../../assets/fotos-galeria/image-2.png" alt="">
-    <img id="foto4" src="../../assets/fotos-galeria/image-3.png" alt="">
-    <img id="foto5" src="../../assets/fotos-galeria/image-4.png" alt="">
-    <img id="foto6" src="../../assets/fotos-galeria/image-5.png" alt="">
-  </div>
-</section>
-
+    <section class="galeria">
+      <h2 class="xilosa h3">Galeria</h2>
+      <div>
+        <img id="foto1"  alt="">
+        <img id="foto2"  alt="">
+        <img id="foto3"  alt="">
+        <img id="foto4"  alt="">
+        <img id="foto5"  alt="">
+        <img id="foto6"  alt="">
+      </div>
+    </section>
   </main>
+
   <footer>
     <img src="../../assets/logo2.svg" alt="logo secundária do herbário">
     <span>
@@ -102,6 +70,8 @@
       Apoio da Universidade Federal de Campina Grande (UFCG)
     </span>
   </footer>
-  <script src="../../assets/scripts.js"></script>
+
+  <!-- Script dinâmico -->
+  <script src="estrutura-planta.js"></script>
 </body>
 </html>

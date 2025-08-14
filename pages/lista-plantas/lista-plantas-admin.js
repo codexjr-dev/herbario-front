@@ -1,6 +1,5 @@
 const API_URL = "https://herbario-back.onrender.com/api/plants";
 
-// Serve para garantir que só possa entrar se tiver logado
 const token = localStorage.getItem('token');
 if (!token) {
   alert("Usuário não autenticado. Faça login.");
@@ -10,15 +9,9 @@ if (!token) {
 async function carregarPlantas() {
   try {
     const resposta = await fetch(API_URL, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Basic ${token}`
-      }
+      headers: { "Authorization": `Basic ${token}` }
     });
-
-    if (!resposta.ok) {
-      throw new Error("Erro ao buscar plantas");
-    }
+    if (!resposta.ok) throw new Error("Erro ao buscar plantas");
 
     const plantas = await resposta.json();
     const corpoTabela = document.getElementById("plantas-table-body");
@@ -28,7 +21,7 @@ async function carregarPlantas() {
       const linha = document.createElement("tr");
 
       const tdNome = document.createElement("td");
-      tdNome.textContent = planta.nomePopular;
+      tdNome.textContent = planta.nomePopular || "—";
 
       const tdAcoes = document.createElement("td");
       tdAcoes.classList.add("botoes");
@@ -48,7 +41,6 @@ async function carregarPlantas() {
 
       linha.appendChild(tdNome);
       linha.appendChild(tdAcoes);
-
       corpoTabela.appendChild(linha);
     });
   } catch (erro) {
@@ -58,21 +50,14 @@ async function carregarPlantas() {
 }
 
 async function excluirPlanta(id) {
-  const confirmar = confirm("Tem certeza que deseja excluir esta planta?");
-  if (!confirmar) return;
+  if (!confirm("Tem certeza que deseja excluir esta planta?")) return;
 
   try {
     const resposta = await fetch(`${API_URL}/${id}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Basic ${token}`
-      }
+      headers: { "Authorization": `Basic ${token}` }
     });
-
-    if (!resposta.ok) {
-      throw new Error("Erro ao excluir planta");
-    }
+    if (!resposta.ok) throw new Error("Erro ao excluir planta");
 
     alert("Planta excluída com sucesso!");
     carregarPlantas();
