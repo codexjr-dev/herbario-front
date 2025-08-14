@@ -26,37 +26,48 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    // Fotos
     const fotosArray = [];
-    for (let i = 0; i <= 6; i++) {
-      const url = form[`foto${i}`]?.value || form[`imagemCapa`]?.value;
-      if (url && url.trim() !== "") fotosArray.push({ url });
+    const capa = form.capaPlanta.value;
+    if (capa) fotosArray.push({ url: capa });
+    for (let i = 1; i <= 6; i++) {
+      const input = form[`foto${i}`];
+      if (input && input.value.trim() !== "") {
+        fotosArray.push({ url: input.value.trim() });
+      }
     }
 
+    // Glossário
     const glossarioItems = document.querySelectorAll('#glossario-container .glossario-item');
     const glossary = Array.from(glossarioItems).map(item => ({
       term: item.querySelector('input[name="termoGlossario"]').value.trim(),
       description: item.querySelector('textarea[name="definicaoGlossario"]').value.trim()
     })).filter(g => g.term && g.description);
 
+    // Coletores
+    const coletorInputs = document.querySelectorAll('#coletores-container input[name="collectors[]"]');
+    const collectors = Array.from(coletorInputs).map(input => input.value.trim()).filter(c => c);
+
+    // Dados do formulário
     const data = {
-      nomePopular: form.nomePopular.value,
-      nomeCientifico: form.nomeCientifico.value,
+      nomePopular: form.nomePopular.value.trim(),
+      nomeCientifico: form.nomeCientifico.value.trim(),
       taxonomia: {
-        reino: form.reino?.value || "",
+        reino: form.reino?.value || "Plantae",
         filo: form.filo?.value || "",
         classe: form.classe?.value || "",
-        ordem: form.ordem.value || "",
-        familia: form.familia.value || "",
+        ordem: form.ordem?.value || "",
+        familia: form.familia?.value || "",
         genero: form.genero?.value || "",
         especie: form.especie?.value || ""
       },
       fotos: fotosArray,
-      descricao: form.descricao.value,
-      duplicates: form.duplicatas.value || "",
-      colectNumber: form.numeroColeta.value ? Number(form.numeroColeta.value) : null,
-      colectDate: form.dataColeta.value ? new Date(form.dataColeta.value).toISOString() : null,
-      local: form.localidade.value || "",
-      collectors: [form.coletor.value || ""],
+      descricao: form.descricao.value.trim(),
+      duplicates: form.duplicates.value.trim() || "",
+      colectNumber: form.collectNumber.value ? Number(form.collectNumber.value) : null,
+      colectDate: form.colectDate.value ? new Date(form.colectDate.value).toISOString() : null,
+      local: form.local.value.trim() || "",
+      collectors,
       glossary
     };
 
@@ -85,10 +96,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Funções auxiliares
   function preencherFormulario(planta) {
     form.nomePopular.value = planta.nomePopular || "";
     form.nomeCientifico.value = planta.nomeCientifico || "";
-    form.reino.value = planta.taxonomia?.reino || "";
+    form.reino.value = planta.taxonomia?.reino || "Plantae";
     form.filo.value = planta.taxonomia?.filo || "";
     form.classe.value = planta.taxonomia?.classe || "";
     form.ordem.value = planta.taxonomia?.ordem || "";
@@ -96,30 +108,97 @@ document.addEventListener("DOMContentLoaded", () => {
     form.genero.value = planta.taxonomia?.genero || "";
     form.especie.value = planta.taxonomia?.especie || "";
 
-    if (planta.fotos && planta.fotos.length) {
-      form.imagemCapa.value = planta.fotos[0]?.url || "";
-      for (let i = 1; i <= 6; i++) {
-        form[`foto${i}`].value = planta.fotos[i]?.url || "";
-      }
+    form.capaPlanta.value = planta.fotos?.[0]?.url || "";
+    for (let i = 1; i <= 6; i++) {
+      const input = form[`foto${i}`];
+      if (input) input.value = planta.fotos?.[i]?.url || "";
     }
 
     form.descricao.value = planta.descricao || "";
-    form.duplicatas.value = planta.duplicates || "";
-    form.numeroColeta.value = planta.colectNumber || "";
-    form.dataColeta.value = planta.colectDate ? new Date(planta.colectDate).toISOString().split("T")[0] : "";
-    form.localidade.value = planta.local || "";
-    form.coletor.value = planta.collectors?.[0] || "";
+    form.duplicates.value = planta.duplicates || "";
+    form.collectNumber.value = planta.colectNumber || "";
+    form.colectDate.value = planta.colectDate ? new Date(planta.colectDate).toISOString().split("T")[0] : "";
+    form.local.value = planta.local || "";
 
+    // Coletores
+    const coletoresContainer = document.getElementById('coletores-container');
+    coletoresContainer.innerHTML = "";
+    if (planta.collectors?.length) {
+      planta.collectors.forEach((c, i) => {
+        const item = criarItemDinamico({
+          label1: `Coletor ${i + 1}`,
+          nome1: 'collectors[]',
+          valor1: c,
+          containerId: 'coletores-container',
+          tipo: 'coletor'
+        });
+        coletoresContainer.appendChild(item);
+      });
+    } else {
+      coletoresContainer.appendChild(criarItemDinamico({
+        label1: 'Coletor 1',
+        nome1: 'collectors[]',
+        containerId: 'coletores-container',
+        tipo: 'coletor'
+      }));
+    }
+
+    // Glossário
     const glossarioContainer = document.getElementById('glossario-container');
     glossarioContainer.innerHTML = "";
-    if (planta.glossary && planta.glossary.length) {
-      planta.glossary.forEach(item => {
-        const glossarioItem = criarGlossarioItem(item.term, item.description);
-        glossarioContainer.appendChild(glossarioItem);
+    if (planta.glossary?.length) {
+      planta.glossary.forEach(g => {
+        const item = criarGlossarioItem(g.term, g.description);
+        glossarioContainer.appendChild(item);
       });
     } else {
       glossarioContainer.appendChild(criarGlossarioItem());
     }
+  }
+
+  function criarItemDinamico(config) {
+    const container = document.createElement('div');
+    container.className = 'item-dinamico';
+    const { label1, nome1, valor1 = '', label2, nome2, valor2 = '' } = config;
+
+    let html = `<label class="rotulo-item">${label1}:</label>
+                <input type="text" name="${nome1}" value="${valor1}" required />`;
+    if (nome2) {
+      html += `<label>${label2}:
+                 <textarea name="${nome2}" rows="3" required>${valor2}</textarea>
+               </label>`;
+    }
+
+    container.innerHTML = html + 
+      `<div class="botoes-item">
+         <button type="button" class="adicionar" title="Adicionar">+</button>
+         <button type="button" class="remover" title="Remover">x</button>
+       </div>`;
+
+    container.querySelector('.adicionar').addEventListener('click', () => {
+      const novoItem = criarItemDinamico(config);
+      container.insertAdjacentElement('afterend', novoItem);
+      if (config.tipo === 'coletor') atualizarNumeracaoColetores();
+    });
+
+    container.querySelector('.remover').addEventListener('click', () => {
+      const parentContainer = document.getElementById(config.containerId);
+      if (parentContainer.children.length > 1) {
+        container.remove();
+        if (config.tipo === 'coletor') atualizarNumeracaoColetores();
+      } else {
+        alert('É necessário ter pelo menos um item.');
+      }
+    });
+
+    return container;
+  }
+
+  function atualizarNumeracaoColetores() {
+    const itens = document.querySelectorAll('#coletores-container .item-dinamico');
+    itens.forEach((item, index) => {
+      item.querySelector('.rotulo-item').textContent = `Coletor ${index + 1}:`;
+    });
   }
 
   function criarGlossarioItem(term = '', description = '') {

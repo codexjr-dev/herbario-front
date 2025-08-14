@@ -1,12 +1,5 @@
 const API_URL = "https://herbario-back.onrender.com/api/parceiros";
 
-// Serve para garantir que só possa entrar se estiver logado
-const token = localStorage.getItem('token');
-if (!token) {
-  alert('Faça login para editar parceiros.');
-  window.location.href = '/pages/login/login-admin.html';
-}
-
 async function carregarParceiros() {
   try {
     const resposta = await fetch(API_URL, {
