@@ -16,40 +16,42 @@ document.addEventListener("DOMContentLoaded", () => {
     "Content-Type": "application/json"
   };
 
-  // Pega id de edição na query string (?id=)
-  const projetoId = new URLSearchParams(window.location.search).get("id");
+  let projetoId = null; // será preenchido se já existir projeto
 
-  // Se for edição, carrega os dados
-  if (projetoId) {
-    fetch(`${API_URL}/${projetoId}`, { headers: AUTH_HEADERS })
-      .then(res => {
-        if (!res.ok) throw new Error("Erro ao buscar projeto");
-        return res.json();
-      })
-      .then(projeto => {
-        form.descricao.value = projeto.descricao || "";
+  // Carregar projeto existente (se houver)
+  fetch(API_URL, { headers: AUTH_HEADERS })
+    .then(res => {
+      if (!res.ok) throw new Error("Erro ao buscar projeto");
+      return res.json();
+    })
+    .then(projetos => {
+      if (projetos.length > 0) {
+        const projeto = projetos[0]; // sempre pega o único projeto
+        projetoId = projeto.id;
+
+        form.descricao.value = projeto.descricaoProjeto || "";
         form["imagem-url"].value = projeto.imagem || "";
-        form["imagem-descricao"].value = projeto.imagemDescricao || "";
-      })
-      .catch(err => {
-        console.error("Erro ao carregar projeto:", err);
-        alert("Erro ao carregar projeto para edição.");
-      });
-  }
+        form["imagem-descricao"].value = projeto.descricaoImagem || "";
+     
+        console.log("Projeto carregado do banco:", projeto);
+      }
+    })
+    .catch(err => {
+      console.error("Erro ao carregar projeto:", err);
+    });
 
   // Salvar (novo ou edição)
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-  const projetoData = {
-    descricaoProjeto: form.descricao.value.trim(),
-    imagem: form["imagem-url"].value.trim(),
-    descricaoImagem: form["imagem-descricao"].value.trim(),
-  };
-
+    const projetoData = {
+      descricaoProjeto: form.descricao.value.trim(),
+      imagem: form["imagem-url"].value.trim(),
+      descricaoImagem: form["imagem-descricao"].value.trim(),
+    };
 
     const method = projetoId ? "PUT" : "POST";
-    const url = projetoId ? `${API_URL}/${projetoId}` : API_URL;
+     const url = projetoId ? `${API_URL}/${projetoId}` : API_URL; // usa id se já existe
 
     fetch(url, {
       method,
@@ -58,8 +60,12 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(res => {
       if (!res.ok) throw new Error("Falha ao salvar projeto");
+      return res.json();
+    })
+    .then(saved => {
+      projetoExiste = true; // garante que ID fica salvo para edições futuras
       alert("Projeto salvo com sucesso!");
-      window.location.href = "../lista-projetos/lista-projetos-admin.html";
+      console.log("Projeto salvo:", saved);
     })
     .catch(err => {
       console.error("Erro ao salvar projeto:", err);
