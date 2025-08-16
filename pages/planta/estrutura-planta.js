@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     setText("nomePopular", planta.nomePopular);
     setText("descricao", planta.descricao);
     setText("nomeCientifico", planta.nomeCientifico);
-    setText("collectNumber", planta.colectNumber);
+    setText("colectNumber", planta.colectNumber);
     setText("classe", planta.taxonomia?.classe);
     setText("colectDate", planta.colectDate ? new Date(planta.colectDate).toLocaleDateString() : "");
     setText("ordem", planta.taxonomia?.ordem);
@@ -39,10 +39,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     capa.src = (planta.fotos && planta.fotos[0]?.url) ? planta.fotos[0].url : IMAGEM_PADRAO;
 
     // Galeria 6 fotos
-    for (let i = 1; i <= 6; i++) {
-      const img = document.getElementById(`foto${i}`);
-      img.src = (planta.fotos[i]?.url) ? planta.fotos[i].url : IMAGEM_PADRAO;
-    }
+   for (let i = 1; i <= 6; i++) {
+    const img = document.getElementById(`foto${i}`);
+    img.src = (planta.fotos[i]?.url) ? planta.fotos[i].url : IMAGEM_PADRAO;
+    img.alt = planta.nomePopular || "Imagem da planta";
+  }
 
     // Glossário
     const glossarioContainer = document.getElementById("glossario-container");

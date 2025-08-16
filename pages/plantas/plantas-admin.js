@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
       fotos: fotosArray,
       descricao: form.descricao.value.trim(),
       duplicates: form.duplicates.value.trim() || "",
-      colectNumber: form.collectNumber.value ? Number(form.collectNumber.value) : null,
+      colectNumber: form.colectNumber.value ? Number(form.colectNumber.value) : null,
       colectDate: form.colectDate.value ? new Date(form.colectDate.value).toISOString() : null,
       local: form.local.value.trim() || "",
       collectors,
@@ -100,13 +100,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function preencherFormulario(planta) {
     form.nomePopular.value = planta.nomePopular || "";
     form.nomeCientifico.value = planta.nomeCientifico || "";
-    form.reino.value = planta.taxonomia?.reino || "Plantae";
-    form.filo.value = planta.taxonomia?.filo || "";
+
     form.classe.value = planta.taxonomia?.classe || "";
     form.ordem.value = planta.taxonomia?.ordem || "";
     form.familia.value = planta.taxonomia?.familia || "";
-    form.genero.value = planta.taxonomia?.genero || "";
-    form.especie.value = planta.taxonomia?.especie || "";
 
     form.capaPlanta.value = planta.fotos?.[0]?.url || "";
     for (let i = 1; i <= 6; i++) {
@@ -116,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.descricao.value = planta.descricao || "";
     form.duplicates.value = planta.duplicates || "";
-    form.collectNumber.value = planta.colectNumber || "";
+    form.colectNumber.value = planta.colectNumber || "";
     form.colectDate.value = planta.colectDate ? new Date(planta.colectDate).toISOString().split("T")[0] : "";
     form.local.value = planta.local || "";
 
