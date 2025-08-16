@@ -1,5 +1,12 @@
 const API_URL = "https://herbario-back.onrender.com/api/parceiros";
 
+// Pega token do localStorage e verifica login
+const token = localStorage.getItem('token');
+if (!token) {
+  alert("Usuário não autenticado. Faça login.");
+  window.location.href = '/pages/login/login-admin.html';
+}
+
 async function carregarParceiros() {
   try {
     const resposta = await fetch(API_URL, {
@@ -30,7 +37,7 @@ async function carregarParceiros() {
 
       // Botão Editar
       const botaoEditar = document.createElement('a');
-      botaoEditar.href = `parceiros-admin.html?id=${parceiro._id}`;
+      botaoEditar.href = `/pages/parceiros/parceiros-admin.html?id=${parceiro._id}`;
       botaoEditar.textContent = 'Editar';
       botaoEditar.className = 'button-editar';
 
@@ -83,4 +90,5 @@ async function excluirParceiro(id) {
   }
 }
 
+// Carrega a lista ao abrir a página
 window.addEventListener('DOMContentLoaded', carregarParceiros);

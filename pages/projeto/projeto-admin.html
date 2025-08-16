@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cadastro / Edição de Parceiro</title>
+  <title>Cadastro / Edição de Projeto</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -79,28 +79,28 @@
 
   <h1>Cadastro / Edição de Projeto</h1>
 
-  <form id="parceiro-form">
+  <form id="projeto-form"> <!-- corrigido -->
 
     <fieldset>
       <legend>Projeto</legend>
 
-      <label for="mapa-descricao">Descrição do Projeto:</label>
-      <textarea id="mapa-descricao" name="mapa-descricao" rows="2"></textarea>
+      <label for="descricao">Descrição do Projeto:</label>
+      <textarea id="descricao" name="descricao" rows="2"></textarea>
 
-      <label for="imagem1-url">URL da Imagem (http):</label>
+      <label for="imagem-url">URL da Imagem (http):</label>
       <input type="url" id="imagem-url" name="imagem-url" placeholder="http://..." />
 
-      <label for="imagem1-descricao">Descrição da Imagem:</label>
+      <label for="imagem-descricao">Descrição da Imagem:</label>
       <textarea id="imagem-descricao" name="imagem-descricao" rows="2"></textarea>
       
     </fieldset>
 
     <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
         <button type="submit" class="botao">Salvar</button>
+        <a href="../lista-projetos/lista-projetos-admin.html" class="botao">Ver Lista</a>
         <a href="../painel-admin/painel-admin.html" class="botao">Voltar</a>
         <a href="../login/login-admin.html" class="botao">Sair</a>
     </div>
-
 
   </form>
   <script src="projeto-admin.js"></script>
