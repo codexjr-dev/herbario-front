@@ -1,4 +1,6 @@
 const API_URL = "https://herbario-back.onrender.com/api/plants";
+const imagemPadrao = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpttnfhDbmXTkbWTyJU_fotk6nrElsiG2Vng&s";
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("planta-form");
@@ -101,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Campos simples
     form.nomePopular.value = planta.nomePopular || '';
-    form.capaPlanta.value = planta.fotos?.[0]?.url || '';
+    form.capaPlanta.value = planta.fotos?.[0]?.url || imagemPadrao;
     form.descricao.value = planta.descricao || '';
     form.nomeCientifico.value = planta.nomeCientifico || '';
     form.classe.value = planta.taxonomia?.classe || '';

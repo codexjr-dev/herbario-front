@@ -1,4 +1,6 @@
 const API_URL = "https://herbario-back.onrender.com/api/parceiros";
+const imagemPadrao = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpttnfhDbmXTkbWTyJU_fotk6nrElsiG2Vng&s";
+
 
 // Verifica login
 const token = localStorage.getItem('token');
@@ -9,70 +11,90 @@ if (!token) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("parceiro-form");
-  if (!form) return;
+  const token = localStorage.getItem("token");
 
-  const AUTH_HEADERS = {
-    "Authorization": `Basic ${token}`,
-    "Content-Type": "application/json"
-  };
-
-  // Pegamos o id da query param ?id= para edição
-  const parceiroId = new URLSearchParams(window.location.search).get("id");
-
-  // Se for edição, carrega os dados
-  if (parceiroId) {
-    fetch(`${API_URL}/${parceiroId}`, { headers: AUTH_HEADERS })
-      .then(res => {
-        if (!res.ok) throw new Error("Parceiro não encontrado");
-        return res.json();
-      })
-      .then(parceiro => {
-        form.nome.value = parceiro.nome || "";
-        form["mapa-url"].value = parceiro.mapaUrl || "";
-        form["mapa-descricao"].value = parceiro.mapaDescricao || "";
-        form["imagem1-url"].value = parceiro.imagem1Url || "";
-        form["imagem1-descricao"].value = parceiro.imagem1Descricao || "";
-        form["imagem2-url"].value = parceiro.imagem2Url || "";
-        form["imagem3-url"].value = parceiro.imagem3Url || "";
-        form["imagem2e3-descricao"].value = parceiro.imagem2e3Descricao || "";
-      })
-      .catch(err => {
-        console.error("Erro ao carregar parceiro para edição:", err);
-        alert("Erro ao carregar parceiro para edição.");
-      });
+  if (!token) {
+    alert("Você precisa fazer login novamente.");
+    window.location.href = '/pages/login/login-admin.html';
+    return;
   }
 
-  // Salvar (novo ou edição)
-  form.addEventListener("submit", (e) => {
+  // Pega o ID do parceiro da query string (?id=...)
+  const parceiroId = new URLSearchParams(window.location.search).get("id");
+
+  // Se houver ID, carrega os dados para edição
+  if (parceiroId) {
+    carregarParceiroParaEdicao(parceiroId, token);
+  }
+
+  // Submit do formulário
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const parceiroData = {
       nome: form.nome.value.trim(),
-      urlMapa: form["mapa-url"].value.trim(),
-      descricaoMapa: form["mapa-descricao"].value.trim(),
-      imagem1: form["imagem1-url"].value.trim(),
-      descricao1: form["imagem1-descricao"].value.trim(),
-      imagem2: form["imagem2-url"].value.trim(),
-      imagem3: form["imagem3-url"].value.trim(),
-      descricao2: form["imagem2e3-descricao"].value.trim(),
+      urlMapa: form["mapa-url"].value.trim() || imagemPadrao,
+      descricaoMapa: form["mapa-descricao"].value.trim() || '',
+      imagem1: form["imagem1-url"].value.trim() || imagemPadrao,
+      descricao1: form["imagem1-descricao"].value.trim() || '',
+      imagem2: form["imagem2-url"].value.trim() || imagemPadrao,
+      imagem3: form["imagem3-url"].value.trim() || imagemPadrao,
+
+      descricao2: form["imagem2e3-descricao"].value.trim()
     };
 
-    const method = parceiroId ? "PUT" : "POST";
-    const url = parceiroId ? `${API_URL}/${parceiroId}` : API_URL;
+    try {
+      const url = parceiroId
+        ? `https://herbario-back.onrender.com/api/parceiros/${parceiroId}` // edição
+        : `https://herbario-back.onrender.com/api/parceiros`;             // novo cadastro
 
-    fetch(url, {
-      method,
-      headers: AUTH_HEADERS,
-      body: JSON.stringify(parceiroData)
-    })
-    .then(res => {
-      if (!res.ok) throw new Error("Falha ao salvar parceiro");
-      alert("Parceiro salvo com sucesso!");
-      window.location.href = "../lista-parceiros/lista-parceiros-admin.html";
-    })
-    .catch(err => {
-      console.error("Erro ao salvar parceiro:", err);
+      const method = parceiroId ? "PUT" : "POST";
+
+      const res = await fetch(url, {
+        method,
+        headers: {
+          "Authorization": `Basic ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(parceiroData)
+      });
+
+      if (!res.ok) throw new Error("Erro ao salvar parceiro");
+
+      alert(parceiroId ? "Edição realizada!" : "Parceiro cadastrado!");
+
+      // Redireciona para lista de parceiros
+      window.location.href = "/pages/lista-parceiros/lista-parceiros-admin.html";
+    } catch (err) {
+      console.error(err);
       alert("Erro ao salvar parceiro.");
-    });
+    }
   });
 });
+
+// Função para carregar parceiro para edição
+async function carregarParceiroParaEdicao(id, token) {
+  try {
+    const res = await fetch("https://herbario-back.onrender.com/api/parceiros", {
+      headers: { "Authorization": `Basic ${token}` }
+    });
+    if (!res.ok) throw new Error("Erro ao buscar parceiros");
+
+    const parceiros = await res.json();
+    const parceiro = parceiros.find(p => p._id === id);
+    if (!parceiro) throw new Error("Parceiro não encontrado");
+
+    // Preenche os campos do form
+    document.getElementById("nome").value = parceiro.nome || "";
+    document.getElementById("mapa-url").value = parceiro.urlMapa || "";
+    document.getElementById("mapa-descricao").value = parceiro.descricaoMapa || "";
+    document.getElementById("imagem1-url").value = parceiro.imagem1 || "";
+    document.getElementById("imagem1-descricao").value = parceiro.descricao1 || "";
+    document.getElementById("imagem2-url").value = parceiro.imagem2 || "";
+    document.getElementById("imagem3-url").value = parceiro.imagem3 || "";
+    document.getElementById("imagem2e3-descricao").value = parceiro.descricao2 || "";
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao carregar parceiro para edição.");
+  }
+}

@@ -1,4 +1,5 @@
 const API_URL = "https://herbario-back.onrender.com/api/projetos";
+const FIXED_ID = "68969647e3c7ad8d3606a8e4";
 
 // Verifica login
 const token = localStorage.getItem('token');
@@ -16,31 +17,32 @@ document.addEventListener("DOMContentLoaded", () => {
     "Content-Type": "application/json"
   };
 
-  let projetoId = null; // será preenchido se já existir projeto
-
-  // Carregar projeto existente (se houver)
+  // Buscar todos e filtrar pelo ID fixo
   fetch(API_URL, { headers: AUTH_HEADERS })
     .then(res => {
-      if (!res.ok) throw new Error("Erro ao buscar projeto");
+      if (!res.ok) throw new Error("Erro ao buscar projetos");
       return res.json();
     })
     .then(projetos => {
-      if (projetos.length > 0) {
-        const projeto = projetos[0]; // sempre pega o único projeto
-        projetoId = projeto.id;
+      const projeto = projetos.find(p => p._id === FIXED_ID);
 
-        form.descricao.value = projeto.descricaoProjeto || "";
-        form["imagem-url"].value = projeto.imagem || "";
-        form["imagem-descricao"].value = projeto.descricaoImagem || "";
-     
-        console.log("Projeto carregado do banco:", projeto);
+      if (!projeto) {
+        alert("Projeto com ID fixo não encontrado no banco!");
+        return;
       }
+
+      // Preenche os campos
+      form.descricao.value = projeto.descricaoProjeto || "";
+      form["imagem-url"].value = projeto.imagem || "";
+      form["imagem-descricao"].value = projeto.descricaoImagem || "";
+
+      console.log("Projeto carregado:", projeto);
     })
     .catch(err => {
       console.error("Erro ao carregar projeto:", err);
     });
 
-  // Salvar (novo ou edição)
+  // Salvar edição
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -50,26 +52,22 @@ document.addEventListener("DOMContentLoaded", () => {
       descricaoImagem: form["imagem-descricao"].value.trim(),
     };
 
-    const method = projetoId ? "PUT" : "POST";
-     const url = projetoId ? `${API_URL}/${projetoId}` : API_URL; // usa id se já existe
-
-    fetch(url, {
-      method,
+    fetch(`${API_URL}/${FIXED_ID}`, {
+      method: "PUT",
       headers: AUTH_HEADERS,
       body: JSON.stringify(projetoData)
     })
-    .then(res => {
-      if (!res.ok) throw new Error("Falha ao salvar projeto");
-      return res.json();
-    })
-    .then(saved => {
-      projetoExiste = true; // garante que ID fica salvo para edições futuras
-      alert("Projeto salvo com sucesso!");
-      console.log("Projeto salvo:", saved);
-    })
-    .catch(err => {
-      console.error("Erro ao salvar projeto:", err);
-      alert("Erro ao salvar projeto.");
-    });
+      .then(res => {
+        if (!res.ok) throw new Error("Falha ao salvar projeto");
+        return res.json();
+      })
+      .then(saved => {
+        alert("Edição realizada!");
+        console.log("Projeto atualizado:", saved);
+      })
+      .catch(err => {
+        console.error("Erro ao salvar projeto:", err);
+        alert("Erro ao salvar projeto.");
+      });
   });
 });
