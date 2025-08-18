@@ -1,4 +1,5 @@
 #intro-parceiros{
+  margin-top: 2rem;
   margin-inline: auto;
   width: 44rem;
   h1{
@@ -14,6 +15,7 @@
 
 @media (max-width: 600px) {
   #intro-parceiros {
+    margin-top:1rem;
     width: 100%;
     padding-inline: 1rem;
   }
