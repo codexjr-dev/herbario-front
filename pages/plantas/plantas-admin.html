@@ -191,11 +191,11 @@
       const { label1, nome1, valor1 = '', label2, nome2, valor2 = '' } = config;
 
       let html = `<label class="rotulo-item">${label1}:</label>
-                  <input type="text" name="${nome1}" value="${valor1}" required />`;
+                  <input type="text" name="${nome1}" value="${valor1}" />`;
 
       if (nome2) {
         html += `<label>${label2}:
-                  <textarea name="${nome2}" rows="3" required>${valor2}</textarea>
+                  <textarea name="${nome2}" rows="3" >${valor2}</textarea>
                 </label>`;
       }
 

@@ -27,7 +27,8 @@ async function carregarResultados() {
       link.href = `../planta/estrutura-planta.html?id=${planta._id}`;
       link.innerHTML = `
         <li>
-          <img src="../../assets/image (1).png" alt="">
+          <img src="${planta.fotos?.[0]?.url || '../../assets/default.png'}" alt="${planta.nomePopular}">
+
           <section>
             <span class="nome-planta">${planta.nomePopular}</span>
             <p>${planta.descricao || "Sem descrição disponível."}</p>

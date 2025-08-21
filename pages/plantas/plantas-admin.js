@@ -114,9 +114,12 @@ document.addEventListener("DOMContentLoaded", () => {
     form.colectDate.value = planta.colectDate ? new Date(planta.colectDate).toISOString().split('T')[0] : '';
     form.local.value = planta.local || '';
     form.duplicates.value = planta.duplicates || '';
-    for (let i = 1; i <= 6; i++) {
-      form[`foto${i}`].value = planta.fotos?.[i]?.url || '';
-    }
+    form.foto1.value = planta.fotos?.[1]?.url || imagemPadrao;
+    form.foto2.value = planta.fotos?.[2]?.url || imagemPadrao;
+    form.foto3.value = planta.fotos?.[3]?.url || imagemPadrao;
+    form.foto4.value = planta.fotos?.[4]?.url || imagemPadrao;
+    form.foto5.value = planta.fotos?.[5]?.url || imagemPadrao;
+    form.foto6.value = planta.fotos?.[6]?.url || imagemPadrao;
 
     // Coletores
     const coletoresContainer = document.getElementById('coletores-container');
@@ -150,9 +153,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const { label1, nome1, valor1 = '', label2, nome2, valor2 = '' } = config;
 
   let html = `<label class="rotulo-item">${label1}:</label>
-              <input type="text" name="${nome1}" value="${valor1}" required />`;
+              <input type="text" name="${nome1}" value="${valor1}" />`;
   if (nome2) html += `<label>${label2}:
-                        <textarea name="${nome2}" rows="3" required>${valor2}</textarea>
+                        <textarea name="${nome2}" rows="3" >${valor2}</textarea>
                       </label>`;
 
   container.innerHTML = html + `<div class="botoes-item">

@@ -45,16 +45,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     img.alt = planta.nomePopular || "Imagem da planta";
   }
 
-    // Glossário
-    const glossarioContainer = document.getElementById("glossario-container");
-    glossarioContainer.innerHTML = "";
-    if (planta.glossary && planta.glossary.length > 0) {
-      planta.glossary.forEach(item => {
-        const div = document.createElement("div");
-        div.innerHTML = `<strong>${item.term}:</strong> ${item.description}`;
-        glossarioContainer.appendChild(div);
-      });
-    }
+  // Glossário
+  const glossarioContainer = document.getElementById("glossario-container");
+  glossarioContainer.innerHTML = "";
+
+  if (planta.glossary && planta.glossary.length > 0) {
+    planta.glossary.forEach(item => {
+      const p = document.createElement("p");
+      p.innerHTML = `<strong class="termo-glossario">${item.term}:</strong> ${item.description}`;
+      glossarioContainer.appendChild(p);
+    });
+  }
+
 
   } catch (err) {
     console.error(err);

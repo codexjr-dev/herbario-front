@@ -1,23 +1,20 @@
-.glossario{
+.glossario {
   margin-bottom: 3rem;
-  & div{
-  border: .1rem solid var(--brand-color);
-  border-radius: 1rem;
-  padding: 2rem;
-}
+
+  div {
+    border: 0.1rem solid var(--brand-color);
+    border-radius: 1rem;
+    padding: 2rem;
+  }
 }
 
-@media (max-width: 400px) {
-  .glossario {
-    margin-bottom: 0.3rem;
-    margin-inline: 0.3rem;
-    max-width: 94vw;
-  }
-  .glossario div {
-    padding: 0.2rem;
-    gap: 0.15rem;
-    border-radius: 0.3rem;
-    max-width: 94vw;
-    box-sizing: border-box;
-  }
+#glossario-container p {
+  margin-bottom: 12px; /* afasta cada item um do outro */
+  line-height: 1.5;    /* leitura mais confortável */
+}
+
+.termo-glossario {
+  font-weight: bold;   /* garante negrito */
+  color: green;        /* cor padrão verde */
+  margin-right: 5px;   /* espaço entre termo e descrição */
 }

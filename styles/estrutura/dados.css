@@ -1,15 +1,18 @@
-.dados{
+.dados {
   margin-bottom: 3rem;
-  & .dados-box{
-    border: .1rem solid var(--brand-color);
+
+  & .dados-box {
+    border: 0.1rem solid var(--brand-color);
     border-radius: 1rem;
     padding: 2rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
-    & div{
-      & legend{
+
+    & div {
+      & legend {
         color: var(--brand-color);
+        font-weight: bold; /* negrito adicionado */
       }
     }
   }
@@ -22,6 +25,7 @@
     padding-right: 0.1rem;
     margin-inline: 0.3rem;
   }
+
   .dados-box {
     grid-template-columns: 1fr;
     padding: 0.15rem 0.1rem;
@@ -31,19 +35,20 @@
     box-sizing: border-box;
     margin-left: 0;
     margin-right: 0;
+
     & legend {
-      font-size: 0.65rem;
+      font-size: 0.85rem;
+      font-weight: bold; /* negrito também no mobile */
+      word-break: break-word;
     }
-    & span{
+
+    & span {
       font-size: 0.8rem;
     }
   }
+
   .dados .dados-box div {
     min-width: 0;
-    word-break: break-word;
-  }
-  .dados .dados-box legend {
-    font-size: 0.85rem;
     word-break: break-word;
   }
 }
