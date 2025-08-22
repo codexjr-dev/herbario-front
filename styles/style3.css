@@ -5,3 +5,7 @@
 @import url(projeto/retrato.css);
 @import url(parceiros/intro.css);
 @import url(parceiros/box.css);
+
+img{
+  border-radius: .5rem;
+}
