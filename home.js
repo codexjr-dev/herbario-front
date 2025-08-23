@@ -6,7 +6,7 @@ document.querySelector("form").addEventListener("submit", function (e) {
   const familia = document.querySelector("select[name='familia']").value;
 
   const params = new URLSearchParams();
-  if (termo) params.append("nome", termo);  // <-- backend espera ?nome=...
+  if (termo) params.append("busca", termo);  // envia como 'busca'
   if (classe) params.append("classe", classe);
   if (familia) params.append("familia", familia);
 
