@@ -10,8 +10,9 @@ async function carregarResultados() {
 
   // pega os parâmetros da URL e normaliza
   const termo = normalize(params.get("busca"));
-  const classe = normalize(params.get("classe"));
-  const familia = normalize(params.get("familia"));
+  const classe = params.get("classe");
+  const familia = params.get("familia");
+
 
   try {
     const resposta = await fetch(API_URL);
