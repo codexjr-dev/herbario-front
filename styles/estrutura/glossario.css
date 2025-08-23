@@ -14,7 +14,7 @@
 }
 
 .termo-glossario {
-  font-weight: bold;   /* garante negrito */
-  color: green;        /* cor padrão verde */
-  margin-right: 5px;   /* espaço entre termo e descrição */
+  font-weight: bold;   
+  color: green;       
+  margin-right: 5px;  
 }
