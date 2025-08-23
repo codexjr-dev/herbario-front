@@ -1,0 +1,20 @@
+#intro-parceiros{
+  margin-inline: auto;
+  width: 44rem;
+  h1{
+    font: var(--h2);
+    margin-bottom: 1rem;
+  }
+  p{
+    font: var(--text);
+    color: var(--standart-grey);
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #intro-parceiros {
+    width: 100%;
+    padding-inline: 1rem;
+  }
+}

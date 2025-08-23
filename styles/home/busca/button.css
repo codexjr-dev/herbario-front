@@ -22,3 +22,15 @@ form{
   display: flex;
   gap: 2rem;
 }
+
+@media screen and (max-width: 600px) {
+  form{
+    gap: 1rem;
+  }
+  .button-div{
+    & img{
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+}

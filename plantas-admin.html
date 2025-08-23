@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Herbário Admin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    h1, h2, legend {
+      color: #2e7d32;
+      font-size: 1.8rem;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin: 0.3rem 0 1rem;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .botao-lista {
+      padding: 0.7rem 1.2rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .botao-lista:hover{
+      background-color: #388e3c;
+    }
+
+    fieldset {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    legend {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 600px) {
+      html {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Cadastro / Edição de Planta</h1>
+
+  <form id="planta-form">
+    <!-- Seção Principal -->
+    <fieldset>
+      <legend>Planta</legend>
+
+      <label for="nomePopular">Nome Popular:</label>
+      <input type="text" id="nomePopular" name="nomePopular" required />
+
+      <label for="nomeCientifico">Nome Científico:</label>
+      <input type="text" id="nomeCientifico" name="nomeCientifico" required />
+
+      <label for="familia">Família:</label>
+      <input type="text" id="familia" name="familia" required />
+
+      <label for="descricao">Descrição:</label>
+      <textarea id="descricao" name="descricao" rows="3" required></textarea>
+
+      <label for="imagemCapa">Imagem de Capa (URL):</label>
+      <input type="url" id="imagemCapa" name="imagemCapa" />
+    </fieldset>
+
+    <!-- Seção Dados Técnicos -->
+    <fieldset>
+      <legend>Dados Técnicos</legend>
+
+      <label for="especieTipo">Espécie Tipo:</label>
+      <input type="text" id="especieTipo" name="especieTipo" />
+
+      <label for="ordem">Ordem:</label>
+      <input type="text" id="ordem" name="ordem" />
+
+      <label for="duplicatas">Duplicatas Indicadas:</label>
+      <input type="text" id="duplicatas" name="duplicatas" />
+
+      <label for="numeroColeta">Número da Coleta:</label>
+      <input type="text" id="numeroColeta" name="numeroColeta" />
+
+      <label for="dataColeta">Data da Coleta:</label>
+      <input type="date" id="dataColeta" name="dataColeta" />
+
+      <label for="localidade">Localidade:</label>
+      <input type="text" id="localidade" name="localidade" />
+
+      <label for="coletor">Coletor(es):</label>
+      <input type="text" id="coletor" name="coletor" />
+
+      <label for="observacoes">Observações:</label>
+      <textarea id="observacoes" name="observacoes" rows="2"></textarea>
+    </fieldset>
+
+    <!-- Seção Glossário -->
+    <fieldset>
+      <legend>Glossário</legend>
+
+      <label for="termoGlossario">Termo:</label>
+      <input type="text" id="termoGlossario" name="termoGlossario" />
+
+      <label for="definicaoGlossario">Definição:</label>
+      <textarea id="definicaoGlossario" name="definicaoGlossario" rows="3"></textarea>
+    </fieldset>
+
+    <!-- Seção Galeria -->
+    <fieldset>
+      <legend>Galeria de Imagens (URLs)</legend>
+
+      <label for="galeria1">Imagem 1:</label>
+      <input type="url" id="galeria1" name="galeria1" />
+
+      <label for="galeria2">Imagem 2:</label>
+      <input type="url" id="galeria2" name="galeria2" />
+
+      <label for="galeria3">Imagem 3:</label>
+      <input type="url" id="galeria3" name="galeria3" />
+
+      <label for="galeria4">Imagem 4:</label>
+      <input type="url" id="galeria4" name="galeria4" />
+
+      <label for="galeria5">Imagem 5:</label>
+      <input type="url" id="galeria5" name="galeria5" />
+
+      <label for="galeria6">Imagem 6:</label>
+      <input type="url" id="galeria6" name="galeria6" />
+    </fieldset>
+
+  <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+    <button type="submit" class="botao-lista">Salvar</button>
+    <a href="lista-plantas-admin.html" class="botao-lista">Ver Lista</a>
+    <a href="painel-admin.html" class="botao-lista">Voltar</a>
+    <a href="login-admin.html" class="botao-lista">Sair</a> <!-- Agora com estilo idêntico -->
+  </div>
+
+
+  </form>
+
+    
+   <script src="assets/scripts.js"></script>
+
+</body>
+</html>

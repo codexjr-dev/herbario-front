@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cadastro / Edição de Parceiro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    h1, h2, legend {
+      color: #2e7d32;
+      font-size: 1.8rem;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin: 0.3rem 0 1rem;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .botao-lista {
+      padding: 0.7rem 1.2rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .botao-lista:hover{
+      background-color: #388e3c;
+    }
+
+    fieldset {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    legend {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 600px) {
+      html {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Cadastro / Edição de Parceiro</h1>
+
+  <form id="parceiro-form">
+
+    <fieldset>
+      <legend>Parceiro</legend>
+
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required />
+
+      <label for="mapa-url">URL do Mapa (https):</label>
+      <input type="url" id="mapa-url" name="mapa-url" placeholder="https://..." required />
+
+      <label for="mapa-descricao">Descrição do Mapa:</label>
+      <textarea id="mapa-descricao" name="mapa-descricao" rows="2"></textarea>
+
+      <label for="imagem1-url">URL da Imagem 1 (http):</label>
+      <input type="url" id="imagem1-url" name="imagem1-url" placeholder="http://..." />
+
+      <label for="imagem1-descricao">Descrição da Imagem 1:</label>
+      <textarea id="imagem1-descricao" name="imagem1-descricao" rows="2"></textarea>
+
+      <label for="imagem2-url">URL da Imagem 2 (https):</label>
+      <input type="url" id="imagem2-url" name="imagem2-url" placeholder="https://..." />
+
+      <label for="imagem3-url">URL da Imagem 3:</label>
+      <input type="url" id="imagem3-url" name="imagem3-url" />
+
+      <label for="imagem2e3-descricao">Descrição das Imagens 2 e 3:</label>
+      <textarea id="imagem2e3-descricao" name="imagem2e3-descricao" rows="3"></textarea>
+    </fieldset>
+
+    <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+        <button type="submit" class="botao-lista">Salvar</button>
+        <a href="lista-parceiros-admin.html" class="botao-lista">Ver Lista</a>
+        <a href="painel-admin.html" class="botao-lista">Voltar</a>
+        <a href="login-admin.html" class="botao-lista">Sair</a>
+    </div>
+
+
+  </form>
+
+</body>
+</html>
