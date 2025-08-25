@@ -1,10 +1,11 @@
 const API_URL = "https://herbario-back.onrender.com/api/projetos";
+const IMAGEM_PADRAO = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpttnfhDbmXTkbWTyJU_fotk6nrElsiG2Vng&s";
 const FIXED_ID = "68969647e3c7ad8d3606a8e4";
 
 // Verifica login
 const token = localStorage.getItem('token');
 if (!token) {
-  alert("Usuário não autenticado. Faça login.");
+  alert("Você precisa fazer login novamente.");
   window.location.href = '/pages/login/login-admin.html';
 }
 
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Preenche os campos
+      // Preenche os campos com os dados do banco
       form.descricao.value = projeto.descricaoProjeto || "";
       form["imagem-url"].value = projeto.imagem || "";
       form["imagem-descricao"].value = projeto.descricaoImagem || "";
@@ -45,6 +46,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Salvar edição
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    // Se o campo de imagem estiver vazio, usa a imagem padrão e atualiza o input
+    if (!form["imagem-url"].value.trim()) {
+      form["imagem-url"].value = IMAGEM_PADRAO;
+    }
 
     const projetoData = {
       descricaoProjeto: form.descricao.value.trim(),

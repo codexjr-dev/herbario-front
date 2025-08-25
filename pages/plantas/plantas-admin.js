@@ -1,5 +1,5 @@
 const API_URL = "https://herbario-back.onrender.com/api/plants";
-const imagemPadrao = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpttnfhDbmXTkbWTyJU_fotk6nrElsiG2Vng&s";
+const IMAGEM_PADRAO = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpttnfhDbmXTkbWTyJU_fotk6nrElsiG2Vng&s";
 
 
 document.addEventListener("DOMContentLoaded", () => {

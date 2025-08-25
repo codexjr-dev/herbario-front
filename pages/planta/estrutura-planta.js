@@ -1,5 +1,5 @@
 const API_URL = "https://herbario-back.onrender.com/api/plants";
-const IMAGEM_PADRAO = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"; // imagem padrão
+const IMAGEM_PADRAO = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpttnfhDbmXTkbWTyJU_fotk6nrElsiG2Vng&s";// imagem padrão
 
 document.addEventListener("DOMContentLoaded", async () => {
   const urlParams = new URLSearchParams(window.location.search);
