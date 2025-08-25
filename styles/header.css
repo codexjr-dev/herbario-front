@@ -22,6 +22,10 @@
   }
 }
 
+.admin{
+  padding-left: 2rem;
+}
+
 @media screen and (max-width: 400px) {
   .cabecalho{
     & span{
@@ -37,6 +41,9 @@
       height: 2.5rem;
       margin-left: .4rem;
     }
+  }
+  .admin{
+    padding-left: .4rem;
   }
 }
 
