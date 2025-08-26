@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Campos simples
     form.nomePopular.value = planta.nomePopular || '';
-    form.capaPlanta.value = planta.fotos?.[0]?.url || imagemPadrao;
+    form.capaPlanta.value = planta.fotos?.[0]?.url || IMAGEM_PADRAO; // CORREÇÃO: era imagemPadrao
     form.descricao.value = planta.descricao || '';
     form.nomeCientifico.value = planta.nomeCientifico || '';
     form.classe.value = planta.taxonomia?.classe || '';
@@ -114,12 +114,12 @@ document.addEventListener("DOMContentLoaded", () => {
     form.colectDate.value = planta.colectDate ? new Date(planta.colectDate).toISOString().split('T')[0] : '';
     form.local.value = planta.local || '';
     form.duplicates.value = planta.duplicates || '';
-    form.foto1.value = planta.fotos?.[1]?.url || imagemPadrao;
-    form.foto2.value = planta.fotos?.[2]?.url || imagemPadrao;
-    form.foto3.value = planta.fotos?.[3]?.url || imagemPadrao;
-    form.foto4.value = planta.fotos?.[4]?.url || imagemPadrao;
-    form.foto5.value = planta.fotos?.[5]?.url || imagemPadrao;
-    form.foto6.value = planta.fotos?.[6]?.url || imagemPadrao;
+    form.foto1.value = planta.fotos?.[1]?.url || IMAGEM_PADRAO; // CORREÇÃO: era imagemPadrao
+    form.foto2.value = planta.fotos?.[2]?.url || IMAGEM_PADRAO; // CORREÇÃO: era imagemPadrao
+    form.foto3.value = planta.fotos?.[3]?.url || IMAGEM_PADRAO; // CORREÇÃO: era imagemPadrao
+    form.foto4.value = planta.fotos?.[4]?.url || IMAGEM_PADRAO; // CORREÇÃO: era imagemPadrao
+    form.foto5.value = planta.fotos?.[5]?.url || IMAGEM_PADRAO; // CORREÇÃO: era imagemPadrao
+    form.foto6.value = planta.fotos?.[6]?.url || IMAGEM_PADRAO; // CORREÇÃO: era imagemPadrao
 
     // Coletores
     const coletoresContainer = document.getElementById('coletores-container');
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let html = `<label class="rotulo-item">${label1}:</label>
               <input type="text" name="${nome1}" value="${valor1}" />`;
   if (nome2) html += `<label>${label2}:
-                        <textarea name="${nome2}" rows="3" >${valor2}</textarea>
+                        <textarea name="${nome2}" rows="3">${valor2}</textarea>
                       </label>`;
 
   container.innerHTML = html + `<div class="botoes-item">
