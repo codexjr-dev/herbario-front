@@ -8,11 +8,10 @@ function normalize(str) {
 async function carregarResultados() {
   const params = new URLSearchParams(window.location.search);
 
-  // pega os parâmetros da URL e normaliza
+  // pega os parâmetros da URL e normaliza TODOS
   const termo = normalize(params.get("busca"));
-  const classe = params.get("classe");
-  const familia = params.get("familia");
-
+  const classe = normalize(params.get("classe"));   // ← CORRIGIDO: normalizar
+  const familia = normalize(params.get("familia")); // ← CORRIGIDO: normalizar
 
   try {
     const resposta = await fetch(API_URL);
@@ -22,12 +21,20 @@ async function carregarResultados() {
     const plantasFiltradas = plantas.filter(planta => {
       const nomePopular = normalize(planta.nomePopular);
       const nomeCientifico = normalize(planta.nomeCientifico);
-      const plantaClasse = normalize(planta.classe);
-      const plantaFamilia = normalize(planta.familia);
+      // CORRIGIDO: Acessar classe e família dentro de taxonomia
+      const plantaClasse = normalize(planta.taxonomia?.classe);
+      const plantaFamilia = normalize(planta.taxonomia?.familia);
 
+      // Busca por termo (funciona com includes)
       const termoValido = !termo || nomePopular.includes(termo) || nomeCientifico.includes(termo);
-      const classeValida = !classe || plantaClasse === classe;
-      const familiaValida = !familia || plantaFamilia === familia;
+      
+      // ALTERNATIVA: Usar === para busca exata (descomente se preferir)
+      // const classeValida = !classe || plantaClasse === classe;
+      // const familiaValida = !familia || plantaFamilia === familia;
+      
+      // RECOMENDADO: Usar includes() para busca mais flexível
+      const classeValida = !classe || plantaClasse.includes(classe);
+      const familiaValida = !familia || plantaFamilia.includes(familia);
 
       return termoValido && classeValida && familiaValida;
     });
@@ -67,4 +74,25 @@ async function carregarResultados() {
   }
 }
 
+// Função para debug - adicione temporariamente para verificar os dados
+async function debugFiltros() {
+  const params = new URLSearchParams(window.location.search);
+  console.log("Parâmetros da URL:", {
+    busca: params.get("busca"),
+    classe: params.get("classe"),
+    familia: params.get("familia")
+  });
+  
+  // Debug da estrutura dos dados da API
+  try {
+    const resposta = await fetch(API_URL);
+    const plantas = await resposta.json();
+    console.log("Exemplo de planta (estrutura):", plantas[0]);
+    console.log("Taxonomia da primeira planta:", plantas[0]?.taxonomia);
+  } catch (error) {
+    console.error("Erro no debug:", error);
+  }
+}
+
 carregarResultados();
+// debugFiltros(); // Descomente para ver os parâmetros no console
