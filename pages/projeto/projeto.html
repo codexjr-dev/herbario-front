@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../styles/style2.css">
+  <title>Projeto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="cabecalho imagem">
+    <a href="../../home.html"><img src="../../assets/logo2.svg" alt="logo"></a>
+    <span class="abas">
+      <a href="../../home.html">Herbário</a>
+      <a href="../projeto/projeto.html">Projeto</a>
+      <a href="../parceiros/parceiros.html">Parceiros</a>
+      <a href="../apoio/sites-de-apoio.html">Site de apoio</a>
+    </span>
+  </header>
+  <main id="projeto">
+    <h1 class="xilosa" id="titulo-projeto">Carregando...</h1>
+    <p class="text" id="texto-projeto"></p>
+    <section class="retrato" id="secao-imagem" style="display: none;">
+      <img id="imagem-projeto" src="" alt="" onerror="this.parentElement.style.display='none'">
+      <legend id="legenda-projeto"></legend>
+    </section>
+  </main>
+  <footer>
+    <img src="../../assets/logo2.svg" alt="logo secundária do herbário">
+    <span>
+      Desenvolvido por ORBE Disgn e CodeX Jr.<br>
+      Apoio da Universidade Federal de Campina Grande (UFCG)
+    </span>
+  </footer>
+  
+  <script>
+    const API_URL = "https://herbario-back.onrender.com/api/projetos";
+    const PROJETO_ID = "68969647e3c7ad8d3606a8e4";
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      await carregarProjeto();
+    });
+
+    async function carregarProjeto() {
+      try {
+        // Primeiro tenta busca direta por ID
+        let resposta = await fetch(`${API_URL}/${PROJETO_ID}`);
+        let projeto;
+        
+        if (resposta.ok) {
+          // Se achou diretamente, usa
+          projeto = await resposta.json();
+        } else {
+          // Se não achou, busca todos e filtra
+          resposta = await fetch(API_URL);
+          if (!resposta.ok) {
+            throw new Error(`Erro na API: ${resposta.status}`);
+          }
+          
+          const projetos = await resposta.json();
+          projeto = projetos.find(p => p._id === PROJETO_ID);
+          
+          if (!projeto && projetos.length > 0) {
+            // Se não achou o específico, usa o primeiro
+            projeto = projetos[0];
+          }
+        }
+
+        if (projeto) {
+          atualizarConteudo(projeto);
+        } else {
+          throw new Error("Nenhum projeto disponível");
+        }
+        
+      } catch (erro) {
+        console.error("Erro ao carregar projeto:", erro);
+        exibirErro();
+      }
+    }
+
+    function atualizarConteudo(projeto) {
+      // Atualiza título
+      const tituloElement = document.getElementById("titulo-projeto");
+      tituloElement.textContent = "Projeto";
+      
+      // Mantém título da página
+      document.title = "Projeto";
+
+      // Atualiza texto principal
+      const textoElement = document.getElementById("texto-projeto");
+      textoElement.innerHTML = projeto.descricaoProjeto || "Descrição não disponível.";
+
+      // Atualiza imagem se disponível
+      if (projeto.imagem && projeto.imagem.trim() !== "") {
+        const secaoImagem = document.getElementById("secao-imagem");
+        const imagemElement = document.getElementById("imagem-projeto");
+        const legendaElement = document.getElementById("legenda-projeto");
+        
+        imagemElement.src = projeto.imagem;
+        imagemElement.alt = "Imagem do projeto";
+        legendaElement.textContent = projeto.descricaoImagem || "";
+        
+        secaoImagem.style.display = "block";
+      }
+    }
+
+    function exibirErro() {
+      document.getElementById("titulo-projeto").textContent = "Projeto";
+      document.getElementById("texto-projeto").innerHTML = 
+        "Desculpe, não foi possível carregar as informações do projeto no momento. Tente novamente mais tarde.";
+      
+      document.getElementById("secao-imagem").style.display = "none";
+    }
+  </script>
+</body>
+</html>

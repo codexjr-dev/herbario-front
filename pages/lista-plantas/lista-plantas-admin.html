@@ -20,7 +20,6 @@
       font-size: 1.8rem;
     }
   
-
     label {
       font-weight: bold;
       margin-top: 1rem;
@@ -58,6 +57,7 @@
       padding: 0.5rem 0;
       vertical-align: middle;
       text-align: left;
+      border-bottom: 1px solid #ddd;
     }
 
     .botoes {
@@ -119,7 +119,7 @@
 </head>
 <body>
 
-  <h1>Lista de Parceiros</h1>
+  <h1>Lista de Plantas</h1>
 
   <fieldset>
     <legend>Plantas</legend>
@@ -127,21 +127,23 @@
     <table>
       <thead>
         <tr>
-          <th style="width: 70%;">Nome do Parceiro</th>
+          <th style="width: 70%;">Nome Popular</th>
+          <th style="width: 30%;">Ações</th>
         </tr>
       </thead>
       <tbody id="plantas-table-body">
-        <!-- preenchido dinamicamente pelo scripts.js -->
+        <!-- preenchido dinamicamente pelo lista-plantas-admin.js -->
       </tbody>
     </table>
   </fieldset>
 
   <!-- Botão Voltar centralizado -->
   <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem;">
-    <a href="painel-admin.html" class="button-voltar">Voltar</a>
-    <a href="login-admin.html" class="button-voltar">Sair</a>
+    <a href="../painel-admin/painel-admin.html" class="button-voltar">Voltar</a>
+    <a href="../login/login-admin.html" class="button-voltar">Sair</a>
   </div>
 
-  <script src="assets/scripts.js"></script>
+  <script src="lista-plantas-admin.js"></script>
+
 </body>
 </html>

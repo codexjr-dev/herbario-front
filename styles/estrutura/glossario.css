@@ -1,8 +1,20 @@
-.glossario{
+.glossario {
   margin-bottom: 3rem;
-  & div{
-  border: .1rem solid var(--brand-color);
-  border-radius: 1rem;
-  padding: 2rem;
+
+  div {
+    border: 0.1rem solid var(--brand-color);
+    border-radius: 1rem;
+    padding: 2rem;
+  }
 }
+
+#glossario-container p {
+  margin-bottom: 12px; /* afasta cada item um do outro */
+  line-height: 1.5;    /* leitura mais confortável */
+}
+
+.termo-glossario {
+  font-weight: bold;   
+  color: green;       
+  margin-right: 5px;  
 }

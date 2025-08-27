@@ -6,6 +6,7 @@
   width: 35rem;
   img{
     height: 18rem;
+    min-width: 33rem;
   }
   legend{
     color: var(--background);

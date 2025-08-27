@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Herbário Admin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+    h1 {
+      text-align: center;
+      color: #2e7d32;
+      font-size: 1.8rem;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+    input, textarea {
+      width: 100%;
+      margin: 0.3rem 0 1rem;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+    }
+    .botao {
+      padding: 0.7rem 1.2rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      text-align: center;
+      cursor: pointer;
+    }
+    .botao:hover {
+      background-color: #388e3c;
+    }
+    fieldset {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    legend {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #2e7d32;
+    }
+    .item-dinamico {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      position: relative;
+    }
+    .botoes-item {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      display: flex;
+      gap: 0.3rem;
+    }
+    button.adicionar {
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    button.remover {
+      background: #e53935;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cadastro / Edição de Planta</h1>
+
+  <form id="planta-form">
+    <!-- Seção Principal -->
+    <fieldset>
+      <legend>Planta</legend>
+      <label for="nomePopular">Nome Popular:</label>
+      <input type="text" id="nomePopular" name="nomePopular" required />
+
+      <label for="capaPlanta">Imagem de Capa (URL):</label>
+      <input type="url" id="capaPlanta" name="capaPlanta" />
+
+      <label for="descricao">Descrição:</label>
+      <textarea id="descricao" name="descricao" rows="3" required></textarea>
+    </fieldset>
+
+    <!-- Seção Dados Técnicos -->
+    <fieldset>
+      <legend>Dados Técnicos</legend>
+      <label for="nomeCientifico">Nome Científico:</label>
+      <input type="text" id="nomeCientifico" name="nomeCientifico" required />
+      
+      <label for="classe">Classe:</label>
+      <input type="text" id="classe" name="classe" required />
+
+      <label for="ordem">Ordem:</label>
+      <input type="text" id="ordem" name="ordem" />
+
+      <label for="familia">Família:</label>
+      <input type="text" id="familia" name="familia" required /> 
+      
+      <label for="especieTipo">Especime Tipo:</label>
+      <input type="text" id="especieTipo" name="especieTipo" />
+
+      <label for="colectNumber">Número da Coleta:</label>
+      <input type="text" id="colectNumber" name="colectNumber" />
+
+      <label for="colectDate">Data da Coleta:</label>
+      <input type="date" id="colectDate" name="colectDate" />
+
+      <label for="local">Localidade:</label>
+      <input type="text" id="local" name="local" />
+
+      <label for="duplicates">Duplicatas Indicadas:</label>
+      <input type="text" id="duplicates" name="duplicates" />
+    </fieldset>
+
+    <!-- Seção Coletores -->
+    <fieldset>
+      <legend>Coletor(es)</legend>
+      <div id="coletores-container"></div>
+    </fieldset>
+
+    <!-- Seção Glossário -->
+    <fieldset>
+      <legend>Glossário</legend>
+      <div id="glossario-container"></div>
+    </fieldset>
+
+    <!-- Seção Galeria -->
+    <fieldset>
+      <legend>Galeria de Imagens (URLs)</legend>
+      <label for="foto1">Imagem 1:</label>
+      <input type="url" id="foto1" name="foto1" />
+
+      <label for="foto2">Imagem 2:</label>
+      <input type="url" id="foto2" name="foto2" />
+
+      <label for="foto3">Imagem 3:</label>
+      <input type="url" id="foto3" name="foto3" />
+
+      <label for="foto4">Imagem 4:</label>
+      <input type="url" id="foto4" name="foto4" />
+
+      <label for="foto5">Imagem 5:</label>
+      <input type="url" id="foto5" name="foto5" />
+
+      <label for="foto6">Imagem 6:</label>
+      <input type="url" id="foto6" name="foto6" />
+    </fieldset>
+
+    <!-- Botões -->
+    <!-- Botões -->
+    <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+      <button type="submit" class="botao">Salvar</button>
+      <a href="../lista-plantas/lista-plantas-admin.html" class="botao" style="text-decoration: none;">Ver Lista</a>
+      <a href="../painel-admin/painel-admin.html" class="botao" style="text-decoration: none;">Voltar</a>
+      <a href="../login/login-admin.html" class="botao" style="text-decoration: none;">Sair</a>
+    </div>
+
+  </form>
+
+  <script>
+    function criarItemDinamico(config) {
+      const container = document.createElement('div');
+      container.className = 'item-dinamico';
+
+      const { label1, nome1, valor1 = '', label2, nome2, valor2 = '' } = config;
+
+      let html = `<label class="rotulo-item">${label1}:</label>
+                  <input type="text" name="${nome1}" value="${valor1}" />`;
+
+      if (nome2) {
+        html += `<label>${label2}:
+                  <textarea name="${nome2}" rows="3" >${valor2}</textarea>
+                </label>`;
+      }
+
+      container.innerHTML = html + `
+        <div class="botoes-item">
+          <button type="button" class="adicionar" title="Adicionar">+</button>
+          <button type="button" class="remover" title="Remover">x</button>
+        </div>
+      `;
+
+      container.querySelector('.adicionar').addEventListener('click', () => {
+        const novoItem = criarItemDinamico(config);
+        container.insertAdjacentElement('afterend', novoItem);
+        if (config.tipo === 'coletor') atualizarNumeracaoColetores();
+      });
+
+      container.querySelector('.remover').addEventListener('click', () => {
+        const parentContainer = document.getElementById(config.containerId);
+        if (parentContainer.children.length > 1) {
+          container.remove();
+          if (config.tipo === 'coletor') atualizarNumeracaoColetores();
+        } else {
+          alert('É necessário ter pelo menos um item.');
+        }
+      });
+
+      return container;
+    }
+
+    function atualizarNumeracaoColetores() {
+      const itens = document.querySelectorAll('#coletores-container .item-dinamico');
+      itens.forEach((item, index) => {
+        item.querySelector('.rotulo-item').textContent = `Coletor ${index + 1}:`;
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Inicializa coletores
+      const coletoresContainer = document.getElementById('coletores-container');
+      coletoresContainer.appendChild(criarItemDinamico({
+        label1: 'Coletor 1',
+        nome1: 'collectors[]',
+        containerId: 'coletores-container',
+        tipo: 'coletor'
+      }));
+
+      // Inicializa glossário
+      const glossarioContainer = document.getElementById('glossario-container');
+      glossarioContainer.appendChild(criarItemDinamico({
+        label1: 'Termo',
+        nome1: 'glossary[].term',
+        label2: 'Definição',
+        nome2: 'glossary[].description',
+        containerId: 'glossario-container',
+        tipo: 'glossario'
+      }));
+    });
+  </script>
+
+  <script src="plantas-admin.js"></script>
+</body>
+</html>

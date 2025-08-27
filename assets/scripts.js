@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000/api/plants';
+const API_URL = 1025;
+
 const AUTH_HEADER = {
   'Authorization': 'Basic YWRtaW46YWRtaW4xMjM=',
   'Content-Type': 'application/json'

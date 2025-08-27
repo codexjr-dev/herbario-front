@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edição de Projeto</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    h1, h2, legend {
+      color: #2e7d32;
+      font-size: 1.8rem;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin: 0.3rem 0 1rem;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .botao {
+      padding: 0.7rem 1.2rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .botao:hover{
+      background-color: #388e3c;
+    }
+
+    fieldset {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    legend {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 600px) {
+      html {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Edição de Projeto</h1>
+
+  <form id="projeto-form"> <!-- corrigido -->
+
+    <fieldset>
+      <legend>Projeto</legend>
+
+      <label for="descricao">Descrição do Projeto:</label>
+      <textarea id="descricao" name="descricao" rows="2"></textarea>
+
+      <label for="imagem-url">URL da Imagem (http):</label>
+      <input type="url" id="imagem-url" name="imagem-url" placeholder="http://..." />
+
+      <label for="imagem-descricao">Descrição da Imagem:</label>
+      <textarea id="imagem-descricao" name="imagem-descricao" rows="2"></textarea>
+      
+    </fieldset>
+
+    <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+        <button type="submit" class="botao">Salvar</button>
+        <a href="../painel-admin/painel-admin.html" class="botao">Voltar</a>
+        <a href="../login/login-admin.html" class="botao">Sair</a>
+    </div>
+
+  </form>
+  <script src="projeto-admin.js"></script>
+
+</body>
+</html>

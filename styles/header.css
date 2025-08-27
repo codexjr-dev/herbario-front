@@ -3,16 +3,18 @@
   height: 3.937rem;
   align-items: center;
   display: flex;
+  
   & span{
     display: flex;
     gap: 2rem;
     margin-left: auto;
     margin-right: 3rem;
   }
+  
   & a{
-  font: var(--aba);
-  color: var(--background);
-}
+    font: var(--aba);
+    color: var(--background);
+  }
 }
 
 .imagem{
@@ -22,19 +24,64 @@
   }
 }
 
+.admin{
+  padding-left: 2rem;
+}
+
+/* Estilo para o footer com imagem clicável */
+footer{
+  /* Seus estilos existentes do footer aqui */
+  
+  & .logo-link{
+    display: inline-block;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    
+    &:hover{
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+    
+    & img{
+      /* Mantém os estilos originais da imagem do footer */
+      transition: filter 0.3s ease;
+    }
+    
+    &:hover img{
+      filter: brightness(1.1);
+    }
+  }
+}
+
 @media screen and (max-width: 400px) {
   .cabecalho{
     & span{
       gap: .5rem;
       margin-right: .4rem;
     }
+    
+    & a{
+      font-size: .6rem;
+    }
   }
+  
   .imagem{
     img{
       height: 2.5rem;
       margin-left: .4rem;
     }
   }
+  
+  .admin{
+    padding-left: .4rem;
+  }
+  
+  /* Footer responsivo */
+  footer{
+    & .logo-link{
+      &:hover{
+        transform: scale(1.03); /* Efeito mais sutil no mobile */
+      }
+    }
+  }
 }
-
-

@@ -26,3 +26,18 @@ main{
 & li:hover{
   border: solid 1px var(--brand-border);
 }
+
+@media screen and (max-width: 400px) {
+  main{
+    margin-inline: 1rem;
+    h1{
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    & li{
+      font-size: .8rem;
+      padding: .5rem 1rem;
+      margin-bottom: .5rem;
+    }
+  }
+}

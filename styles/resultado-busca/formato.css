@@ -7,3 +7,12 @@ main{
     margin-top: 1rem;
   }
 }
+
+@media screen and (max-width: 400px) {
+  main{
+    margin-inline: 1rem;
+    & legend{
+      font-size: 1rem;
+    }
+  }
+}
