@@ -18,3 +18,29 @@
   color: green;       
   margin-right: 5px;  
 }
+
+@media (max-width: 600px) {
+  .glossario div {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    max-width: 100%;
+  }
+
+  .glossario-container{
+    max-width: 100%;
+  }
+
+  .glossario div{
+    max-width: 90%;
+  }
+
+  #glossario-container p {
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+
+  .termo-glossario {
+    font-size: 1rem;
+    margin-right: 3px;
+  }
+}

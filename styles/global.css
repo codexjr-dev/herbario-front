@@ -4,6 +4,7 @@
   padding: 0;
   font: inherit;
   overflow-x: hidden;
+  font-family: var(--lexend);
 }
 
 :root{
@@ -33,7 +34,7 @@
     --h2: 2.5rem var(--xilosa);
     --h3: 1.5rem var(--xilosa);
     --text: 400 0.95rem var(--lexend);
-    --legend: 0.5rem;
+    --legend: 0.4rem;
     --aba: 500 0.8rem var(--lexend);
   }
 }
