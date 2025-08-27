@@ -9,7 +9,7 @@
 }
 
 #glossario-container p {
-  margin-bottom: 12px; /* afasta cada item um do outro */
+  margin-bottom: 0.75rem; /* afasta cada item um do outro */
   line-height: 1.5;    /* leitura mais confortável */
 }
 
@@ -26,17 +26,14 @@
     max-width: 100%;
   }
 
-  .glossario-container{
+  .glossario{
     max-width: 100%;
   }
 
-  .glossario div{
-    max-width: 90%;
-  }
-
   #glossario-container p {
-    margin-bottom: 8px;
+    margin-bottom: .5px;
     font-size: 1rem;
+    max-width: 100%
   }
 
   .termo-glossario {
