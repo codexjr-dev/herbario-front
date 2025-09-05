@@ -2,12 +2,13 @@
   margin-top: 2rem;
   margin-inline: auto;
   width: 44rem;
+  text-align: justify;
   h1{
     font: var(--h2);
     margin-bottom: 1rem;
   }
   p{
-    font: var(--text);
+    font-size: 1.2rem;
     color: var(--standart-grey);
     margin-bottom: 2rem;
   }

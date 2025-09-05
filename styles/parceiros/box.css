@@ -1,45 +1,49 @@
 .parceiros-box{
   margin-inline: auto;
   width: 44rem;
+  & h2.xilosa {
+    margin-bottom: 2rem;
+  }
   & .retrato{
-    width: 40rem;
+    width: 86%;
+    margin-left: 4rem; /* ADICIONAR: margem esquerda maior */
     & img{
-      width: 38rem;
+      width: 100;
     }
   }
   & .img-box{
     margin-block: 2rem;
+    margin-left: 4rem; /* ADICIONAR: margem esquerda maior */
     & legend{
       color: var(--brand-color);
+      font-size: 1.2rem;
+      margin-top: 1rem;
     }
     & .principal{
-      & img{
-        height: 18rem;
-        max-width: 42rem;
-      }
-    }
-  }
+       & img{
+         height: 18rem;
+         width: 100%;
+       }
+     }
+   }
 }
 
-.second{
-  display: grid;
-  grid-auto-flow: column;
-  gap: .5rem;
-  img{
-    height: 18rem;
-  }
-  #img-1{
-    width: 24rem;
-  }
-  #img-2{
-    width: 17rem;
-  }
+.second {
+  display: flex;
+  justify-content: space-between; /* uma à esquerda, outra à direita */
+  gap: 0.5rem;
+}
+
+.second img {
+  height: 18rem;
+  width: 48%;        /* duas imagens quase metade da largura cada */
+  object-fit: cover;
 }
 
 @media (max-width: 600px) {
   .parceiros-box {
     width: 100vw;
-    padding-inline: 1.5rem; 
+    padding-inline: 1.5rem;
   }
   .retrato{
     max-width: 100%;
