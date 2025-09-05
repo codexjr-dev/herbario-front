@@ -5,15 +5,15 @@
     margin-bottom: 2rem;
   }
   & .retrato{
-    width: 86%;
-    margin-left: 4rem; /* ADICIONAR: margem esquerda maior */
+    width: 90%;
+    margin-left: 2rem; /* ADICIONAR: margem esquerda maior */
     & img{
       width: 100;
     }
   }
   & .img-box{
     margin-block: 2rem;
-    margin-left: 4rem; /* ADICIONAR: margem esquerda maior */
+    margin-left: 2rem; /* ADICIONAR: margem esquerda maior */
     & legend{
       color: var(--brand-color);
       font-size: 1.2rem;
