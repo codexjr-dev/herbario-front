@@ -9,7 +9,10 @@
   border-radius: 1rem;
   padding: 1rem;
   padding-bottom: 2rem; /* ADICIONAR APENAS ESTA LINHA */
-  width: 80%;
+  width: 95%; /* ALTERAR: de 80% para 100% */
+  max-width: 800px; /* ADICIONAR: mesma largura máxima da descrição */
+  margin: 0 auto; /* ADICIONAR: centraliza o box */
+
   img{
     height: 18rem;
     width: 100%

@@ -1,5 +1,6 @@
 #projeto{
-  width: 40rem;
+  width: 45rem;
+  max-width: 1200px;
   margin-inline: auto;
   margin-top: 2rem;
   h1{
@@ -10,6 +11,12 @@
   p{
     display: inline-block;
     margin-bottom: 1.5rem;
+    text-align: justify;
+    max-width: 800px; /* ADICIONAR: limita a largura igual aos parceiros */
+    margin-left: auto; /* ADICIONAR: centraliza o texto */
+    margin-right: auto; /* ADICIONAR: centraliza o texto */
+    font-size: 1.1em; /* ADICIONAR: tamanho igual ao de parceiros */
+    line-height: 1.6; /* ADICIONAR: espaçamento entre linhas igual ao de parceiros */
   }
 }
 
