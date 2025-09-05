@@ -27,7 +27,7 @@
     margin-top: 1rem;
   }
   #projeto h1 {
-    font-size: 1.5rem;
+    font: var(--h2);
     margin-bottom: 0.75rem;
   }
   #projeto p {

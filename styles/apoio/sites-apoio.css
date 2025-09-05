@@ -1,11 +1,16 @@
 main{
-  max-width: 63,8rem;
-  margin-inline: 7rem;
+  max-width: 800px; /* ALTERAR: de 63,8rem para 1200px (igual parceiros) */
+  margin: 0 auto; /* ALTERAR: de margin-inline: 7rem para centralização automática */
   margin-top: 3rem;
+  padding: 0 2rem; /* ADICIONAR: margens internas laterais igual parceiros */
+  box-sizing: border-box; /* ADICIONAR: inclui padding no cálculo da largura */
+  
   h1{
     display: block;
     margin-bottom: 3rem;
+    text-align: left; /* ADICIONAR: centraliza o título */
   }
+  
   & li{
     border-radius: 5rem;
     padding: 1rem 2rem;
@@ -27,17 +32,40 @@ main{
   border: solid 1px var(--brand-border);
 }
 
-@media screen and (max-width: 400px) {
+/* MELHORAR: media query mais abrangente */
+@media (max-width: 768px) { /* ALTERAR: de 400px para 768px */
   main{
-    margin-inline: 1rem;
+    padding: 0 1rem; /* ALTERAR: usar padding em vez de margin-inline */
+    margin-top: 2rem; /* ADICIONAR: reduzir margem superior */
+    
     h1{
-      font-size: 1.5rem;
+      font-size: 2rem; /* ALTERAR: de 1.5rem para 2rem */
+      margin-bottom: 2rem; /* ALTERAR: de 1.5rem para 2rem */
+    }
+    
+    & li{
+      font-size: 1rem; /* ALTERAR: de .8rem para 1rem */
+      padding: 0.8rem 1.5rem; /* ALTERAR: padding um pouco maior */
+      margin-bottom: 0.8rem; /* ALTERAR: de .5rem para .8rem */
+    }
+  }
+}
+
+/* ADICIONAR: media query para mobile */
+@media (max-width: 480px) {
+  main{
+    padding: 0 0.5rem;
+    margin-top: 1.5rem;
+    
+    h1{
+      font-size: 1.8rem;
       margin-bottom: 1.5rem;
     }
+    
     & li{
-      font-size: .8rem;
-      padding: .5rem 1rem;
-      margin-bottom: .5rem;
+      font-size: 0.9rem;
+      padding: 0.6rem 1rem;
+      margin-bottom: 0.6rem;
     }
   }
 }
