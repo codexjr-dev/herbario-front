@@ -10,9 +10,8 @@ async function carregarResultados() {
 
   // pega os parâmetros da URL e normaliza
   const termo = normalize(params.get("busca"));
-  const classe = params.get("classe");
-  const familia = params.get("familia");
-
+  const classe = normalize(params.get("classe"));
+  const familia = normalize(params.get("familia"));
 
   try {
     const resposta = await fetch(API_URL);
@@ -22,8 +21,8 @@ async function carregarResultados() {
     const plantasFiltradas = plantas.filter(planta => {
       const nomePopular = normalize(planta.nomePopular);
       const nomeCientifico = normalize(planta.nomeCientifico);
-      const plantaClasse = normalize(planta.classe);
-      const plantaFamilia = normalize(planta.familia);
+      const plantaClasse = normalize(planta.taxonomia?.classe);
+      const plantaFamilia = normalize(planta.taxonomia?.familia);
 
       const termoValido = !termo || nomePopular.includes(termo) || nomeCientifico.includes(termo);
       const classeValida = !classe || plantaClasse === classe;

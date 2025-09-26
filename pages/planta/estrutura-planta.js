@@ -1,5 +1,5 @@
 const API_URL = "https://herbario-back.onrender.com/api/plants";
-const IMAGEM_PADRAO = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpttnfhDbmXTkbWTyJU_fotk6nrElsiG2Vng&s";// imagem padrão
+const IMAGEM_PADRAO = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpttnfhDbmXTkbWTyJU_fotk6nrElsiG2Vng&s"; // imagem padrão
 
 document.addEventListener("DOMContentLoaded", async () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     setText("nomeCientifico", planta.nomeCientifico);
     setText("colectNumber", planta.colectNumber);
     setText("classe", planta.taxonomia?.classe);
-    setText("colectDate", planta.colectDate ? new Date(planta.colectDate).toLocaleDateString() : "");
+    setText("colectDate", planta.colectDate ? new Date(planta.colectDate).toLocaleDateString() : "—");
     setText("ordem", planta.taxonomia?.ordem);
     setText("localidade", planta.local);
     setText("familia", planta.taxonomia?.familia);
@@ -39,24 +39,37 @@ document.addEventListener("DOMContentLoaded", async () => {
     capa.src = (planta.fotos && planta.fotos[0]?.url) ? planta.fotos[0].url : IMAGEM_PADRAO;
 
     // Galeria 6 fotos
-   for (let i = 1; i <= 6; i++) {
-    const img = document.getElementById(`foto${i}`);
-    img.src = (planta.fotos[i]?.url) ? planta.fotos[i].url : IMAGEM_PADRAO;
-    img.alt = planta.nomePopular || "Imagem da planta";
-  }
+    for (let i = 1; i <= 6; i++) {
+      const img = document.getElementById(`foto${i}`);
+      img.src = (planta.fotos[i]?.url) ? planta.fotos[i].url : IMAGEM_PADRAO;
+      img.alt = planta.nomePopular || "Imagem da planta";
+    }
 
-  // Glossário
-  const glossarioContainer = document.getElementById("glossario-container");
-  glossarioContainer.innerHTML = "";
+    // Glossário Ciências
+    const glossarioCienciasContainer = document.getElementById("glossario-ciencias-container");
+    glossarioCienciasContainer.innerHTML = "";
+    if (planta.glossaryCiencias?.length) {
+      planta.glossaryCiencias.forEach(item => {
+        const p = document.createElement("p");
+        p.innerHTML = `<strong class="termo-glossario">${item.term}:</strong> ${item.description}`;
+        glossarioCienciasContainer.appendChild(p);
+      });
+    } else {
+      glossarioCienciasContainer.textContent = "—";
+    }
 
-  if (planta.glossary && planta.glossary.length > 0) {
-    planta.glossary.forEach(item => {
-      const p = document.createElement("p");
-      p.innerHTML = `<strong class="termo-glossario">${item.term}:</strong> ${item.description}`;
-      glossarioContainer.appendChild(p);
-    });
-  }
-
+    // Glossário Histórias
+    const glossarioHistoriasContainer = document.getElementById("glossario-historias-container");
+    glossarioHistoriasContainer.innerHTML = "";
+    if (planta.glossaryHistorias?.length) {
+      planta.glossaryHistorias.forEach(item => {
+        const p = document.createElement("p");
+        p.innerHTML = `<strong class="termo-glossario">${item.term}:</strong> ${item.description}`;
+        glossarioHistoriasContainer.appendChild(p);
+      });
+    } else {
+      glossarioHistoriasContainer.textContent = "—";
+    }
 
   } catch (err) {
     console.error(err);

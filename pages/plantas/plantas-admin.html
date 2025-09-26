@@ -146,8 +146,13 @@
 
     <!-- Seção Glossário -->
     <fieldset>
-      <legend>Glossário</legend>
-      <div id="glossario-container"></div>
+      <legend>Ciências</legend>
+      <div id="glossario-ciencias-container"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Histórias</legend>
+      <div id="glossario-historias-container"></div>
     </fieldset>
 
     <!-- Seção Galeria -->
@@ -242,18 +247,29 @@
         tipo: 'coletor'
       }));
 
-      // Inicializa glossário
-      const glossarioContainer = document.getElementById('glossario-container');
-      glossarioContainer.appendChild(criarItemDinamico({
-        label1: 'Termo',
-        nome1: 'glossary[].term',
-        label2: 'Definição',
-        nome2: 'glossary[].description',
-        containerId: 'glossario-container',
-        tipo: 'glossario'
-      }));
-    });
-  </script>
+      // Inicializa glossário Ciências
+  const cienciasContainer = document.getElementById('glossario-ciencias-container');
+  cienciasContainer.appendChild(criarItemDinamico({
+    label1: 'Termo',
+    nome1: 'glossaryCiencias[].term',
+    label2: 'Definição',
+    nome2: 'glossaryCiencias[].description',
+    containerId: 'glossario-ciencias-container',
+    tipo: 'glossario'
+  }));
+
+  // Inicializa glossário Histórias
+  const historiasContainer = document.getElementById('glossario-historias-container');
+  historiasContainer.appendChild(criarItemDinamico({
+    label1: 'Termo',
+    nome1: 'glossaryHistorias[].term',
+    label2: 'Definição',
+    nome2: 'glossaryHistorias[].description',
+    containerId: 'glossario-historias-container',
+    tipo: 'glossario'
+  }));
+});
+</script>
 
   <script src="plantas-admin.js"></script>
 </body>
