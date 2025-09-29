@@ -32,3 +32,11 @@
   font-weight: 500;
 }
 
+.verde{
+  color: var(--brand-color);
+}
+
+.azul{
+  color: #0a2f43a6;
+}
+

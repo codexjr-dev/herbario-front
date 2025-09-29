@@ -1,0 +1,36 @@
+#instagram{
+  & h1{
+    font: var(--h3);
+  }
+  & div{
+  display: flex;
+  gap: .5rem;
+  font-family: var(--lexend);
+  align-items: center;
+  & a{
+    color: rgb(19, 19, 135);
+  }
+  }
+  margin-top: 2.5rem;
+  & img{
+    height: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #instagram {
+    margin-top: 1.5rem;
+  }
+  #instagram div {
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-start;
+    font-size: 0.95rem;
+  }
+  #instagram img {
+    height: 1.5rem;
+  }
+  #instagram h1 {
+    font-size: 1.2rem;
+  }
+}

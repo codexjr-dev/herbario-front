@@ -14,8 +14,8 @@
     }
     & .principal{
       & img{
-        height: 18rem;
-        max-width: 42rem;
+        height: 20rem;
+        min-width: 100%;
       }
     }
   }
