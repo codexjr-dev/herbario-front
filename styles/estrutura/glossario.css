@@ -5,6 +5,7 @@
     border: 0.1rem solid var(--brand-color);
     border-radius: 1rem;
     padding: 2rem;
+    margin-bottom: 2rem; /* <-- cria espaço entre os blocos */
   }
 }
 
