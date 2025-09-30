@@ -98,6 +98,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!resposta.ok) throw new Error("Erro ao buscar planta");
 
       const planta = await resposta.json();
+      
+      // Compatibilidade: se existir 'glossary' antigo, usa como 'glossaryCiencias'
+      if (planta.glossary && !planta.glossaryCiencias) {
+        planta.glossaryCiencias = planta.glossary;
+      }
+      
+      // Se não existir glossaryHistorias, inicializa vazio
+      if (!planta.glossaryHistorias) {
+        planta.glossaryHistorias = [];
+      }
+      
       preencherFormulario(planta);
     } catch (erro) {
       console.error(erro);
@@ -141,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     atualizarNumeracaoColetores();
 
-    // Glossário Ciências
+    // Glossário Ciências (antigo glossary)
     const glossarioCienciasContainer = document.getElementById('glossario-ciencias-container');
     glossarioCienciasContainer.innerHTML = '';
     if (planta.glossaryCiencias?.length) {
@@ -169,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }));
     }
 
-    // Glossário Histórias
+    // Glossário Histórias (novo campo)
     const glossarioHistoriasContainer = document.getElementById('glossario-historias-container');
     glossarioHistoriasContainer.innerHTML = '';
     if (planta.glossaryHistorias?.length) {
