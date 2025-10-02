@@ -1,24 +1,71 @@
 const API_URL = "https://herbario-back.onrender.com/api/plants";
 const IMAGEM_PADRAO = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpttnfhDbmXTkbWTyJU_fotk6nrElsiG2Vng&s";
 
+// Funções globais (precisam estar disponíveis antes do DOMContentLoaded)
+function criarItemDinamico(config) {
+  const container = document.createElement('div');
+  container.className = 'item-dinamico';
+  const { label1, nome1, valor1 = '', label2, nome2, valor2 = '' } = config;
+
+  let html = `<label class="rotulo-item">${label1}:</label>
+              <input type="text" name="${nome1}" value="${valor1}" />`;
+  if (nome2) html += `<label>${label2}:
+                        <textarea name="${nome2}" rows="3">${valor2}</textarea>
+                      </label>`;
+
+  container.innerHTML = html + `<div class="botoes-item">
+                                  <button type="button" class="adicionar" title="Adicionar">+</button>
+                                  <button type="button" class="remover" title="Remover">x</button>
+                                </div>`;
+
+  container.querySelector('.adicionar').addEventListener('click', () => {
+    const novoConfig = { ...config, valor1: '', valor2: '' };
+    const novoItem = criarItemDinamico(novoConfig);
+    container.insertAdjacentElement('afterend', novoItem);
+    if (config.tipo === 'coletor') atualizarNumeracaoColetores();
+  });
+
+  container.querySelector('.remover').addEventListener('click', () => {
+    const parentContainer = document.getElementById(config.containerId);
+    if (parentContainer.children.length > 1) {
+      container.remove();
+      if (config.tipo === 'coletor') atualizarNumeracaoColetores();
+    } else {
+      alert('É necessário ter pelo menos um item.');
+    }
+  });
+
+  return container;
+}
+
+function atualizarNumeracaoColetores() {
+  const itens = document.querySelectorAll('#coletores-container .item-dinamico');
+  itens.forEach((item, index) => item.querySelector('.rotulo-item').textContent = `Coletor ${index+1}:`);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("planta-form");
   const token = localStorage.getItem("token");
 
   if (!token) {
-    alert("VocÃª precisa fazer login novamente.");
+    alert("Você precisa fazer login novamente.");
     window.location.href = '/pages/login/login-admin.html';
     return;
   }
 
   const plantaId = getPlantaId();
 
+  // Inicializa os campos dinâmicos se estiverem vazios (modo cadastro)
+  if (!plantaId) {
+    inicializarCamposDinamicos();
+  }
+
   // Se houver ID, carrega os dados da planta
   if (plantaId) {
     carregarPlantaParaEdicao(plantaId, token);
   }
 
-  // Submit do formulÃ¡rio
+  // Submit do formulário
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -32,17 +79,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const collectors = Array.from(document.querySelectorAll('#coletores-container input[name="collectors[]"]'))
       .map(input => input.value.trim()).filter(c => c);
 
-    const glossaryCiencias = Array.from(document.querySelectorAll('#glossario-ciencias-container .item-dinamico'))
+    const glossary = Array.from(document.querySelectorAll('#glossario-ciencias-container .item-dinamico'))
       .map(item => ({
-        term: item.querySelector('input[name="glossaryCiencias[].term"]').value.trim(),
-        description: item.querySelector('textarea[name="glossaryCiencias[].description"]').value.trim()
-      }))
-      .filter(g => g.term && g.description);
-
-    const glossaryHistorias = Array.from(document.querySelectorAll('#glossario-historias-container .item-dinamico'))
-      .map(item => ({
-        term: item.querySelector('input[name="glossaryHistorias[].term"]').value.trim(),
-        description: item.querySelector('textarea[name="glossaryHistorias[].description"]').value.trim()
+        term: item.querySelector('input[name="glossary[].term"]').value.trim(),
+        description: item.querySelector('textarea[name="glossary[].description"]').value.trim()
       }))
       .filter(g => g.term && g.description);
 
@@ -62,8 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
       colectDate: form.colectDate.value ? new Date(form.colectDate.value).toISOString() : null,
       local: form.local.value.trim(),
       collectors,
-      glossaryCiencias,
-      glossaryHistorias
+      glossary
     };
 
     try {
@@ -86,10 +125,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // FunÃ§Ãµes auxiliares
+  // Funções auxiliares
   function getPlantaId() {
     const params = new URLSearchParams(window.location.search);
     return params.get('id');
+  }
+
+  function inicializarCamposDinamicos() {
+    // Coletores
+    const coletoresContainer = document.getElementById('coletores-container');
+    if (coletoresContainer.children.length === 0) {
+      coletoresContainer.appendChild(criarItemDinamico({
+        label1: 'Coletor 1',
+        nome1: 'collectors[]',
+        containerId: 'coletores-container',
+        tipo: 'coletor'
+      }));
+    }
+
+    // Glossário Ciências
+    const cienciasContainer = document.getElementById('glossario-ciencias-container');
+    if (cienciasContainer.children.length === 0) {
+      cienciasContainer.appendChild(criarItemDinamico({
+        label1: 'Termo',
+        nome1: 'glossary[].term',
+        label2: 'Definição',
+        nome2: 'glossary[].description',
+        containerId: 'glossario-ciencias-container',
+        tipo: 'glossario'
+      }));
+    }
   }
 
   async function carregarPlantaParaEdicao(id, token) {
@@ -101,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
       preencherFormulario(planta);
     } catch (erro) {
       console.error(erro);
-      alert("Erro ao carregar planta para ediÃ§Ã£o.");
+      alert("Erro ao carregar planta para edição.");
     }
   }
 
@@ -121,12 +186,12 @@ document.addEventListener("DOMContentLoaded", () => {
     form.colectDate.value = planta.colectDate ? new Date(planta.colectDate).toISOString().split('T')[0] : '';
     form.local.value = planta.local || '';
     form.duplicates.value = planta.duplicates || '';
-    form.foto1.value = planta.fotos?.[1]?.url || IMAGEM_PADRAO;
-    form.foto2.value = planta.fotos?.[2]?.url || IMAGEM_PADRAO;
-    form.foto3.value = planta.fotos?.[3]?.url || IMAGEM_PADRAO;
-    form.foto4.value = planta.fotos?.[4]?.url || IMAGEM_PADRAO;
-    form.foto5.value = planta.fotos?.[5]?.url || IMAGEM_PADRAO;
-    form.foto6.value = planta.fotos?.[6]?.url || IMAGEM_PADRAO;
+    form.foto1.value = planta.fotos?.[1]?.url || '';
+    form.foto2.value = planta.fotos?.[2]?.url || '';
+    form.foto3.value = planta.fotos?.[3]?.url || '';
+    form.foto4.value = planta.fotos?.[4]?.url || '';
+    form.foto5.value = planta.fotos?.[5]?.url || '';
+    form.foto6.value = planta.fotos?.[6]?.url || '';
 
     // Coletores
     const coletoresContainer = document.getElementById('coletores-container');
@@ -141,101 +206,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     atualizarNumeracaoColetores();
 
-    // GlossÃ¡rio CiÃªncias
-    const glossarioCienciasContainer = document.getElementById('glossario-ciencias-container');
-    glossarioCienciasContainer.innerHTML = '';
-    if (planta.glossaryCiencias?.length) {
-      planta.glossaryCiencias.forEach(g => {
+    // Glossário (Ciências)
+    const glossarioContainer = document.getElementById('glossario-ciencias-container');
+    glossarioContainer.innerHTML = '';
+    if (planta.glossary?.length) {
+      planta.glossary.forEach(g => {
         const item = criarItemDinamico({
           label1: 'Termo',
-          nome1: 'glossaryCiencias[].term',
+          nome1: 'glossary[].term',
           valor1: g.term,
-          label2: 'DefiniÃ§Ã£o',
-          nome2: 'glossaryCiencias[].description',
+          label2: 'Definição',
+          nome2: 'glossary[].description',
           valor2: g.description,
           containerId: 'glossario-ciencias-container',
           tipo: 'glossario'
         });
-        glossarioCienciasContainer.appendChild(item);
+        glossarioContainer.appendChild(item);
       });
     } else {
-      glossarioCienciasContainer.appendChild(criarItemDinamico({
+      glossarioContainer.appendChild(criarItemDinamico({
         label1: 'Termo',
-        nome1: 'glossaryCiencias[].term',
-        label2: 'DefiniÃ§Ã£o',
-        nome2: 'glossaryCiencias[].description',
+        nome1: 'glossary[].term',
+        label2: 'Definição',
+        nome2: 'glossary[].description',
         containerId: 'glossario-ciencias-container',
         tipo: 'glossario'
       }));
     }
-
-    // GlossÃ¡rio HistÃ³rias
-    const glossarioHistoriasContainer = document.getElementById('glossario-historias-container');
-    glossarioHistoriasContainer.innerHTML = '';
-    if (planta.glossaryHistorias?.length) {
-      planta.glossaryHistorias.forEach(g => {
-        const item = criarItemDinamico({
-          label1: 'Termo',
-          nome1: 'glossaryHistorias[].term',
-          valor1: g.term,
-          label2: 'DefiniÃ§Ã£o',
-          nome2: 'glossaryHistorias[].description',
-          valor2: g.description,
-          containerId: 'glossario-historias-container',
-          tipo: 'glossario'
-        });
-        glossarioHistoriasContainer.appendChild(item);
-      });
-    } else {
-      glossarioHistoriasContainer.appendChild(criarItemDinamico({
-        label1: 'Termo',
-        nome1: 'glossaryHistorias[].term',
-        label2: 'DefiniÃ§Ã£o',
-        nome2: 'glossaryHistorias[].description',
-        containerId: 'glossario-historias-container',
-        tipo: 'glossario'
-      }));
-    }
-  }
-
-  function criarItemDinamico(config) {
-    const container = document.createElement('div');
-    container.className = 'item-dinamico';
-    const { label1, nome1, valor1 = '', label2, nome2, valor2 = '' } = config;
-
-    let html = `<label class="rotulo-item">${label1}:</label>
-                <input type="text" name="${nome1}" value="${valor1}" />`;
-    if (nome2) html += `<label>${label2}:
-                          <textarea name="${nome2}" rows="3" >${valor2}</textarea>
-                        </label>`;
-
-    container.innerHTML = html + `<div class="botoes-item">
-                                    <button type="button" class="adicionar" title="Adicionar">+</button>
-                                    <button type="button" class="remover" title="Remover">x</button>
-                                  </div>`;
-
-    container.querySelector('.adicionar').addEventListener('click', () => {
-      const novoConfig = { ...config, valor1: '', valor2: '' };
-      const novoItem = criarItemDinamico(novoConfig);
-      container.insertAdjacentElement('afterend', novoItem);
-      if (config.tipo === 'coletor') atualizarNumeracaoColetores();
-    });
-
-    container.querySelector('.remover').addEventListener('click', () => {
-      const parentContainer = document.getElementById(config.containerId);
-      if (parentContainer.children.length > 1) {
-        container.remove();
-        if (config.tipo === 'coletor') atualizarNumeracaoColetores();
-      } else {
-        alert('Ã‰ necessÃ¡rio ter pelo menos um item.');
-      }
-    });
-
-    return container;
-  }
-
-  function atualizarNumeracaoColetores() {
-    const itens = document.querySelectorAll('#coletores-container .item-dinamico');
-    itens.forEach((item, index) => item.querySelector('.rotulo-item').textContent = `Coletor ${index+1}:`);
   }
 });
