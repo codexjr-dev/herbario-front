@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token");
 
   if (!token) {
-    alert("Você precisa fazer login novamente.");
+    alert("VocÃª precisa fazer login novamente.");
     window.location.href = '/pages/login/login-admin.html';
     return;
   }
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarPlantaParaEdicao(plantaId, token);
   }
 
-  // Submit do formulário
+  // Submit do formulÃ¡rio
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Funções auxiliares
+  // FunÃ§Ãµes auxiliares
   function getPlantaId() {
     const params = new URLSearchParams(window.location.search);
     return params.get('id');
@@ -98,21 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!resposta.ok) throw new Error("Erro ao buscar planta");
 
       const planta = await resposta.json();
-      
-      // Compatibilidade: se existir 'glossary' antigo, usa como 'glossaryCiencias'
-      if (planta.glossary && !planta.glossaryCiencias) {
-        planta.glossaryCiencias = planta.glossary;
-      }
-      
-      // Se não existir glossaryHistorias, inicializa vazio
-      if (!planta.glossaryHistorias) {
-        planta.glossaryHistorias = [];
-      }
-      
       preencherFormulario(planta);
     } catch (erro) {
       console.error(erro);
-      alert("Erro ao carregar planta para edição.");
+      alert("Erro ao carregar planta para ediÃ§Ã£o.");
     }
   }
 
@@ -152,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     atualizarNumeracaoColetores();
 
-    // Glossário Ciências (antigo glossary)
+    // GlossÃ¡rio CiÃªncias
     const glossarioCienciasContainer = document.getElementById('glossario-ciencias-container');
     glossarioCienciasContainer.innerHTML = '';
     if (planta.glossaryCiencias?.length) {
@@ -161,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
           label1: 'Termo',
           nome1: 'glossaryCiencias[].term',
           valor1: g.term,
-          label2: 'Definição',
+          label2: 'DefiniÃ§Ã£o',
           nome2: 'glossaryCiencias[].description',
           valor2: g.description,
           containerId: 'glossario-ciencias-container',
@@ -173,14 +162,14 @@ document.addEventListener("DOMContentLoaded", () => {
       glossarioCienciasContainer.appendChild(criarItemDinamico({
         label1: 'Termo',
         nome1: 'glossaryCiencias[].term',
-        label2: 'Definição',
+        label2: 'DefiniÃ§Ã£o',
         nome2: 'glossaryCiencias[].description',
         containerId: 'glossario-ciencias-container',
         tipo: 'glossario'
       }));
     }
 
-    // Glossário Histórias (novo campo)
+    // GlossÃ¡rio HistÃ³rias
     const glossarioHistoriasContainer = document.getElementById('glossario-historias-container');
     glossarioHistoriasContainer.innerHTML = '';
     if (planta.glossaryHistorias?.length) {
@@ -189,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
           label1: 'Termo',
           nome1: 'glossaryHistorias[].term',
           valor1: g.term,
-          label2: 'Definição',
+          label2: 'DefiniÃ§Ã£o',
           nome2: 'glossaryHistorias[].description',
           valor2: g.description,
           containerId: 'glossario-historias-container',
@@ -201,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
       glossarioHistoriasContainer.appendChild(criarItemDinamico({
         label1: 'Termo',
         nome1: 'glossaryHistorias[].term',
-        label2: 'Definição',
+        label2: 'DefiniÃ§Ã£o',
         nome2: 'glossaryHistorias[].description',
         containerId: 'glossario-historias-container',
         tipo: 'glossario'
@@ -238,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
         container.remove();
         if (config.tipo === 'coletor') atualizarNumeracaoColetores();
       } else {
-        alert('É necessário ter pelo menos um item.');
+        alert('Ã‰ necessÃ¡rio ter pelo menos um item.');
       }
     });
 
