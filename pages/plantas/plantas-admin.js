@@ -69,6 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    console.log('Formulário submetido'); // Debug
+
     const fotosArray = [];
     if (form.capaPlanta.value) fotosArray.push({ url: form.capaPlanta.value });
     for (let i = 1; i <= 6; i++) {
@@ -79,11 +81,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const collectors = Array.from(document.querySelectorAll('#coletores-container input[name="collectors[]"]'))
       .map(input => input.value.trim()).filter(c => c);
 
+    // CORRIGIDO: Coleta glossário de Ciências
     const glossary = Array.from(document.querySelectorAll('#glossario-ciencias-container .item-dinamico'))
-      .map(item => ({
-        term: item.querySelector('input[name="glossary[].term"]').value.trim(),
-        description: item.querySelector('textarea[name="glossary[].description"]').value.trim()
-      }))
+      .map(item => {
+        const termInput = item.querySelector('input[name^="glossaryCiencias"]');
+        const descTextarea = item.querySelector('textarea[name^="glossaryCiencias"]');
+        return {
+          term: termInput ? termInput.value.trim() : '',
+          description: descTextarea ? descTextarea.value.trim() : ''
+        };
+      })
+      .filter(g => g.term && g.description);
+
+    // CORRIGIDO: Coleta glossário de Histórias (memorian no banco)
+    const memorian = Array.from(document.querySelectorAll('#glossario-historias-container .item-dinamico'))
+      .map(item => {
+        const termInput = item.querySelector('input[name^="glossaryHistorias"]');
+        const descTextarea = item.querySelector('textarea[name^="glossaryHistorias"]');
+        return {
+          term: termInput ? termInput.value.trim() : '',
+          description: descTextarea ? descTextarea.value.trim() : ''
+        };
+      })
       .filter(g => g.term && g.description);
 
     const data = {
@@ -102,8 +121,11 @@ document.addEventListener("DOMContentLoaded", () => {
       colectDate: form.colectDate.value ? new Date(form.colectDate.value).toISOString() : null,
       local: form.local.value.trim(),
       collectors,
-      glossary
+      glossary,    // Campo para Ciências
+      memorian     // Campo para Histórias
     };
+
+    console.log('Dados a serem enviados:', data); // Debug
 
     try {
       const response = await fetch(plantaId ? `${API_URL}/${plantaId}` : API_URL, {
@@ -114,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!response.ok) {
         const erroTexto = await response.text();
+        console.error('Erro da API:', erroTexto);
         alert("Erro ao salvar planta: " + erroTexto);
         return;
       }
@@ -121,6 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert(plantaId ? "Planta atualizada com sucesso!" : "Planta cadastrada com sucesso!");
       window.location.href = "/pages/lista-plantas/lista-plantas-admin.html";
     } catch (error) {
+      console.error('Erro ao enviar:', error);
       alert("Erro ao enviar dados: " + error.message);
     }
   });
@@ -148,10 +172,23 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cienciasContainer.children.length === 0) {
       cienciasContainer.appendChild(criarItemDinamico({
         label1: 'Termo',
-        nome1: 'glossary[].term',
+        nome1: 'glossaryCiencias[].term',
         label2: 'Definição',
-        nome2: 'glossary[].description',
+        nome2: 'glossaryCiencias[].description',
         containerId: 'glossario-ciencias-container',
+        tipo: 'glossario'
+      }));
+    }
+
+    // Glossário Histórias
+    const historiasContainer = document.getElementById('glossario-historias-container');
+    if (historiasContainer.children.length === 0) {
+      historiasContainer.appendChild(criarItemDinamico({
+        label1: 'Termo',
+        nome1: 'glossaryHistorias[].term',
+        label2: 'Definição',
+        nome2: 'glossaryHistorias[].description',
+        containerId: 'glossario-historias-container',
         tipo: 'glossario'
       }));
     }
@@ -206,17 +243,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     atualizarNumeracaoColetores();
 
-    // Glossário (Ciências)
+    // Glossário Ciências
     const glossarioContainer = document.getElementById('glossario-ciencias-container');
     glossarioContainer.innerHTML = '';
     if (planta.glossary?.length) {
       planta.glossary.forEach(g => {
         const item = criarItemDinamico({
           label1: 'Termo',
-          nome1: 'glossary[].term',
+          nome1: 'glossaryCiencias[].term',
           valor1: g.term,
           label2: 'Definição',
-          nome2: 'glossary[].description',
+          nome2: 'glossaryCiencias[].description',
           valor2: g.description,
           containerId: 'glossario-ciencias-container',
           tipo: 'glossario'
@@ -226,10 +263,38 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       glossarioContainer.appendChild(criarItemDinamico({
         label1: 'Termo',
-        nome1: 'glossary[].term',
+        nome1: 'glossaryCiencias[].term',
         label2: 'Definição',
-        nome2: 'glossary[].description',
+        nome2: 'glossaryCiencias[].description',
         containerId: 'glossario-ciencias-container',
+        tipo: 'glossario'
+      }));
+    }
+
+    // Glossário Histórias (memorian no banco)
+    const historiasContainer = document.getElementById('glossario-historias-container');
+    historiasContainer.innerHTML = '';
+    if (planta.memorian?.length) {
+      planta.memorian.forEach(g => {
+        const item = criarItemDinamico({
+          label1: 'Termo',
+          nome1: 'glossaryHistorias[].term',
+          valor1: g.term,
+          label2: 'Definição',
+          nome2: 'glossaryHistorias[].description',
+          valor2: g.description,
+          containerId: 'glossario-historias-container',
+          tipo: 'glossario'
+        });
+        historiasContainer.appendChild(item);
+      });
+    } else {
+      historiasContainer.appendChild(criarItemDinamico({
+        label1: 'Termo',
+        nome1: 'glossaryHistorias[].term',
+        label2: 'Definição',
+        nome2: 'glossaryHistorias[].description',
+        containerId: 'glossario-historias-container',
         tipo: 'glossario'
       }));
     }
