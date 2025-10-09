@@ -88,6 +88,9 @@
       cursor: pointer;
       font-size: 0.9rem;
     }
+    .required {
+    color: red;
+  }
   </style>
 </head>
 <body>
@@ -97,29 +100,29 @@
     <!-- Seção Principal -->
     <fieldset>
       <legend>Planta</legend>
-      <label for="nomePopular">Nome Popular:</label>
+      <label for="nomePopular">Nome Popular<span class="required"> *</span>:</label>
       <input type="text" id="nomePopular" name="nomePopular" required />
 
       <label for="capaPlanta">Imagem de Capa (URL):</label>
       <input type="url" id="capaPlanta" name="capaPlanta" />
 
-      <label for="descricao">Descrição:</label>
+      <label for="descricao">Descrição <span class="required"> *</span>:</label>
       <textarea id="descricao" name="descricao" rows="3" required></textarea>
     </fieldset>
 
     <!-- Seção Dados Técnicos -->
     <fieldset>
       <legend>Dados Técnicos</legend>
-      <label for="nomeCientifico">Nome Científico:</label>
+      <label for="nomeCientifico">Nome Científico<span class="required"> *</span>:</label>
       <input type="text" id="nomeCientifico" name="nomeCientifico" required />
       
-      <label for="classe">Classe:</label>
+      <label for="classe">Classe<span class="required"> *</span>:</label>
       <input type="text" id="classe" name="classe" required />
 
       <label for="ordem">Ordem:</label>
       <input type="text" id="ordem" name="ordem" />
 
-      <label for="familia">Família:</label>
+      <label for="familia">Família <span class="required"> *</span>:</label>
       <input type="text" id="familia" name="familia" required /> 
       
       <label for="especieTipo">Especime Tipo:</label>
