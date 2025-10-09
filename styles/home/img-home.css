@@ -17,6 +17,14 @@
   height: 14.21rem;
 }
 
+footer{
+  & img:hover{
+    transform: translateY(-.2rem);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+  }
+}
+
 @media screen and (max-width: 600px) {
   #imgs-home #img-floresta {
     height: 13rem;
