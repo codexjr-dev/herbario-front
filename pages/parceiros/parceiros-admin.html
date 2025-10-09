@@ -73,6 +73,10 @@
         font-size: 14px;
       }
     }
+    
+    .required {
+    color: red;
+  }
   </style>
 </head>
 <body>
@@ -84,7 +88,7 @@
     <fieldset>
       <legend>Parceiro</legend>
 
-      <label for="nome">Nome:</label>
+      <label for="nome">Nome<span class="required"> *</span>:</label>
       <input type="text" id="nome" name="nome" required />
 
       <label for="mapa-url">URL do Mapa (https):</label>
