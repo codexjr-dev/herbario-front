@@ -15,11 +15,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         <section class="parceiros-box">
           <h2 class="xilosa h3">${p.nome}</h2>
 
-          <div class="retrato">
-            <img src="${p.urlMapa}" alt="posição no google maps da cidade de ${p.nome}">
-            <legend>${p.descricaoMapa}</legend>
-          </div>
-
           <div class="img-box">
             <div class="principal">
               <img src="${p.imagem1}" alt="Imagem principal de ${p.nome}">

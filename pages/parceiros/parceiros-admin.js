@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const parceiroData = {
       nome: form.nome.value.trim(),
-      urlMapa: form["mapa-url"].value.trim() || IMAGEM_PADRAO,
-      descricaoMapa: form["mapa-descricao"].value.trim() || '',
+      urlMapa: IMAGEM_PADRAO,
+      descricaoMapa: '',
       imagem1: form["imagem1-url"].value.trim() || IMAGEM_PADRAO,
       descricao1: form["imagem1-descricao"].value.trim() || '',
       imagem2: form["imagem2-url"].value.trim() || IMAGEM_PADRAO,
