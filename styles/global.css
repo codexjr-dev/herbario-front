@@ -25,7 +25,7 @@
   --text: 400 1rem var(--lexend);
   --legend: .75rem;
 
-  --aba: 500 1rem var(--lexend);
+  --aba: 500 1.4rem var(--lexend);
 }
 
 @media (max-width: 600px) {
