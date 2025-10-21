@@ -1,3 +1,7 @@
+.nome-planta{
+  font-family: var(--xilosa);
+}
+
 ul{
   & li{
     list-style: none;

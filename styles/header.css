@@ -11,6 +11,7 @@
   }
   & a{
   font: var(--aba);
+  font-family: var(--xilosa);
   color: var(--background);
 }
 }
